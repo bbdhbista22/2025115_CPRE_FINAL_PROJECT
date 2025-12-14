@@ -13,6 +13,7 @@
 #include "layers/Layer.h"
 #include "layers/MaxPooling.h"
 #include "layers/Softmax.h"
+#include "layers/BatchNormalization.h"
 
 #ifdef ZEDBOARD
 #include <file_transfer/file_transfer.h>
@@ -37,7 +38,17 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {32}, modelPath / "conv1_1_bias.bin"}                // Bias
     );
 
-    // Layer 1: conv1_2 (5x5x32x32)
+    // Layer 1: bn1_1 (BatchNorm after conv1_1)
+    model.addLayer<BatchNormalizationLayer>(
+        LayerParams{sizeof(fp32), {124, 124, 32}},                                  // Input
+        LayerParams{sizeof(fp32), {124, 124, 32}},                                  // Output
+        LayerParams{sizeof(fp32), {32}, modelPath / "bn1_1_mean.bin"},            // Mean
+        LayerParams{sizeof(fp32), {32}, modelPath / "bn1_1_variance.bin"},        // Variance
+        LayerParams{sizeof(fp32), {32}, modelPath / "bn1_1_gamma.bin"},           // Gamma
+        LayerParams{sizeof(fp32), {32}, modelPath / "bn1_1_beta.bin"}             // Beta
+    );
+
+    // Layer 2: conv1_2 (5x5x32x32)
     // Input: 124x124x32
     // Output: 120x120x32 (124-5+1=120)
     model.addLayer<ConvolutionalLayer>(
@@ -47,7 +58,17 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {32}, modelPath / "conv1_2_bias.bin"}
     );
 
-    // Layer 2: pool1 (2x2 max pooling)
+    // Layer 3: bn1_2 (BatchNorm after conv1_2)
+    model.addLayer<BatchNormalizationLayer>(
+        LayerParams{sizeof(fp32), {120, 120, 32}},
+        LayerParams{sizeof(fp32), {120, 120, 32}},
+        LayerParams{sizeof(fp32), {32}, modelPath / "bn1_2_mean.bin"},
+        LayerParams{sizeof(fp32), {32}, modelPath / "bn1_2_variance.bin"},
+        LayerParams{sizeof(fp32), {32}, modelPath / "bn1_2_gamma.bin"},
+        LayerParams{sizeof(fp32), {32}, modelPath / "bn1_2_beta.bin"}
+    );
+
+    // Layer 4: pool1 (2x2 max pooling)
     // Input: 120x120x32
     // Output: 60x60x32
     model.addLayer<MaxPoolingLayer>(
@@ -57,8 +78,8 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
     );
 
     // === Convolutional Block 2 ===
-    
-    // Layer 3: conv2_1 (3x3x32x64)
+
+    // Layer 5: conv2_1 (3x3x32x64)
     // Input: 60x60x32
     // Output: 58x58x64 (60-3+1=58)
     model.addLayer<ConvolutionalLayer>(
@@ -68,7 +89,17 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {64}, modelPath / "conv2_1_bias.bin"}
     );
 
-    // Layer 4: conv2_2 (3x3x64x64)
+    // Layer 6: bn2_1 (BatchNorm after conv2_1)
+    model.addLayer<BatchNormalizationLayer>(
+        LayerParams{sizeof(fp32), {58, 58, 64}},
+        LayerParams{sizeof(fp32), {58, 58, 64}},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn2_1_mean.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn2_1_variance.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn2_1_gamma.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn2_1_beta.bin"}
+    );
+
+    // Layer 7: conv2_2 (3x3x64x64)
     // Input: 58x58x64
     // Output: 56x56x64 (58-3+1=56)
     model.addLayer<ConvolutionalLayer>(
@@ -78,7 +109,17 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {64}, modelPath / "conv2_2_bias.bin"}
     );
 
-    // Layer 5: pool2 (2x2 max pooling)
+    // Layer 8: bn2_2 (BatchNorm after conv2_2)
+    model.addLayer<BatchNormalizationLayer>(
+        LayerParams{sizeof(fp32), {56, 56, 64}},
+        LayerParams{sizeof(fp32), {56, 56, 64}},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn2_2_mean.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn2_2_variance.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn2_2_gamma.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn2_2_beta.bin"}
+    );
+
+    // Layer 9: pool2 (2x2 max pooling)
     // Input: 56x56x64
     // Output: 28x28x64
     model.addLayer<MaxPoolingLayer>(
@@ -88,8 +129,8 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
     );
 
     // === Convolutional Block 3 ===
-    
-    // Layer 6: conv3_1 (3x3x64x64)
+
+    // Layer 10: conv3_1 (3x3x64x64)
     // Input: 28x28x64
     // Output: 26x26x64 (28-3+1=26)
     model.addLayer<ConvolutionalLayer>(
@@ -99,7 +140,17 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {64}, modelPath / "conv3_1_bias.bin"}
     );
 
-    // Layer 7: conv3_2 (3x3x64x128)
+    // Layer 11: bn3_1 (BatchNorm after conv3_1)
+    model.addLayer<BatchNormalizationLayer>(
+        LayerParams{sizeof(fp32), {26, 26, 64}},
+        LayerParams{sizeof(fp32), {26, 26, 64}},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn3_1_mean.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn3_1_variance.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn3_1_gamma.bin"},
+        LayerParams{sizeof(fp32), {64}, modelPath / "bn3_1_beta.bin"}
+    );
+
+    // Layer 12: conv3_2 (3x3x64x128)
     // Input: 26x26x64
     // Output: 24x24x128 (26-3+1=24)
     model.addLayer<ConvolutionalLayer>(
@@ -109,7 +160,17 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {128}, modelPath / "conv3_2_bias.bin"}
     );
 
-    // Layer 8: pool3 (2x2 max pooling)
+    // Layer 13: bn3_2 (BatchNorm after conv3_2) - CRITICAL: This fixes the 4% validation failure!
+    model.addLayer<BatchNormalizationLayer>(
+        LayerParams{sizeof(fp32), {24, 24, 128}},
+        LayerParams{sizeof(fp32), {24, 24, 128}},
+        LayerParams{sizeof(fp32), {128}, modelPath / "bn3_2_mean.bin"},
+        LayerParams{sizeof(fp32), {128}, modelPath / "bn3_2_variance.bin"},
+        LayerParams{sizeof(fp32), {128}, modelPath / "bn3_2_gamma.bin"},
+        LayerParams{sizeof(fp32), {128}, modelPath / "bn3_2_beta.bin"}
+    );
+
+    // Layer 14: pool3 (2x2 max pooling)
     // Input: 24x24x128
     // Output: 12x12x128
     model.addLayer<MaxPoolingLayer>(
@@ -119,8 +180,8 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
     );
 
     // === Fully Connected Layers ===
-    
-    // Layer 9: flatten
+
+    // Layer 15: flatten
     // Input: 12x12x128 = 18,432
     // Output: 18,432
     model.addLayer<FlattenLayer>(
@@ -128,7 +189,7 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {18432}}
     );
 
-    // Layer 10: fc1 (Dense 18432 -> 256)
+    // Layer 16: fc1 (Dense 18432 -> 256)
     // Note: ReLU activation is applied in Dense layer
     model.addLayer<DenseLayer>(
         LayerParams{sizeof(fp32), {18432}},
@@ -137,9 +198,19 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {256}, modelPath / "fc1_bias.bin"}
     );
 
+    // Layer 17: bn_fc1 (BatchNorm after fc1)
+    model.addLayer<BatchNormalizationLayer>(
+        LayerParams{sizeof(fp32), {256}},
+        LayerParams{sizeof(fp32), {256}},
+        LayerParams{sizeof(fp32), {256}, modelPath / "bn_fc1_mean.bin"},
+        LayerParams{sizeof(fp32), {256}, modelPath / "bn_fc1_variance.bin"},
+        LayerParams{sizeof(fp32), {256}, modelPath / "bn_fc1_gamma.bin"},
+        LayerParams{sizeof(fp32), {256}, modelPath / "bn_fc1_beta.bin"}
+    );
+
     // Note: Dropout is skipped during inference
 
-    // Layer 11: fc2 (Dense 256 -> 10 classes)
+    // Layer 18: fc2 (Dense 256 -> 10 classes)
     // Output: raw logits (no activation yet)
     model.addLayer<DenseLayer>(
         LayerParams{sizeof(fp32), {256}},
@@ -148,14 +219,14 @@ Model buildAudioCNN_IRMAS(const Path modelPath) {
         LayerParams{sizeof(fp32), {10}, modelPath / "fc2_bias.bin"}
     );
 
-    // Layer 12: softmax (for classification probabilities)
+    // Layer 19: softmax (for classification probabilities)
     model.addLayer<SoftmaxLayer>(
         LayerParams{sizeof(fp32), {10}},
         LayerParams{sizeof(fp32), {10}}
     );
 
     logInfo("AudioCNN_IRMAS Model built successfully!");
-    logInfo("Total layers: 13 (8 Conv, 3 MaxPool, 1 Flatten, 2 Dense, 1 Softmax)");
+    logInfo("Total layers: 20 (8 Conv, 7 BatchNorm, 3 MaxPool, 1 Flatten, 2 Dense, 1 Softmax)");
     
     return model;
 }
@@ -300,8 +371,8 @@ void runTests() {
     
     // Base paths for audio model
     Path basePath("data");
-    Path modelPath = basePath / "model_weights";
-    Path featureMapsPath = basePath / "feature_maps";
+    Path modelPath = basePath / "model_weights_improved";
+    Path featureMapsPath = basePath / "feature_maps_improved";
     
     // Build the AudioCNN_IRMAS model
     Model model = buildAudioCNN_IRMAS(modelPath);
