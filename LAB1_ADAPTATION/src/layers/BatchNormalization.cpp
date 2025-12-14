@@ -1,5 +1,6 @@
 #include "BatchNormalization.h"
 #include <cmath>
+#include <algorithm>
 #include <iostream>
 
 namespace ML {

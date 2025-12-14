@@ -6,3 +6,7 @@ nul
 .vscode/settings.json
 LAB1_ADAPTATION/BATCHNORM_INTEGRATION_GUIDE.md
 LAB1_ADAPTATION/export_batchnorm_params.py
+LAB1_ADAPTATION/diagnose_conv1_weights.py
+LAB1_ADAPTATION/diagnose_mismatch.py
+LAB1_ADAPTATION/regenerate_feature_maps.py
+LAB1_ADAPTATION/verify_conv_calculation.py
