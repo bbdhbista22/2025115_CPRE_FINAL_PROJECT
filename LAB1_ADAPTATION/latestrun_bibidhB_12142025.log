@@ -1,0 +1,171 @@
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   AudioCNN_IRMAS Model Testing
+[[36mInfo[39m]:   Musical Instrument Classification
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]: --- Building AudioCNN_IRMAS Model ---
+[[36mInfo[39m]: AudioCNN_IRMAS Model built successfully!
+[[36mInfo[39m]: Total layers: 20 (8 Conv, 7 BatchNorm, 3 MaxPool, 1 Flatten, 2 Dense, 1 Softmax)
+Opened binary file data/model_weights_improved/conv1_1_weights.bin
+Opened binary file data/model_weights_improved/conv1_1_bias.bin
+Opened binary file data/model_weights_improved/bn1_1_mean.bin
+Opened binary file data/model_weights_improved/bn1_1_variance.bin
+Opened binary file data/model_weights_improved/bn1_1_gamma.bin
+Opened binary file data/model_weights_improved/bn1_1_beta.bin
+Opened binary file data/model_weights_improved/conv1_2_weights.bin
+Opened binary file data/model_weights_improved/conv1_2_bias.bin
+Opened binary file data/model_weights_improved/bn1_2_mean.bin
+Opened binary file data/model_weights_improved/bn1_2_variance.bin
+Opened binary file data/model_weights_improved/bn1_2_gamma.bin
+Opened binary file data/model_weights_improved/bn1_2_beta.bin
+Opened binary file data/model_weights_improved/conv2_1_weights.bin
+Opened binary file data/model_weights_improved/conv2_1_bias.bin
+Opened binary file data/model_weights_improved/bn2_1_mean.bin
+Opened binary file data/model_weights_improved/bn2_1_variance.bin
+Opened binary file data/model_weights_improved/bn2_1_gamma.bin
+Opened binary file data/model_weights_improved/bn2_1_beta.bin
+Opened binary file data/model_weights_improved/conv2_2_weights.bin
+Opened binary file data/model_weights_improved/conv2_2_bias.bin
+Opened binary file data/model_weights_improved/bn2_2_mean.bin
+Opened binary file data/model_weights_improved/bn2_2_variance.bin
+Opened binary file data/model_weights_improved/bn2_2_gamma.bin
+Opened binary file data/model_weights_improved/bn2_2_beta.bin
+Opened binary file data/model_weights_improved/conv3_1_weights.bin
+Opened binary file data/model_weights_improved/conv3_1_bias.bin
+Opened binary file data/model_weights_improved/bn3_1_mean.bin
+Opened binary file data/model_weights_improved/bn3_1_variance.bin
+Opened binary file data/model_weights_improved/bn3_1_gamma.bin
+Opened binary file data/model_weights_improved/bn3_1_beta.bin
+Opened binary file data/model_weights_improved/conv3_2_weights.bin
+Opened binary file data/model_weights_improved/conv3_2_bias.bin
+Opened binary file data/model_weights_improved/bn3_2_mean.bin
+Opened binary file data/model_weights_improved/bn3_2_variance.bin
+Opened binary file data/model_weights_improved/bn3_2_gamma.bin
+Opened binary file data/model_weights_improved/bn3_2_beta.bin
+Opened binary file data/model_weights_improved/fc1_weights.bin
+Opened binary file data/model_weights_improved/fc1_bias.bin
+Opened binary file data/model_weights_improved/bn_fc1_mean.bin
+Opened binary file data/model_weights_improved/bn_fc1_variance.bin
+Opened binary file data/model_weights_improved/bn_fc1_gamma.bin
+Opened binary file data/model_weights_improved/bn_fc1_beta.bin
+Opened binary file data/model_weights_improved/fc2_weights.bin
+Opened binary file data/model_weights_improved/fc2_bias.bin
+[[36mInfo[39m]: Loading test mel-spectrogram...
+Opened binary file data/test_input.bin
+[[36mInfo[39m]: Test input loaded successfully!
+[[36mInfo[39m]: --- Running All Layer Tests ---
+[[36mInfo[39m]: --- Running Layer Test 0 ---
+Timer Layer Inference: elapsed=163.035004ms
+Layer 0 output dimensions: 124 124 32 (total: 492032 elements)
+Expected output file not found: data/feature_maps_improved/layer_0_output.bin
+Skipping comparison for layer 0
+[[36mInfo[39m]: --- Running Layer Test 1 ---
+Timer Layer Inference: elapsed=104.723999ms
+Layer 1 output dimensions: 124 124 32 (total: 492032 elements)
+Expected output file not found: data/feature_maps_improved/layer_1_output.bin
+Skipping comparison for layer 1
+[[36mInfo[39m]: --- Running Layer Test 2 ---
+Timer Layer Inference: elapsed=2883.800049ms
+Layer 2 output dimensions: 120 120 32 (total: 460800 elements)
+Expected output file not found: data/feature_maps_improved/layer_2_output.bin
+Skipping comparison for layer 2
+[[36mInfo[39m]: --- Running Layer Test 3 ---
+Timer Layer Inference: elapsed=2893.335938ms
+Layer 3 output dimensions: 120 120 32 (total: 460800 elements)
+Expected output file not found: data/feature_maps_improved/layer_3_output.bin
+Skipping comparison for layer 3
+[[36mInfo[39m]: --- Running Layer Test 4 ---
+Timer Layer Inference: elapsed=2895.073975ms
+Layer 4 output dimensions: 60 60 32 (total: 115200 elements)
+Expected output file not found: data/feature_maps_improved/layer_4_output.bin
+Skipping comparison for layer 4
+[[36mInfo[39m]: --- Running Layer Test 5 ---
+Timer Layer Inference: elapsed=3353.715088ms
+Layer 5 output dimensions: 58 58 64 (total: 215296 elements)
+Expected output file not found: data/feature_maps_improved/layer_5_output.bin
+Skipping comparison for layer 5
+[[36mInfo[39m]: --- Running Layer Test 6 ---
+Timer Layer Inference: elapsed=3359.943115ms
+First 10 output values: 0.235222 0.530563 0.0460531 0.157806 0.862441 0.183635 0.0569289 0.827866 -0.66917 2.69718 
+Layer 6 output dimensions: 58 58 64 (total: 215296 elements)
+Expected output file not found: data/feature_maps_improved/layer_6_output.bin
+Skipping comparison for layer 6
+[[36mInfo[39m]: --- Running Layer Test 7 ---
+Timer Layer Inference: elapsed=4305.123047ms
+First 10 output values: 0 0.320843 0.882343 0 0 0 0.446636 1.34938 0.196378 0 
+Layer 7 output dimensions: 56 56 64 (total: 200704 elements)
+Expected output file not found: data/feature_maps_improved/layer_7_output.bin
+Skipping comparison for layer 7
+[[36mInfo[39m]: --- Running Layer Test 8 ---
+Timer Layer Inference: elapsed=4311.622070ms
+Layer 8 output dimensions: 56 56 64 (total: 200704 elements)
+Expected output file not found: data/feature_maps_improved/layer_8_output.bin
+Skipping comparison for layer 8
+[[36mInfo[39m]: --- Running Layer Test 9 ---
+Timer Layer Inference: elapsed=4308.521973ms
+Layer 9 output dimensions: 28 28 64 (total: 50176 elements)
+Expected output file not found: data/feature_maps_improved/layer_9_output.bin
+Skipping comparison for layer 9
+[[36mInfo[39m]: --- Running Layer Test 10 ---
+Timer Layer Inference: elapsed=4490.232910ms
+Layer 10 output dimensions: 26 26 64 (total: 43264 elements)
+Expected output file not found: data/feature_maps_improved/layer_10_output.bin
+Skipping comparison for layer 10
+[[36mInfo[39m]: --- Running Layer Test 11 ---
+Timer Layer Inference: elapsed=4491.609863ms
+Layer 11 output dimensions: 26 26 64 (total: 43264 elements)
+Expected output file not found: data/feature_maps_improved/layer_11_output.bin
+Skipping comparison for layer 11
+[[36mInfo[39m]: --- Running Layer Test 12 ---
+Timer Layer Inference: elapsed=4804.527832ms
+Layer 12 output dimensions: 24 24 128 (total: 73728 elements)
+Expected output file not found: data/feature_maps_improved/layer_12_output.bin
+Skipping comparison for layer 12
+[[36mInfo[39m]: --- Running Layer Test 13 ---
+Timer Layer Inference: elapsed=4805.458008ms
+Layer 13 output dimensions: 24 24 128 (total: 73728 elements)
+Expected output file not found: data/feature_maps_improved/layer_13_output.bin
+Skipping comparison for layer 13
+[[36mInfo[39m]: --- Running Layer Test 14 ---
+Timer Layer Inference: elapsed=4811.514160ms
+Layer 14 output dimensions: 12 12 128 (total: 18432 elements)
+Expected output file not found: data/feature_maps_improved/layer_14_output.bin
+Skipping comparison for layer 14
+[[36mInfo[39m]: --- Running Layer Test 15 ---
+Timer Layer Inference: elapsed=4812.579102ms
+Layer 15 output dimensions: 18432 (total: 18432 elements)
+Expected output file not found: data/feature_maps_improved/layer_15_output.bin
+Skipping comparison for layer 15
+[[36mInfo[39m]: --- Running Layer Test 16 ---
+Timer Layer Inference: elapsed=4857.693848ms
+Layer 16 output dimensions: 256 (total: 256 elements)
+Expected output file not found: data/feature_maps_improved/layer_16_output.bin
+Skipping comparison for layer 16
+[[36mInfo[39m]: --- Running Layer Test 17 ---
+Timer Layer Inference: elapsed=4855.643066ms
+Layer 17 output dimensions: 256 (total: 256 elements)
+Expected output file not found: data/feature_maps_improved/layer_17_output.bin
+Skipping comparison for layer 17
+[[36mInfo[39m]: --- Running Layer Test 18 ---
+Timer Layer Inference: elapsed=4857.890137ms
+Layer 18 output dimensions: 10 (total: 10 elements)
+Expected output file not found: data/feature_maps_improved/layer_18_output.bin
+Skipping comparison for layer 18
+[[36mInfo[39m]: --- Running Layer Test 19 ---
+Timer Layer Inference: elapsed=4860.408203ms
+Layer 19 output dimensions: 10 (total: 10 elements)
+Expected output file not found: data/feature_maps_improved/layer_19_output.bin
+Skipping comparison for layer 19
+[[36mInfo[39m]: --- Running Full Inference Test ---
+Timer Full Inference: elapsed=4779.215820ms
+
+Final output dimensions: 10 (total: 10 elements)
+
+Top-5 predictions:
+  1. Saxophone (class 7): 86.1401%
+  2. Electric Guitar (class 4): 8.4979%
+  3. Acoustic Guitar (class 3): 2.27406%
+  4. Violin (class 9): 1.85003%
+  5. Cello (class 0): 1.09494%
+
+
+----- ML::runTests() COMPLETE -----
