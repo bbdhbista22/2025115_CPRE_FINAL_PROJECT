@@ -72,10 +72,7 @@ namespace ML
                     }
                     // Add bias: b[m]
                     result += getBiasData().get<fp32>(m);
-                    
-                    // Apply ReLU activation
-                    result = std::max(0.0f, result);
-                    
+
                     // Output index: [p, q, m]
                     size_t output_idx = p * Q * M + q * M + m;
                     getOutputData().get<fp32>(output_idx) = result;

@@ -52,18 +52,9 @@ namespace ML
             {
                 // Weight matrix: [input_features, output_features]
                 size_t weightIdx = in_idx * outputSize + out_idx;
-                
+
                 sum += dataIn.get<fp32>(in_idx) * weights.get<fp32>(weightIdx);
             }
-
-            // Apply ReLU activation only for hidden layers (not the final layer before Softmax)
-            // The final dense layer has 10 outputs (for 10 instrument classes)
-            // Hidden dense layers have other sizes (like 256)
-            if (outputSize != 10) {
-                // This is a hidden layer, apply ReLU
-                sum = std::max(0.0f, sum);
-            }
-            // For the final layer (outputSize == 10), don't apply ReLU
 
             // Store result in output
             output.get<fp32>(out_idx) = sum;

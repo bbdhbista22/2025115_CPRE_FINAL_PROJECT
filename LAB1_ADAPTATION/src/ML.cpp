@@ -268,8 +268,42 @@ void runLayerTest(const std::size_t layerNum, const Model& model, const Path& ba
         }
         std::cout << "(total: " << output->getParams().flat_count() << " elements)" << std::endl;
 
+        // Map C++ layer indices to Python feature map filenames
+        // Updated architecture: Conv (NO ReLU) → BatchNorm (WITH ReLU)
+        // C++ Conv output (no ReLU) → Python Conv output (before BatchNorm)
+        // C++ BatchNorm output (with ReLU) → Python ReLU output (after BatchNorm+ReLU)
+        const char* pythonLayerMap[] = {
+            "layer_0_conv1_1_features.bin",      // C++ 0:  conv1_1 (Conv, NO ReLU)
+            "layer_2_relu1_1_features.bin",      // C++ 1:  bn1_1 (BatchNorm+ReLU)
+            "layer_3_conv1_2_features.bin",      // C++ 2:  conv1_2 (Conv, NO ReLU)
+            "layer_5_relu1_2_features.bin",      // C++ 3:  bn1_2 (BatchNorm+ReLU)
+            "layer_6_pool1_features.bin",        // C++ 4:  pool1
+            "layer_7_conv2_1_features.bin",      // C++ 5:  conv2_1 (Conv, NO ReLU)
+            "layer_9_relu2_1_features.bin",      // C++ 6:  bn2_1 (BatchNorm+ReLU)
+            "layer_10_conv2_2_features.bin",     // C++ 7:  conv2_2 (Conv, NO ReLU)
+            "layer_12_relu2_2_features.bin",     // C++ 8:  bn2_2 (BatchNorm+ReLU)
+            "layer_13_pool2_features.bin",       // C++ 9:  pool2
+            "layer_14_conv3_1_features.bin",     // C++ 10: conv3_1 (Conv, NO ReLU)
+            "layer_16_relu3_1_features.bin",     // C++ 11: bn3_1 (BatchNorm+ReLU)
+            "layer_17_conv3_2_features.bin",     // C++ 12: conv3_2 (Conv, NO ReLU)
+            "layer_19_relu3_2_features.bin",     // C++ 13: bn3_2 (BatchNorm+ReLU) - FIXED!
+            "layer_20_pool3_features.bin",       // C++ 14: pool3
+            "layer_21_flatten_features.bin",     // C++ 15: flatten
+            "layer_22_fc1_features.bin",         // C++ 16: fc1 (Dense, NO ReLU)
+            "layer_24_relu_fc1_features.bin",    // C++ 17: bn_fc1 (BatchNorm+ReLU)
+            "layer_26_fc2_features.bin",         // C++ 18: fc2
+            nullptr                              // C++ 19: softmax (not exported)
+        };
+
+        // Check if we have a mapping for this layer
+        if (layerNum >= 20 || pythonLayerMap[layerNum] == nullptr) {
+            std::cout << "No Python feature map available for layer " << layerNum << std::endl;
+            std::cout << "Skipping comparison for layer " << layerNum << std::endl;
+            return;
+        }
+
         // Load the expected output for this specific layer
-        std::string expectedFileName = "layer_" + std::to_string(layerNum) + "_output.bin";
+        std::string expectedFileName = pythonLayerMap[layerNum];
         Path expectedPath = basePath / expectedFileName.c_str();
         
         // Check if expected file exists

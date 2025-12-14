@@ -109,6 +109,9 @@ void BatchNormalizationLayer::computeNaive(const LayerData& input) const {
                         float normalized = (x - mean_c) / std_c;
                         float y = gamma_c * normalized + beta_c;
 
+                        // Apply ReLU activation
+                        y = std::max(0.0f, y);
+
                         output.get<fp32>(idx) = y;
                     }
                 }
@@ -140,6 +143,9 @@ void BatchNormalizationLayer::computeNaive(const LayerData& input) const {
                     float normalized = (x - mean_c) / std_c;
                     float y = gamma_c * normalized + beta_c;
 
+                    // Apply ReLU activation
+                    y = std::max(0.0f, y);
+
                     output.get<fp32>(idx) = y;
                 }
             }
@@ -163,6 +169,9 @@ void BatchNormalizationLayer::computeNaive(const LayerData& input) const {
             // y = gamma * (x - mean) / sqrt(variance + epsilon) + beta
             float normalized = (x - mean_i) / std_i;
             float y = gamma_i * normalized + beta_i;
+
+            // Apply ReLU activation
+            y = std::max(0.0f, y);
 
             output.get<fp32>(i) = y;
         }
