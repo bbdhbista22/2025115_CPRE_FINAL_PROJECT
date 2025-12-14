@@ -92,4 +92,10 @@ namespace ML
         computeNaive(dataIn);
     }
 
+    void MaxPoolingLayer::computeQuantized(const LayerData& dataIn) const {
+        // MaxPooling works the same on quantized data (max operation is scale-invariant)
+        // No special quantization logic needed
+        computeNaive(dataIn);
+    }
+
 }

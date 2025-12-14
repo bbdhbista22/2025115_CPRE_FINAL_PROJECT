@@ -79,4 +79,102 @@ namespace ML
         computeNaive(dataIn);
     }
 
+    void DenseLayer::computeQuantized(const LayerData& dataIn) const {
+        // INT8 Quantized Dense Layer Implementation
+        // Similar to quantized convolution but for matrix-vector multiply
+
+        const auto &weightDims = getWeightParams().dims; // Expected: [input_features, output_features]
+
+        // Calculate total input features by flattening all input dimensions
+        size_t totalInputFeatures = getInputParams().flat_count();
+        size_t outputSize = getOutputParams().flat_count();
+
+        // Validate dimensions
+        size_t expectedInputFeatures = weightDims[0];  // First dimension of weight matrix
+        size_t expectedOutputFeatures = weightDims[1]; // Second dimension of weight matrix
+
+        if (totalInputFeatures != expectedInputFeatures) {
+            std::cerr << "Dense layer input size mismatch: got " << totalInputFeatures
+                      << ", expected " << expectedInputFeatures << std::endl;
+            return;
+        }
+
+        if (outputSize != expectedOutputFeatures) {
+            std::cerr << "Dense layer output size mismatch: got " << outputSize
+                      << ", expected " << expectedOutputFeatures << std::endl;
+            return;
+        }
+
+        const LayerData& weights = getWeightData();
+        LayerData& output = getOutputData();
+        const LayerData& bias = getBiasData();
+
+        // --- Quantization Parameters ---
+        // Note: For Dense layers, we need calibration stats for the input
+        // For now, we'll use a simple symmetric quantization approach
+        // In production, these would come from calibration statistics
+
+        // Calculate input scale (symmetric quantization around 0)
+        fp32 input_max = 0.0f;
+        for (size_t i = 0; i < totalInputFeatures; i++) {
+            fp32 val = std::abs(dataIn.get<fp32>(i));
+            if (val > input_max) input_max = val;
+        }
+        fp32 Si = (input_max > 0) ? (127.0f / input_max) : 1.0f;
+
+        // Calculate weight scale
+        fp32 weight_max = 0.0f;
+        for (size_t i = 0; i < totalInputFeatures * outputSize; i++) {
+            fp32 val = std::abs(weights.get<fp32>(i));
+            if (val > weight_max) weight_max = val;
+        }
+        fp32 Sw = (weight_max > 0) ? (127.0f / weight_max) : 1.0f;
+
+        // Bias scale = Si * Sw
+        fp32 Sb = Si * Sw;
+
+        // --- Quantize inputs ---
+        std::vector<i8> input_quantized(totalInputFeatures);
+        for (size_t i = 0; i < totalInputFeatures; i++) {
+            fp32 val = dataIn.get<fp32>(i);
+            i32 quantized = static_cast<i32>(std::round(val * Si));
+            input_quantized[i] = static_cast<i8>(std::max(-128, std::min(127, quantized)));
+        }
+
+        // --- Quantize weights ---
+        std::vector<i8> weights_quantized(totalInputFeatures * outputSize);
+        for (size_t i = 0; i < totalInputFeatures * outputSize; i++) {
+            fp32 val = weights.get<fp32>(i);
+            i32 quantized = static_cast<i32>(std::round(val * Sw));
+            weights_quantized[i] = static_cast<i8>(std::max(-128, std::min(127, quantized)));
+        }
+
+        // --- Quantize biases ---
+        std::vector<i32> bias_quantized(outputSize);
+        for (size_t i = 0; i < outputSize; i++) {
+            fp32 val = bias.get<fp32>(i);
+            bias_quantized[i] = static_cast<i32>(std::round(val * Sb));
+        }
+
+        // --- INT8 Matrix-Vector Multiply ---
+        for (size_t out_idx = 0; out_idx < outputSize; out_idx++) {
+            i32 accumulator = bias_quantized[out_idx];
+
+            for (size_t in_idx = 0; in_idx < totalInputFeatures; in_idx++) {
+                // Weight matrix: [input_features, output_features]
+                size_t weightIdx = in_idx * outputSize + out_idx;
+
+                // INT8 multiply, accumulate in INT32
+                accumulator += static_cast<i32>(input_quantized[in_idx]) *
+                               static_cast<i32>(weights_quantized[weightIdx]);
+            }
+
+            // Dequantize: divide by (Si * Sw)
+            fp32 result = static_cast<fp32>(accumulator) / (Si * Sw);
+
+            // Store result in output
+            output.get<fp32>(out_idx) = result;
+        }
+    }
+
 }

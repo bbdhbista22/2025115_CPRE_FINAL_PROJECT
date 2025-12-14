@@ -38,6 +38,9 @@ const LayerData& Model::inferenceLayer(const LayerData& inData, const int layerN
     case Layer::InfType::SIMD:
         layer.computeSIMD(inData);
         break;
+    case Layer::InfType::QUANTIZED:
+        layer.computeQuantized(inData);
+        break;
     default:
         assert(false && "Inference Type not implemented");
     }

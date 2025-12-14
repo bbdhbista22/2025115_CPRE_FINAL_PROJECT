@@ -39,6 +39,7 @@ public:
     void computeThreaded(const LayerData& dataIn) const override;
     void computeTiled(const LayerData& dataIn) const override;
     void computeSIMD(const LayerData& dataIn) const override;
+    void computeQuantized(const LayerData& dataIn) const override;
 
 private:
     LayerParams meanParam;

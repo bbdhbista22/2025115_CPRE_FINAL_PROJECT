@@ -68,4 +68,10 @@ namespace ML
         computeNaive(dataIn);
     }
 
+    void SoftmaxLayer::computeQuantized(const LayerData& dataIn) const {
+        // Softmax requires FP32 for exp() and division operations
+        // Quantized models typically dequantize before softmax
+        computeNaive(dataIn);
+    }
+
 }

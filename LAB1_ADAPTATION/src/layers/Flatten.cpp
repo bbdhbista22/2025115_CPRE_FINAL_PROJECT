@@ -46,4 +46,10 @@ namespace ML
         computeNaive(dataIn);
     }
 
+    void FlattenLayer::computeQuantized(const LayerData& dataIn) const {
+        // Flattening doesn't require quantization - it's just a reshape
+        // Data passes through unchanged
+        computeNaive(dataIn);
+    }
+
 }

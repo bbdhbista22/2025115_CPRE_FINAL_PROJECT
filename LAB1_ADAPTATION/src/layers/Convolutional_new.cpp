@@ -4,6 +4,10 @@
 #include <algorithm>
 #include <thread>
 #include <vector>
+#include <fstream>
+#include <sstream>
+#include <map>
+#include <cmath>
 
 #include "../Types.h"
 #include "../Utils.h"
@@ -11,8 +15,132 @@
 
 namespace ML
 {
-    // --- Begin Student Code ---
-    // ASDFf
+    // ==========================================================================
+    // INT8 QUANTIZATION - CALIBRATION STATISTICS
+    // ==========================================================================
+
+    struct CalibrationStats
+    {
+        fp32 min, max, mean, std;
+        fp32 Si;  // Scale factor
+        i8 zi;    // Zero point
+    };
+
+    // Global calibration data loaded from JSON
+    static std::map<std::string, CalibrationStats> calibration_data;
+    static bool calibration_loaded = false;
+    static int conv_layer_count = 0;
+
+    // Simple JSON parser for calibration stats
+    bool loadCalibrationStats(const std::string& json_path)
+    {
+        if (calibration_loaded) {
+            return true;
+        }
+
+        std::ifstream file(json_path);
+        if (!file.is_open()) {
+            logError("Failed to open calibration stats file: " + json_path);
+            return false;
+        }
+
+        std::string content((std::istreambuf_iterator<char>(file)),
+                            std::istreambuf_iterator<char>());
+        file.close();
+
+        // Simple JSON parsing - look for layer entries
+        size_t pos = 0;
+        while ((pos = content.find("\"", pos)) != std::string::npos)
+        {
+            size_t name_start = pos + 1;
+            size_t name_end = content.find("\"", name_start);
+            if (name_end == std::string::npos) break;
+
+            std::string layer_name = content.substr(name_start, name_end - name_start);
+            pos = name_end + 1;
+
+            // Skip to the opening brace
+            size_t brace_start = content.find("{", pos);
+            if (brace_start == std::string::npos) break;
+
+            // Find the closing brace
+            size_t brace_end = content.find("}", brace_start);
+            if (brace_end == std::string::npos) break;
+
+            std::string layer_content = content.substr(brace_start + 1, brace_end - brace_start - 1);
+
+            // Parse the values
+            CalibrationStats stats = {};
+
+            // Extract min
+            size_t min_pos = layer_content.find("\"min\":");
+            if (min_pos != std::string::npos) {
+                size_t val_start = layer_content.find(":", min_pos) + 1;
+                size_t val_end = layer_content.find(",", val_start);
+                if (val_end == std::string::npos) val_end = layer_content.find("}", val_start);
+                stats.min = std::stof(layer_content.substr(val_start, val_end - val_start));
+            }
+
+            // Extract max
+            size_t max_pos = layer_content.find("\"max\":");
+            if (max_pos != std::string::npos) {
+                size_t val_start = layer_content.find(":", max_pos) + 1;
+                size_t val_end = layer_content.find(",", val_start);
+                if (val_end == std::string::npos) val_end = layer_content.find("}", val_start);
+                stats.max = std::stof(layer_content.substr(val_start, val_end - val_start));
+            }
+
+            // Extract mean
+            size_t mean_pos = layer_content.find("\"mean\":");
+            if (mean_pos != std::string::npos) {
+                size_t val_start = layer_content.find(":", mean_pos) + 1;
+                size_t val_end = layer_content.find(",", val_start);
+                if (val_end == std::string::npos) val_end = layer_content.find("}", val_start);
+                stats.mean = std::stof(layer_content.substr(val_start, val_end - val_start));
+            }
+
+            // Extract std
+            size_t std_pos = layer_content.find("\"std\":");
+            if (std_pos != std::string::npos) {
+                size_t val_start = layer_content.find(":", std_pos) + 1;
+                size_t val_end = layer_content.find(",", val_start);
+                if (val_end == std::string::npos) val_end = layer_content.find("}", val_start);
+                stats.std = std::stof(layer_content.substr(val_start, val_end - val_start));
+            }
+
+            // Extract Si
+            size_t Si_pos = layer_content.find("\"Si\":");
+            if (Si_pos != std::string::npos) {
+                size_t val_start = layer_content.find(":", Si_pos) + 1;
+                size_t val_end = layer_content.find(",", val_start);
+                if (val_end == std::string::npos) val_end = layer_content.find("}", val_start);
+                stats.Si = std::stof(layer_content.substr(val_start, val_end - val_start));
+            }
+
+            // Extract zi
+            size_t zi_pos = layer_content.find("\"zi\":");
+            if (zi_pos != std::string::npos) {
+                size_t val_start = layer_content.find(":", zi_pos) + 1;
+                size_t val_end = layer_content.find(",", val_start);
+                if (val_end == std::string::npos) val_end = layer_content.find("}", val_start);
+                stats.zi = static_cast<i8>(std::stoi(layer_content.substr(val_start, val_end - val_start)));
+            }
+
+            calibration_data[layer_name] = stats;
+            pos = brace_end + 1;
+        }
+
+        calibration_loaded = true;
+        logInfo("Loaded calibration stats for " + std::to_string(calibration_data.size()) + " layers");
+
+        return true;
+    }
+
+    void resetConvLayerCounter() {
+        conv_layer_count = 0;
+    }
+
+    // ==========================================================================
     // Compute the convolution for the layer data
     // Get dimensions from layer parameters
   
@@ -100,6 +228,148 @@ namespace ML
     {
         // For simplicity, use naive implementation
         computeNaive(dataIn);
+    }
+
+    // ==========================================================================
+    // INT8 QUANTIZED CONVOLUTION
+    // ==========================================================================
+    void ConvolutionalLayer::computeQuantized(const LayerData &dataIn) const
+    {
+        // Load calibration stats if not already loaded
+        if (!calibration_loaded) {
+            std::vector<std::string> possible_paths = {
+                "data/calibration_stats.json",
+                "calibration_stats.json",
+                "../data/calibration_stats.json"
+            };
+
+            bool found = false;
+            for (const auto& path : possible_paths) {
+                if (loadCalibrationStats(path)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                logError("Could not find calibration_stats.json file");
+                logError("Falling back to FP32 inference");
+                computeNaive(dataIn);
+                return;
+            }
+        }
+
+        // Get dimensions
+        const auto &inputDims = getInputParams().dims;
+        const auto &outputDims = getOutputParams().dims;
+        const auto &weightDims = getWeightParams().dims;
+
+        size_t U = 1; // Stride
+        size_t W = inputDims[1];
+        size_t C = inputDims[2];
+        size_t P = outputDims[0];
+        size_t Q = outputDims[1];
+        size_t M = outputDims[2];
+        size_t R = weightDims[0];
+        size_t S = weightDims[1];
+
+        // Select input calibration stats based on layer count
+        std::string input_stats_name;
+        if (conv_layer_count == 0) {
+            input_stats_name = "_input";
+        } else {
+            // Map to conv layer names: conv1_1, conv1_2, conv2_1, conv2_2, conv3_1, conv3_2
+            const char* layer_names[] = {"conv1_1", "conv1_2", "conv2_1", "conv2_2", "conv3_1", "conv3_2"};
+            if (conv_layer_count - 1 < 6) {
+                input_stats_name = layer_names[conv_layer_count - 1];
+            } else {
+                input_stats_name = "conv3_2";  // Fallback
+            }
+        }
+
+        auto input_stats_it = calibration_data.find(input_stats_name);
+        if (input_stats_it == calibration_data.end()) {
+            logError("No calibration stats found for: " + input_stats_name);
+            computeNaive(dataIn);
+            return;
+        }
+
+        const CalibrationStats &input_stats = input_stats_it->second;
+        fp32 Si = input_stats.Si;
+        i8 zi = input_stats.zi;
+
+        // Increment layer counter for next conv layer
+        conv_layer_count++;
+
+        // Calculate weight scale (Sw)
+        size_t weight_size = getWeightParams().flat_count();
+        fp32 max_weight = 0.0f;
+        for (size_t i = 0; i < weight_size; i++) {
+            fp32 abs_val = std::abs(getWeightData().get<fp32>(i));
+            if (abs_val > max_weight) {
+                max_weight = abs_val;
+            }
+        }
+        if (max_weight < 1e-8f) {
+            max_weight = 1.0f;
+        }
+        fp32 Sw = 127.0f / max_weight;
+
+        // Bias scale
+        fp32 Sb = Si * Sw;
+
+        // Quantize inputs
+        size_t input_size = getInputParams().flat_count();
+        std::vector<i8> quantized_input(input_size);
+        for (size_t i = 0; i < input_size; i++) {
+            i32 temp = static_cast<i32>(std::round(Si * dataIn.get<fp32>(i))) + zi;
+            quantized_input[i] = static_cast<i8>(std::max<i32>(-128, std::min<i32>(127, temp)));
+        }
+
+        // Quantize weights
+        std::vector<i8> quantized_weights(weight_size);
+        for (size_t i = 0; i < weight_size; i++) {
+            i32 temp = static_cast<i32>(std::round(Sw * getWeightData().get<fp32>(i)));
+            quantized_weights[i] = static_cast<i8>(std::max<i32>(-128, std::min<i32>(127, temp)));
+        }
+
+        // Quantize biases
+        std::vector<i32> quantized_biases(M);
+        for (size_t m = 0; m < M; m++) {
+            quantized_biases[m] = static_cast<i32>(std::round(Sb * getBiasData().get<fp32>(m)));
+        }
+
+        // Main convolution loop (INT8)
+        for (size_t p = 0; p < P; p++) {
+            for (size_t q = 0; q < Q; q++) {
+                for (size_t m = 0; m < M; m++) {
+                    i32 accumulator = quantized_biases[m];
+
+                    for (size_t c = 0; c < C; c++) {
+                        for (size_t r = 0; r < R; r++) {
+                            for (size_t s = 0; s < S; s++) {
+                                size_t input_h = U * p + r;
+                                size_t input_w = U * q + s;
+                                size_t input_idx = input_h * W * C + input_w * C + c;
+                                size_t weight_idx = r * S * C * M + s * C * M + c * M + m;
+
+                                // INT8 multiply-accumulate
+                                accumulator += static_cast<i32>(quantized_input[input_idx]) *
+                                              static_cast<i32>(quantized_weights[weight_idx]);
+                            }
+                        }
+                    }
+
+                    // Dequantize output
+                    fp32 result = static_cast<fp32>(accumulator) / (Si * Sw);
+
+                    // NO ReLU here - it's fused with BatchNorm in our architecture
+
+                    size_t output_idx = p * Q * M + q * M + m;
+                    getOutputData().get<fp32>(output_idx) = result;
+                }
+            }
+        }
     }
 
 } // namespace ML

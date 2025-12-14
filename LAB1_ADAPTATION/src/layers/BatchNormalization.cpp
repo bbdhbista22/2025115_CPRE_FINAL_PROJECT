@@ -200,4 +200,122 @@ void BatchNormalizationLayer::computeSIMD(const LayerData& input) const {
     computeNaive(input);
 }
 
+void BatchNormalizationLayer::computeQuantized(const LayerData& input) const {
+    // Hybrid approach for INT8 quantization:
+    // 1. Input is in FP32 (already dequantized from previous quantized conv layer)
+    // 2. Apply BatchNorm + ReLU in FP32 (division makes full INT8 impractical)
+    // 3. Output stays in FP32 (will be quantized by next conv layer if needed)
+    //
+    // We chose this hybrid approach because:
+    // - BatchNorm requires division by sqrt(variance), which is complex in INT8
+    // - Accuracy loss from quantizing BatchNorm is often higher than the speedup gain
+    // - Most production INT8 models keep BatchNorm in FP32
+
+    // Pre-compute std_dev if not already done
+    computeStdDev();
+
+    LayerData& output = getOutputData();
+    const auto& inputDims = input.getParams().dims;
+    const size_t numChannels = mean.getParams().flat_count();
+
+    // Determine input format
+    if (inputDims.size() == 4) {
+        // 4D input: (batch, height, width, channels) - Conv layer output
+        const size_t batch = inputDims[0];
+        const size_t height = inputDims[1];
+        const size_t width = inputDims[2];
+        const size_t channels = inputDims[3];
+
+        if (channels != numChannels) {
+            throw std::runtime_error("BatchNormalization: Channel count mismatch");
+        }
+
+        for (size_t b = 0; b < batch; b++) {
+            for (size_t h = 0; h < height; h++) {
+                for (size_t w = 0; w < width; w++) {
+                    for (size_t c = 0; c < channels; c++) {
+                        size_t idx = ((b * height + h) * width + w) * channels + c;
+
+                        float x = input.get<fp32>(idx);
+                        float mean_c = mean.get<fp32>(c);
+                        float std_c = std_dev.get<fp32>(c);
+                        float gamma_c = gamma.get<fp32>(c);
+                        float beta_c = beta.get<fp32>(c);
+
+                        // y = gamma * (x - mean) / sqrt(variance + epsilon) + beta
+                        float normalized = (x - mean_c) / std_c;
+                        float y = gamma_c * normalized + beta_c;
+
+                        // Apply ReLU activation
+                        y = std::max(0.0f, y);
+
+                        output.get<fp32>(idx) = y;
+                    }
+                }
+            }
+        }
+    }
+    else if (inputDims.size() == 3) {
+        // 3D input: (height, width, channels) - Single sample
+        const size_t height = inputDims[0];
+        const size_t width = inputDims[1];
+        const size_t channels = inputDims[2];
+
+        if (channels != numChannels) {
+            throw std::runtime_error("BatchNormalization: Channel count mismatch");
+        }
+
+        for (size_t h = 0; h < height; h++) {
+            for (size_t w = 0; w < width; w++) {
+                for (size_t c = 0; c < channels; c++) {
+                    size_t idx = (h * width + w) * channels + c;
+
+                    float x = input.get<fp32>(idx);
+                    float mean_c = mean.get<fp32>(c);
+                    float std_c = std_dev.get<fp32>(c);
+                    float gamma_c = gamma.get<fp32>(c);
+                    float beta_c = beta.get<fp32>(c);
+
+                    // y = gamma * (x - mean) / sqrt(variance + epsilon) + beta
+                    float normalized = (x - mean_c) / std_c;
+                    float y = gamma_c * normalized + beta_c;
+
+                    // Apply ReLU activation
+                    y = std::max(0.0f, y);
+
+                    output.get<fp32>(idx) = y;
+                }
+            }
+        }
+    }
+    else if (inputDims.size() == 1) {
+        // 1D input: (features) - Dense layer output
+        const size_t features = inputDims[0];
+
+        if (features != numChannels) {
+            throw std::runtime_error("BatchNormalization: Feature count mismatch");
+        }
+
+        for (size_t i = 0; i < features; i++) {
+            float x = input.get<fp32>(i);
+            float mean_i = mean.get<fp32>(i);
+            float std_i = std_dev.get<fp32>(i);
+            float gamma_i = gamma.get<fp32>(i);
+            float beta_i = beta.get<fp32>(i);
+
+            // y = gamma * (x - mean) / sqrt(variance + epsilon) + beta
+            float normalized = (x - mean_i) / std_i;
+            float y = gamma_i * normalized + beta_i;
+
+            // Apply ReLU activation
+            y = std::max(0.0f, y);
+
+            output.get<fp32>(i) = y;
+        }
+    }
+    else {
+        throw std::runtime_error("BatchNormalization: Unsupported input dimensionality");
+    }
+}
+
 } // namespace ML

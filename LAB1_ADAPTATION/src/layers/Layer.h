@@ -121,7 +121,7 @@ class LayerData {
 class Layer {
    public:
     // Inference Type
-    enum class InfType { NAIVE, THREADED, TILED, SIMD };
+    enum class InfType { NAIVE, THREADED, TILED, SIMD, QUANTIZED };
 
     // Layer Type
     enum class LayerType { NONE, CONVOLUTIONAL, DENSE, SOFTMAX, MAX_POOLING, BATCHNORM };
@@ -154,6 +154,7 @@ class Layer {
     virtual void computeThreaded(const LayerData& dataIn) const = 0;
     virtual void computeTiled(const LayerData& dataIn) const = 0;
     virtual void computeSIMD(const LayerData& dataIn) const = 0;
+    virtual void computeQuantized(const LayerData& dataIn) const = 0;
 
    private:
     LayerParams inParams;
