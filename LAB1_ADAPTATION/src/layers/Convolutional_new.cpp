@@ -298,6 +298,10 @@ namespace ML
         fp32 Si = input_stats.Si;
         i8 zi = input_stats.zi;
 
+        // Log quantization parameters
+        std::cout << "[QUANT] Conv Layer " << conv_layer_count << " - Using calibration: " << input_stats_name << std::endl;
+        std::cout << "[QUANT]   Input scale (Si): " << Si << ", zero-point (zi): " << static_cast<int>(zi) << std::endl;
+
         // Increment layer counter for next conv layer
         conv_layer_count++;
 
@@ -317,6 +321,9 @@ namespace ML
 
         // Bias scale
         fp32 Sb = Si * Sw;
+
+        std::cout << "[QUANT]   Weight max: " << max_weight << ", scale (Sw): " << Sw << std::endl;
+        std::cout << "[QUANT]   Bias scale (Sb): " << Sb << std::endl;
 
         // Quantize inputs
         size_t input_size = getInputParams().flat_count();
@@ -338,6 +345,19 @@ namespace ML
         for (size_t m = 0; m < M; m++) {
             quantized_biases[m] = static_cast<i32>(std::round(Sb * getBiasData().get<fp32>(m)));
         }
+
+        // Log sample quantized values (first 5 of each)
+        std::cout << "[QUANT]   Sample INT8 inputs: ";
+        for (size_t i = 0; i < std::min(size_t(5), input_size); i++) {
+            std::cout << static_cast<int>(quantized_input[i]) << " ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "[QUANT]   Sample INT8 weights: ";
+        for (size_t i = 0; i < std::min(size_t(5), weight_size); i++) {
+            std::cout << static_cast<int>(quantized_weights[i]) << " ";
+        }
+        std::cout << std::endl;
 
         // Main convolution loop (INT8)
         for (size_t p = 0; p < P; p++) {
@@ -370,6 +390,31 @@ namespace ML
                 }
             }
         }
+
+        // Log output statistics
+        size_t output_size = P * Q * M;
+        fp32 output_min = getOutputData().get<fp32>(0);
+        fp32 output_max = getOutputData().get<fp32>(0);
+        fp32 output_sum = 0.0f;
+
+        for (size_t i = 0; i < output_size; i++) {
+            fp32 val = getOutputData().get<fp32>(i);
+            output_min = std::min(output_min, val);
+            output_max = std::max(output_max, val);
+            output_sum += val;
+        }
+
+        fp32 output_mean = output_sum / output_size;
+
+        std::cout << "[QUANT]   Output stats - min: " << output_min
+                  << ", max: " << output_max
+                  << ", mean: " << output_mean << std::endl;
+
+        std::cout << "[QUANT]   Sample FP32 outputs: ";
+        for (size_t i = 0; i < std::min(size_t(5), output_size); i++) {
+            std::cout << getOutputData().get<fp32>(i) << " ";
+        }
+        std::cout << std::endl;
     }
 
 } // namespace ML

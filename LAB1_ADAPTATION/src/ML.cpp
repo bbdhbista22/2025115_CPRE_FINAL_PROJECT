@@ -2,6 +2,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
 
 #include "Config.h"
 #include "Model.h"
@@ -365,13 +366,13 @@ void runInferenceTest(const Model& model, const LayerData& inputData) {
         std::cout << dim << " ";
     }
     std::cout << "(total: " << output.getParams().flat_count() << " elements)" << std::endl;
-    
+
     // Print top-5 predictions with instrument names
     const char* instrumentNames[] = {
         "Cello", "Clarinet", "Flute", "Acoustic Guitar", "Electric Guitar",
         "Organ", "Piano", "Saxophone", "Trumpet", "Violin"
     };
-    
+
     const size_t numClasses = output.getParams().flat_count();
     std::cout << "\nTop-5 predictions:" << std::endl;
     std::vector<std::pair<fp32, size_t>> predictions;
@@ -379,11 +380,109 @@ void runInferenceTest(const Model& model, const LayerData& inputData) {
         predictions.push_back({output.get<fp32>(i), i});
     }
     std::sort(predictions.begin(), predictions.end(), std::greater<std::pair<fp32, size_t>>());
-    
+
     for (size_t i = 0; i < std::min(size_t(5), numClasses); ++i) {
         std::cout << "  " << (i+1) << ". " << instrumentNames[predictions[i].second]
-                  << " (class " << predictions[i].second << "): " 
+                  << " (class " << predictions[i].second << "): "
                   << (predictions[i].first * 100.0f) << "%" << std::endl;
+    }
+}
+
+void runQuantizedInferenceTest(const Model& model, const LayerData& inputData) {
+    logInfo("========================================");
+    logInfo("  INT8 QUANTIZED INFERENCE TEST");
+    logInfo("========================================");
+
+    // First run NAIVE for baseline
+    logInfo("\n--- Step 1: Running FP32 NAIVE baseline ---");
+    Timer naiveTimer("FP32 NAIVE Inference");
+    naiveTimer.start();
+    const LayerData& naiveOutput = model.inference(inputData, Layer::InfType::NAIVE);
+    naiveTimer.stop();
+
+    // Copy NAIVE output for comparison
+    LayerData naiveOutputCopy(naiveOutput);
+
+    // Print NAIVE top prediction
+    const char* instrumentNames[] = {
+        "Cello", "Clarinet", "Flute", "Acoustic Guitar", "Electric Guitar",
+        "Organ", "Piano", "Saxophone", "Trumpet", "Violin"
+    };
+
+    size_t naiveTopClass = 0;
+    fp32 naiveTopProb = naiveOutput.get<fp32>(0);
+    for (size_t i = 1; i < 10; i++) {
+        if (naiveOutput.get<fp32>(i) > naiveTopProb) {
+            naiveTopProb = naiveOutput.get<fp32>(i);
+            naiveTopClass = i;
+        }
+    }
+    std::cout << "FP32 NAIVE Top prediction: " << instrumentNames[naiveTopClass]
+              << " (" << (naiveTopProb * 100.0f) << "%)" << std::endl;
+
+    // Now run QUANTIZED
+    logInfo("\n--- Step 2: Running INT8 QUANTIZED inference ---");
+    Timer quantTimer("INT8 QUANTIZED Inference");
+    quantTimer.start();
+    const LayerData& quantOutput = model.inference(inputData, Layer::InfType::QUANTIZED);
+    quantTimer.stop();
+
+    // Print QUANTIZED top prediction
+    size_t quantTopClass = 0;
+    fp32 quantTopProb = quantOutput.get<fp32>(0);
+    for (size_t i = 1; i < 10; i++) {
+        if (quantOutput.get<fp32>(i) > quantTopProb) {
+            quantTopProb = quantOutput.get<fp32>(i);
+            quantTopClass = i;
+        }
+    }
+    std::cout << "INT8 QUANTIZED Top prediction: " << instrumentNames[quantTopClass]
+              << " (" << (quantTopProb * 100.0f) << "%)" << std::endl;
+
+    // Compare outputs
+    logInfo("\n--- Step 3: Comparing FP32 vs INT8 results ---");
+
+    // Calculate cosine similarity
+    fp32 cosine_sim = naiveOutputCopy.compare<fp32>(quantOutput);
+    std::cout << "Cosine similarity: " << (cosine_sim * 100.0f) << "%" << std::endl;
+
+    // Calculate max absolute error
+    fp32 max_error = 0.0f;
+    for (size_t i = 0; i < 10; i++) {
+        fp32 error = std::abs(naiveOutputCopy.get<fp32>(i) - quantOutput.get<fp32>(i));
+        max_error = std::max(max_error, error);
+    }
+    std::cout << "Max absolute error: " << max_error << std::endl;
+
+    // Check if top predictions match
+    bool topMatch = (naiveTopClass == quantTopClass);
+    std::cout << "Top prediction match: " << (topMatch ? "YES" : "NO") << std::endl;
+
+    // Performance comparison
+    logInfo("\n--- Step 4: Performance comparison ---");
+    fp32 speedup = naiveTimer.milliseconds / quantTimer.milliseconds;
+    std::cout << "FP32 NAIVE time:     " << naiveTimer.milliseconds << " ms" << std::endl;
+    std::cout << "INT8 QUANTIZED time: " << quantTimer.milliseconds << " ms" << std::endl;
+    std::cout << "Speedup:             " << speedup << "x" << std::endl;
+
+    if (speedup > 1.0f) {
+        std::cout << "INT8 is FASTER by " << ((speedup - 1.0f) * 100.0f) << "%" << std::endl;
+    } else {
+        std::cout << "INT8 is SLOWER by " << ((1.0f - speedup) * 100.0f) << "%" << std::endl;
+    }
+
+    // Print detailed probability comparison
+    std::cout << "\nDetailed probability comparison:" << std::endl;
+    std::cout << "Class | FP32        | INT8        | Diff" << std::endl;
+    std::cout << "------|-------------|-------------|-------------" << std::endl;
+    for (size_t i = 0; i < 10; i++) {
+        fp32 naiveProb = naiveOutputCopy.get<fp32>(i) * 100.0f;
+        fp32 quantProb = quantOutput.get<fp32>(i) * 100.0f;
+        fp32 diff = naiveProb - quantProb;
+        std::cout << std::setw(5) << i << " | "
+                  << std::setw(10) << std::fixed << std::setprecision(4) << naiveProb << "% | "
+                  << std::setw(10) << std::fixed << std::setprecision(4) << quantProb << "% | "
+                  << std::setw(10) << std::fixed << std::setprecision(4) << diff << "%" << std::endl;
     }
 }
 
@@ -420,13 +519,17 @@ void runTests() {
     
     // Run layer-by-layer tests
     runAllLayerTests(model, featureMapsPath, melSpec);
-    
+
     // Run full inference test
     runInferenceTest(model, melSpec);
-    
+
+    // Run quantized inference test
+    std::cout << "\n\n";
+    runQuantizedInferenceTest(model, melSpec);
+
     // Clean up
     model.freeLayers();
-    
+
     std::cout << "\n\n----- ML::runTests() COMPLETE -----\n";
 }
 

@@ -122,6 +122,9 @@ namespace ML
         }
         fp32 Si = (input_max > 0) ? (127.0f / input_max) : 1.0f;
 
+        std::cout << "[QUANT] Dense Layer - Dynamic quantization" << std::endl;
+        std::cout << "[QUANT]   Input max: " << input_max << ", scale (Si): " << Si << std::endl;
+
         // Calculate weight scale
         fp32 weight_max = 0.0f;
         for (size_t i = 0; i < totalInputFeatures * outputSize; i++) {
@@ -132,6 +135,9 @@ namespace ML
 
         // Bias scale = Si * Sw
         fp32 Sb = Si * Sw;
+
+        std::cout << "[QUANT]   Weight max: " << weight_max << ", scale (Sw): " << Sw << std::endl;
+        std::cout << "[QUANT]   Bias scale (Sb): " << Sb << std::endl;
 
         // --- Quantize inputs ---
         std::vector<i8> input_quantized(totalInputFeatures);
@@ -175,6 +181,24 @@ namespace ML
             // Store result in output
             output.get<fp32>(out_idx) = result;
         }
+
+        // Log output statistics
+        fp32 output_min = output.get<fp32>(0);
+        fp32 output_max = output.get<fp32>(0);
+        fp32 output_sum = 0.0f;
+
+        for (size_t i = 0; i < outputSize; i++) {
+            fp32 val = output.get<fp32>(i);
+            output_min = std::min(output_min, val);
+            output_max = std::max(output_max, val);
+            output_sum += val;
+        }
+
+        fp32 output_mean = output_sum / outputSize;
+
+        std::cout << "[QUANT]   Output stats - min: " << output_min
+                  << ", max: " << output_max
+                  << ", mean: " << output_mean << std::endl;
     }
 
 }
