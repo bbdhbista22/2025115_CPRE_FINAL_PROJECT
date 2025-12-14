@@ -1,0 +1,122 @@
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   AudioCNN_IRMAS Model Testing
+[[36mInfo[39m]:   Musical Instrument Classification
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]: --- Building AudioCNN_IRMAS Model ---
+[[36mInfo[39m]: AudioCNN_IRMAS Model built successfully!
+[[36mInfo[39m]: Total layers: 13 (8 Conv, 3 MaxPool, 1 Flatten, 2 Dense, 1 Softmax)
+Opened binary file data/model_weights/conv1_1_weights.bin
+Opened binary file data/model_weights/conv1_1_bias.bin
+Opened binary file data/model_weights/conv1_2_weights.bin
+Opened binary file data/model_weights/conv1_2_bias.bin
+Opened binary file data/model_weights/conv2_1_weights.bin
+Opened binary file data/model_weights/conv2_1_bias.bin
+Opened binary file data/model_weights/conv2_2_weights.bin
+Opened binary file data/model_weights/conv2_2_bias.bin
+Opened binary file data/model_weights/conv3_1_weights.bin
+Opened binary file data/model_weights/conv3_1_bias.bin
+Opened binary file data/model_weights/conv3_2_weights.bin
+Opened binary file data/model_weights/conv3_2_bias.bin
+Opened binary file data/model_weights/fc1_weights.bin
+Opened binary file data/model_weights/fc1_bias.bin
+Opened binary file data/model_weights/fc2_weights.bin
+Opened binary file data/model_weights/fc2_bias.bin
+[[36mInfo[39m]: Loading test mel-spectrogram...
+Opened binary file data/test_input.bin
+[[36mInfo[39m]: Test input loaded successfully!
+[[36mInfo[39m]: --- Running All Layer Tests ---
+[[36mInfo[39m]: --- Running Layer Test 0 ---
+Timer Layer Inference: elapsed=98.507004ms
+Layer 0 output dimensions: 124 124 32 (total: 492032 elements)
+Expected file size: 1968128 bytes (492032 elements)
+Opened binary file data/feature_maps/layer_0_output.bin
+Comparing Outputs (Cosine Similarity): True 87.8725%  (0.878725)
+[[36mInfo[39m]: --- Running Layer Test 1 ---
+Timer Layer Inference: elapsed=2872.145996ms
+Layer 1 output dimensions: 120 120 32 (total: 460800 elements)
+Expected file size: 1843200 bytes (460800 elements)
+Opened binary file data/feature_maps/layer_1_output.bin
+Comparing Outputs (Cosine Similarity): True 80.8603%  (0.808603)
+[[36mInfo[39m]: --- Running Layer Test 2 ---
+Timer Layer Inference: elapsed=2876.523926ms
+Layer 2 output dimensions: 60 60 32 (total: 115200 elements)
+Expected file size: 460800 bytes (115200 elements)
+Opened binary file data/feature_maps/layer_2_output.bin
+Comparing Outputs (Cosine Similarity): True 81.5217%  (0.815217)
+[[36mInfo[39m]: --- Running Layer Test 3 ---
+Timer Layer Inference: elapsed=3334.583008ms
+Layer 3 output dimensions: 58 58 64 (total: 215296 elements)
+Expected file size: 861184 bytes (215296 elements)
+Opened binary file data/feature_maps/layer_3_output.bin
+Comparing Outputs (Cosine Similarity): False 68.5757%  (0.685757)
+[[36mInfo[39m]: --- Running Layer Test 4 ---
+Timer Layer Inference: elapsed=4227.009766ms
+Layer 4 output dimensions: 56 56 64 (total: 200704 elements)
+Expected file size: 802816 bytes (200704 elements)
+Opened binary file data/feature_maps/layer_4_output.bin
+Comparing Outputs (Cosine Similarity): False 62.6004%  (0.626004)
+[[36mInfo[39m]: --- Running Layer Test 5 ---
+Timer Layer Inference: elapsed=4224.737793ms
+Layer 5 output dimensions: 28 28 64 (total: 50176 elements)
+Expected file size: 200704 bytes (50176 elements)
+Opened binary file data/feature_maps/layer_5_output.bin
+Comparing Outputs (Cosine Similarity): False 70.3328%  (0.703328)
+[[36mInfo[39m]: --- Running Layer Test 6 ---
+Timer Layer Inference: elapsed=4412.119141ms
+First 10 output values: 1.34532 0 0 0 0 0.0776608 0 0 0 0 
+Layer 6 output dimensions: 26 26 64 (total: 43264 elements)
+Expected file size: 173056 bytes (43264 elements)
+Opened binary file data/feature_maps/layer_6_output.bin
+First 10 expected values: 1.4925 0 0 0 0 0 0 0 0 0 
+Comparing Outputs (Cosine Similarity): False 35.7828%  (0.357828)
+[[36mInfo[39m]: --- Running Layer Test 7 ---
+Timer Layer Inference: elapsed=4728.062012ms
+First 10 output values: 0 0 0 0 0 0 0 0 0 0 
+Layer 7 output dimensions: 24 24 128 (total: 73728 elements)
+Expected file size: 294912 bytes (73728 elements)
+Opened binary file data/feature_maps/layer_7_output.bin
+First 10 expected values: 0 0 0 0 0 0 0 0.176025 0 0 
+Comparing Outputs (Cosine Similarity): False 4.04885%  (0.0404885)
+[[36mInfo[39m]: --- Running Layer Test 8 ---
+Timer Layer Inference: elapsed=4725.898926ms
+Layer 8 output dimensions: 12 12 128 (total: 18432 elements)
+Expected file size: 73728 bytes (18432 elements)
+Opened binary file data/feature_maps/layer_8_output.bin
+Comparing Outputs (Cosine Similarity): False 24.052%  (0.24052)
+[[36mInfo[39m]: --- Running Layer Test 9 ---
+Timer Layer Inference: elapsed=4727.214844ms
+Layer 9 output dimensions: 18432 (total: 18432 elements)
+Expected file size: 73728 bytes (18432 elements)
+Opened binary file data/feature_maps/layer_9_output.bin
+Comparing Outputs (Cosine Similarity): False 24.052%  (0.24052)
+[[36mInfo[39m]: --- Running Layer Test 10 ---
+Timer Layer Inference: elapsed=4771.074219ms
+Layer 10 output dimensions: 256 (total: 256 elements)
+Expected file size: 1024 bytes (256 elements)
+Opened binary file data/feature_maps/layer_10_output.bin
+Comparing Outputs (Cosine Similarity): False 50.455%  (0.50455)
+[[36mInfo[39m]: --- Running Layer Test 11 ---
+Timer Layer Inference: elapsed=4774.762207ms
+Layer 11 output dimensions: 10 (total: 10 elements)
+Expected file size: 1024 bytes (256 elements)
+DIMENSION MISMATCH: Output has 10 elements, expected 256
+[[36mInfo[39m]: --- Running Layer Test 12 ---
+Timer Layer Inference: elapsed=4772.390137ms
+Layer 12 output dimensions: 10 (total: 10 elements)
+Expected file size: 40 bytes (10 elements)
+Opened binary file data/feature_maps/layer_12_output.bin
+Comparing Outputs (Cosine Similarity): False 77.6832%  (0.776832)
+[[36mInfo[39m]: --- Running Full Inference Test ---
+Timer Full Inference: elapsed=4761.481934ms
+
+Final output dimensions: 10 (total: 10 elements)
+
+Top-5 predictions:
+  1. Cello (class 0): 86.2004%
+  2. Violin (class 9): 11.4225%
+  3. Flute (class 2): 1.71493%
+  4. Trumpet (class 8): 0.351211%
+  5. Clarinet (class 1): 0.218773%
+
+
+----- ML::runTests() COMPLETE -----
