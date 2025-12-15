@@ -32,6 +32,7 @@ namespace ML
         LayerData& output = getOutputData();
 
         // Max pooling computation
+        #pragma omp parallel for collapse(2)
         for (size_t c = 0; c < outputChannels; c++)
         {
             for (size_t h_out = 0; h_out < outputHeight; h_out++)

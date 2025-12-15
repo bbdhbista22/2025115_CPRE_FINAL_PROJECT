@@ -94,6 +94,7 @@ void BatchNormalizationLayer::computeNaive(const LayerData& input) const {
             throw std::runtime_error("BatchNormalization: Channel count mismatch");
         }
 
+        #pragma omp parallel for collapse(3)
         for (size_t b = 0; b < batch; b++) {
             for (size_t h = 0; h < height; h++) {
                 for (size_t w = 0; w < width; w++) {
@@ -129,6 +130,7 @@ void BatchNormalizationLayer::computeNaive(const LayerData& input) const {
             throw std::runtime_error("BatchNormalization: Channel count mismatch");
         }
 
+        #pragma omp parallel for collapse(2)
         for (size_t h = 0; h < height; h++) {
             for (size_t w = 0; w < width; w++) {
                 for (size_t c = 0; c < channels; c++) {
@@ -160,6 +162,7 @@ void BatchNormalizationLayer::computeNaive(const LayerData& input) const {
             throw std::runtime_error("BatchNormalization: Feature count mismatch");
         }
 
+        #pragma omp parallel for
         for (size_t i = 0; i < features; i++) {
             float x = input.get<fp32>(i);
             float mean_i = mean.get<fp32>(i);
@@ -230,6 +233,7 @@ void BatchNormalizationLayer::computeQuantized(const LayerData& input) const {
             throw std::runtime_error("BatchNormalization: Channel count mismatch");
         }
 
+        #pragma omp parallel for collapse(3)
         for (size_t b = 0; b < batch; b++) {
             for (size_t h = 0; h < height; h++) {
                 for (size_t w = 0; w < width; w++) {
@@ -265,6 +269,7 @@ void BatchNormalizationLayer::computeQuantized(const LayerData& input) const {
             throw std::runtime_error("BatchNormalization: Channel count mismatch");
         }
 
+        #pragma omp parallel for collapse(2)
         for (size_t h = 0; h < height; h++) {
             for (size_t w = 0; w < width; w++) {
                 for (size_t c = 0; c < channels; c++) {
@@ -296,6 +301,7 @@ void BatchNormalizationLayer::computeQuantized(const LayerData& input) const {
             throw std::runtime_error("BatchNormalization: Feature count mismatch");
         }
 
+        #pragma omp parallel for
         for (size_t i = 0; i < features; i++) {
             float x = input.get<fp32>(i);
             float mean_i = mean.get<fp32>(i);

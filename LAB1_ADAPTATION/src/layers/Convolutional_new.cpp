@@ -174,6 +174,7 @@ namespace ML
         size_t R = weightDims[0];
         size_t S = weightDims[1];
 
+        #pragma omp parallel for collapse(2)
         for (size_t p = 0; p < P; p++)
         {
             for (size_t q = 0; q < Q; q++)
@@ -387,6 +388,7 @@ namespace ML
         }
 
         // Main convolution loop (INT8)
+        #pragma omp parallel for collapse(2)
         for (size_t p = 0; p < P; p++) {
             for (size_t q = 0; q < Q; q++) {
                 for (size_t m = 0; m < M; m++) {

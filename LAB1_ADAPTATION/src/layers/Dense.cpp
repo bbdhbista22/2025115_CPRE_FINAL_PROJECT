@@ -78,6 +78,7 @@ namespace ML
 
         // Dense layer computation: output = input * weights + bias
         // Input is treated as flattened regardless of original dimensions
+        #pragma omp parallel for
         for (size_t out_idx = 0; out_idx < outputSize; out_idx++)
         {
             fp32 sum = bias.get<fp32>(out_idx);
@@ -274,6 +275,7 @@ namespace ML
         }
 
         // --- INT8 Matrix-Vector Multiply ---
+        #pragma omp parallel for
         for (size_t out_idx = 0; out_idx < outputSize; out_idx++) {
             i32 accumulator = bias_quantized[out_idx];
 
