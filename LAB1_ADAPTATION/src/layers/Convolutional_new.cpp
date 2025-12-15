@@ -27,9 +27,21 @@ namespace ML
     };
 
     // Global calibration data loaded from JSON
-    static std::map<std::string, CalibrationStats> calibration_data;
-    static bool calibration_loaded = false;
-    static int conv_layer_count = 0;
+    std::map<std::string, CalibrationStats> calibration_data;
+    bool calibration_loaded = false;
+
+    // Helper function to extract layer name from file path (e.g., "conv1_1_weights.bin" -> "conv1_1")
+    std::string extractLayerNameFromPath(const std::string& filepath) {
+        size_t last_slash = filepath.find_last_of("/\\");
+        std::string filename = (last_slash != std::string::npos) ? filepath.substr(last_slash + 1) : filepath;
+        
+        // Remove "_weights.bin" suffix
+        size_t underscore_pos = filename.find("_weights.bin");
+        if (underscore_pos != std::string::npos) {
+            return filename.substr(0, underscore_pos);
+        }
+        return filename;
+    }
 
     // Simple JSON parser for calibration stats
     bool loadCalibrationStats(const std::string& json_path)
@@ -134,10 +146,6 @@ namespace ML
         logInfo("Loaded calibration stats for " + std::to_string(calibration_data.size()) + " layers");
 
         return true;
-    }
-
-    void resetConvLayerCounter() {
-        conv_layer_count = 0;
     }
 
     // ==========================================================================
@@ -273,18 +281,27 @@ namespace ML
         size_t R = weightDims[0];
         size_t S = weightDims[1];
 
-        // Select input calibration stats based on layer count
+        // Extract layer name from weight file path to determine calibration stats
+        // E.g., "conv1_1_weights.bin" -> "conv1_1"
+        std::string layer_name = extractLayerNameFromPath(getWeightParams().filePath);
+
+        // Map layer name to input calibration stats based on architecture
+        // Architecture: Conv1_1 -> BN1_1 -> Conv1_2 -> BN1_2 -> Pool1 -> Conv2_1 -> BN2_1 -> Conv2_2 -> BN2_2 -> Pool2 -> Conv3_1 -> BN3_1 -> Conv3_2 -> BN3_2 -> Pool3
         std::string input_stats_name;
-        if (conv_layer_count == 0) {
-            input_stats_name = "_input";
+        if (layer_name == "conv1_1") {
+            input_stats_name = "_input";      // First layer takes raw input
+        } else if (layer_name == "conv1_2") {
+            input_stats_name = "bn1_1";       // Conv1_2 input comes from BN1_1
+        } else if (layer_name == "conv2_1") {
+            input_stats_name = "pool1";       // Conv2_1 input comes from Pool1
+        } else if (layer_name == "conv2_2") {
+            input_stats_name = "bn2_1";       // Conv2_2 input comes from BN2_1
+        } else if (layer_name == "conv3_1") {
+            input_stats_name = "pool2";       // Conv3_1 input comes from Pool2
+        } else if (layer_name == "conv3_2") {
+            input_stats_name = "bn3_1";       // Conv3_2 input comes from BN3_1
         } else {
-            // Map to conv layer names: conv1_1, conv1_2, conv2_1, conv2_2, conv3_1, conv3_2
-            const char* layer_names[] = {"conv1_1", "conv1_2", "conv2_1", "conv2_2", "conv3_1", "conv3_2"};
-            if (conv_layer_count - 1 < 6) {
-                input_stats_name = layer_names[conv_layer_count - 1];
-            } else {
-                input_stats_name = "conv3_2";  // Fallback
-            }
+            input_stats_name = "bn3_1";       // Fallback
         }
 
         auto input_stats_it = calibration_data.find(input_stats_name);
@@ -299,11 +316,8 @@ namespace ML
         i8 zi = input_stats.zi;
 
         // Log quantization parameters
-        std::cout << "[QUANT] Conv Layer " << conv_layer_count << " - Using calibration: " << input_stats_name << std::endl;
+        std::cout << "[QUANT] " << layer_name << " - Using calibration: " << input_stats_name << std::endl;
         std::cout << "[QUANT]   Input scale (Si): " << Si << ", zero-point (zi): " << static_cast<int>(zi) << std::endl;
-
-        // Increment layer counter for next conv layer
-        conv_layer_count++;
 
         // Calculate weight scale (Sw)
         size_t weight_size = getWeightParams().flat_count();
@@ -359,6 +373,19 @@ namespace ML
         }
         std::cout << std::endl;
 
+        // Precompute sum of quantized weights for each output channel (for zero-point correction)
+        std::vector<i32> quantized_weight_sum(M, 0);
+        for (size_t m = 0; m < M; m++) {
+            for (size_t c = 0; c < C; c++) {
+                for (size_t r = 0; r < R; r++) {
+                    for (size_t s = 0; s < S; s++) {
+                        size_t weight_idx = r * S * C * M + s * C * M + c * M + m;
+                        quantized_weight_sum[m] += static_cast<i32>(quantized_weights[weight_idx]);
+                    }
+                }
+            }
+        }
+
         // Main convolution loop (INT8)
         for (size_t p = 0; p < P; p++) {
             for (size_t q = 0; q < Q; q++) {
@@ -379,6 +406,9 @@ namespace ML
                             }
                         }
                     }
+
+                    // Apply zero-point correction: subtract zi * sum_of_weights
+                    accumulator -= static_cast<i32>(zi) * quantized_weight_sum[m];
 
                     // Dequantize output
                     fp32 result = static_cast<fp32>(accumulator) / (Si * Sw);

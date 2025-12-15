@@ -4,12 +4,15 @@
 
 namespace ML {
 
+
 // Run inference on the entire model using the inData and outputting the outData
 // infType can be used to determine the inference function to call
 const LayerData& Model::inference(const LayerData& inData, const Layer::InfType infType) const {
     assert(layers.size() > 0 && "There must be at least 1 layer to perform inference");
     inferenceLayer(inData, 0, infType);
 
+    
+    
     for (std::size_t i = 1; i < layers.size(); i++) {
         inferenceLayer(layers[i - 1]->getOutputData(), i, infType);
     }

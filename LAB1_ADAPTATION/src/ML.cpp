@@ -485,6 +485,108 @@ void runQuantizedInferenceTest(const Model& model, const LayerData& inputData) {
                   << std::setw(10) << std::fixed << std::setprecision(4) << diff << "%" << std::endl;
     }
 }
+void runLayerByLayerDiagnostic(const Model& model, const LayerData& inputData) {
+    logInfo("========================================");
+    logInfo("  LAYER-BY-LAYER QUANTIZATION DIAGNOSTIC");
+    logInfo("========================================");
+    
+    const char* layerNames[] = {
+        "Layer 0: conv1_1",
+        "Layer 1: bn1_1",
+        "Layer 2: conv1_2",
+        "Layer 3: bn1_2",
+        "Layer 4: pool1",
+        "Layer 5: conv2_1",
+        "Layer 6: bn2_1",
+        "Layer 7: conv2_2",
+        "Layer 8: bn2_2",
+        "Layer 9: pool2",
+        "Layer 10: conv3_1",
+        "Layer 11: bn3_1",
+        "Layer 12: conv3_2",
+        "Layer 13: bn3_2",
+        "Layer 14: pool3",
+        "Layer 15: flatten",
+        "Layer 16: fc1",
+        "Layer 17: bn_fc1",
+        "Layer 18: fc2",
+        "Layer 19: softmax"
+    };
+
+    // Run FP32 inference and capture all intermediate outputs
+    std::cout << "\n[DIAGNOSTIC] Running FP32 NAIVE inference...\n" << std::endl;
+    model.inferenceLayer(inputData, 0, Layer::InfType::NAIVE);
+    
+    std::vector<LayerData> fp32_outputs;
+    fp32_outputs.push_back(model[0].getOutputData());
+    
+    for (size_t i = 1; i < model.getNumLayers(); i++) {
+        model.inferenceLayer(fp32_outputs.back(), i, Layer::InfType::NAIVE);
+        fp32_outputs.push_back(model[i].getOutputData());
+    }
+    
+    // Run INT8 QUANTIZED inference and capture all intermediate outputs
+    std::cout << "\n[DIAGNOSTIC] Running INT8 QUANTIZED inference...\n" << std::endl;
+    model.inferenceLayer(inputData, 0, Layer::InfType::QUANTIZED);
+    
+    std::vector<LayerData> int8_outputs;
+    int8_outputs.push_back(model[0].getOutputData());
+    
+    for (size_t i = 1; i < model.getNumLayers(); i++) {
+        model.inferenceLayer(int8_outputs.back(), i, Layer::InfType::QUANTIZED);
+        int8_outputs.push_back(model[i].getOutputData());
+    }
+    
+    // Compare layer outputs
+    std::cout << "\n[DIAGNOSTIC] Comparing layer outputs:\n" << std::endl;
+    std::cout << "Layer | Cosine Sim | Max Error | Min(FP32) | Max(FP32) | Min(INT8) | Max(INT8)" << std::endl;
+    std::cout << "------|-----------|-----------|-----------|-----------|-----------|----------" << std::endl;
+    
+    int divergence_layer = -1;
+    for (size_t i = 0; i < model.getNumLayers(); i++) {
+        fp32 cosine_sim = fp32_outputs[i].compare<fp32>(int8_outputs[i]);
+        
+        fp32 fp32_min = fp32_outputs[i].get<fp32>(0);
+        fp32 fp32_max = fp32_outputs[i].get<fp32>(0);
+        fp32 int8_min = int8_outputs[i].get<fp32>(0);
+        fp32 int8_max = int8_outputs[i].get<fp32>(0);
+        fp32 max_error = 0.0f;
+        
+        for (size_t j = 0; j < fp32_outputs[i].getParams().flat_count(); j++) {
+            fp32 fp32_val = fp32_outputs[i].get<fp32>(j);
+            fp32 int8_val = int8_outputs[i].get<fp32>(j);
+            
+            fp32_min = std::min(fp32_min, fp32_val);
+            fp32_max = std::max(fp32_max, fp32_val);
+            int8_min = std::min(int8_min, int8_val);
+            int8_max = std::max(int8_max, int8_val);
+            
+            max_error = std::max(max_error, std::abs(fp32_val - int8_val));
+        }
+        
+        std::cout << std::setw(5) << i << " | "
+                  << std::setw(9) << std::fixed << std::setprecision(2) << (cosine_sim * 100.0f) << "% | "
+                  << std::setw(9) << std::fixed << std::setprecision(4) << max_error << " | "
+                  << std::setw(9) << std::fixed << std::setprecision(4) << fp32_min << " | "
+                  << std::setw(9) << std::fixed << std::setprecision(4) << fp32_max << " | "
+                  << std::setw(9) << std::fixed << std::setprecision(4) << int8_min << " | "
+                  << std::setw(9) << std::fixed << std::setprecision(4) << int8_max << std::endl;
+        
+        // Flag first layer with low cosine similarity
+        if (cosine_sim < 0.9f && divergence_layer == -1) {
+            divergence_layer = i;
+            std::cout << "  >>> FIRST DIVERGENCE at " << layerNames[i] << " (cosine sim: " << (cosine_sim*100.0f) << "%)" << std::endl;
+        }
+    }
+    
+    if (divergence_layer >= 0) {
+        std::cout << "\n[DIAGNOSTIC] Quantization starts diverging at layer " << divergence_layer 
+                  << " (" << layerNames[divergence_layer] << ")" << std::endl;
+        std::cout << "[DIAGNOSTIC] This is likely where the quantization formula is incorrect." << std::endl;
+    } else {
+        std::cout << "\n[DIAGNOSTIC] All layers match well! Quantization is working correctly." << std::endl;
+    }
+}
 
 void runAllLayerTests(const Model& model, const Path& basePath, const LayerData& inputData) {
     logInfo("--- Running All Layer Tests ---");
@@ -518,12 +620,15 @@ void runTests() {
     logInfo("Test input loaded successfully!");
     
     // Run layer-by-layer tests
-    runAllLayerTests(model, featureMapsPath, melSpec);
+    //runAllLayerTests(model, featureMapsPath, melSpec);
 
     // Run full inference test
-    runInferenceTest(model, melSpec);
+    //runInferenceTest(model, melSpec);
 
-    // Run quantized inference test
+      // Run quantized inference test with layer-by-layer diagnostic
+    std::cout << "\n\n";
+    runLayerByLayerDiagnostic(model, melSpec);
+    
     std::cout << "\n\n";
     runQuantizedInferenceTest(model, melSpec);
 

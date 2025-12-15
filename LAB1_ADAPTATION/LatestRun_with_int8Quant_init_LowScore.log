@@ -1,0 +1,299 @@
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   AudioCNN_IRMAS Model Testing
+[[36mInfo[39m]:   Musical Instrument Classification
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]: --- Building AudioCNN_IRMAS Model ---
+[[36mInfo[39m]: AudioCNN_IRMAS Model built successfully!
+[[36mInfo[39m]: Total layers: 20 (8 Conv, 7 BatchNorm, 3 MaxPool, 1 Flatten, 2 Dense, 1 Softmax)
+Opened binary file data/model_weights_improved/conv1_1_weights.bin
+Opened binary file data/model_weights_improved/conv1_1_bias.bin
+Opened binary file data/model_weights_improved/bn1_1_mean.bin
+Opened binary file data/model_weights_improved/bn1_1_variance.bin
+Opened binary file data/model_weights_improved/bn1_1_gamma.bin
+Opened binary file data/model_weights_improved/bn1_1_beta.bin
+Opened binary file data/model_weights_improved/conv1_2_weights.bin
+Opened binary file data/model_weights_improved/conv1_2_bias.bin
+Opened binary file data/model_weights_improved/bn1_2_mean.bin
+Opened binary file data/model_weights_improved/bn1_2_variance.bin
+Opened binary file data/model_weights_improved/bn1_2_gamma.bin
+Opened binary file data/model_weights_improved/bn1_2_beta.bin
+Opened binary file data/model_weights_improved/conv2_1_weights.bin
+Opened binary file data/model_weights_improved/conv2_1_bias.bin
+Opened binary file data/model_weights_improved/bn2_1_mean.bin
+Opened binary file data/model_weights_improved/bn2_1_variance.bin
+Opened binary file data/model_weights_improved/bn2_1_gamma.bin
+Opened binary file data/model_weights_improved/bn2_1_beta.bin
+Opened binary file data/model_weights_improved/conv2_2_weights.bin
+Opened binary file data/model_weights_improved/conv2_2_bias.bin
+Opened binary file data/model_weights_improved/bn2_2_mean.bin
+Opened binary file data/model_weights_improved/bn2_2_variance.bin
+Opened binary file data/model_weights_improved/bn2_2_gamma.bin
+Opened binary file data/model_weights_improved/bn2_2_beta.bin
+Opened binary file data/model_weights_improved/conv3_1_weights.bin
+Opened binary file data/model_weights_improved/conv3_1_bias.bin
+Opened binary file data/model_weights_improved/bn3_1_mean.bin
+Opened binary file data/model_weights_improved/bn3_1_variance.bin
+Opened binary file data/model_weights_improved/bn3_1_gamma.bin
+Opened binary file data/model_weights_improved/bn3_1_beta.bin
+Opened binary file data/model_weights_improved/conv3_2_weights.bin
+Opened binary file data/model_weights_improved/conv3_2_bias.bin
+Opened binary file data/model_weights_improved/bn3_2_mean.bin
+Opened binary file data/model_weights_improved/bn3_2_variance.bin
+Opened binary file data/model_weights_improved/bn3_2_gamma.bin
+Opened binary file data/model_weights_improved/bn3_2_beta.bin
+Opened binary file data/model_weights_improved/fc1_weights.bin
+Opened binary file data/model_weights_improved/fc1_bias.bin
+Opened binary file data/model_weights_improved/bn_fc1_mean.bin
+Opened binary file data/model_weights_improved/bn_fc1_variance.bin
+Opened binary file data/model_weights_improved/bn_fc1_gamma.bin
+Opened binary file data/model_weights_improved/bn_fc1_beta.bin
+Opened binary file data/model_weights_improved/fc2_weights.bin
+Opened binary file data/model_weights_improved/fc2_bias.bin
+[[36mInfo[39m]: Loading test mel-spectrogram...
+Opened binary file data/test_input.bin
+[[36mInfo[39m]: Test input loaded successfully!
+[[36mInfo[39m]: --- Running All Layer Tests ---
+[[36mInfo[39m]: --- Running Layer Test 0 ---
+Timer Layer Inference: elapsed=99.875000ms
+Layer 0 output dimensions: 124 124 32 (total: 492032 elements)
+Expected file size: 1968128 bytes (492032 elements)
+Opened binary file data/feature_maps_improved/layer_0_conv1_1_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 1 ---
+Timer Layer Inference: elapsed=105.961998ms
+Layer 1 output dimensions: 124 124 32 (total: 492032 elements)
+Expected file size: 1968128 bytes (492032 elements)
+Opened binary file data/feature_maps_improved/layer_2_relu1_1_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 2 ---
+Timer Layer Inference: elapsed=2904.698975ms
+Layer 2 output dimensions: 120 120 32 (total: 460800 elements)
+Expected file size: 1843200 bytes (460800 elements)
+Opened binary file data/feature_maps_improved/layer_3_conv1_2_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 3 ---
+Timer Layer Inference: elapsed=2910.766113ms
+Layer 3 output dimensions: 120 120 32 (total: 460800 elements)
+Expected file size: 1843200 bytes (460800 elements)
+Opened binary file data/feature_maps_improved/layer_5_relu1_2_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 4 ---
+Timer Layer Inference: elapsed=2947.790039ms
+Layer 4 output dimensions: 60 60 32 (total: 115200 elements)
+Expected file size: 460800 bytes (115200 elements)
+Opened binary file data/feature_maps_improved/layer_6_pool1_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 5 ---
+Timer Layer Inference: elapsed=3392.043945ms
+Layer 5 output dimensions: 58 58 64 (total: 215296 elements)
+Expected file size: 861184 bytes (215296 elements)
+Opened binary file data/feature_maps_improved/layer_7_conv2_1_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 6 ---
+Timer Layer Inference: elapsed=3375.512939ms
+First 10 output values: 0.378644 0.563662 0.0587967 0.378422 0 0 0 0.62315 0 1.15359 
+Layer 6 output dimensions: 58 58 64 (total: 215296 elements)
+Expected file size: 861184 bytes (215296 elements)
+Opened binary file data/feature_maps_improved/layer_9_relu2_1_features.bin
+First 10 expected values: 0.378644 0.563662 0.0587966 0.378422 0 0 0 0.62315 0 1.15359 
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 7 ---
+Timer Layer Inference: elapsed=4228.728027ms
+First 10 output values: -0.141799 -0.0128226 0.403402 -0.627807 0.149508 0.660643 0.793883 0.441369 -0.50621 0.696727 
+Layer 7 output dimensions: 56 56 64 (total: 200704 elements)
+Expected file size: 802816 bytes (200704 elements)
+Opened binary file data/feature_maps_improved/layer_10_conv2_2_features.bin
+First 10 expected values: -0.141799 -0.0128223 0.403402 -0.627807 0.149508 0.660643 0.793882 0.441369 -0.506209 0.696727 
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 8 ---
+Timer Layer Inference: elapsed=4230.704102ms
+Layer 8 output dimensions: 56 56 64 (total: 200704 elements)
+Expected file size: 802816 bytes (200704 elements)
+Opened binary file data/feature_maps_improved/layer_12_relu2_2_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 9 ---
+Timer Layer Inference: elapsed=4230.174805ms
+Layer 9 output dimensions: 28 28 64 (total: 50176 elements)
+Expected file size: 200704 bytes (50176 elements)
+Opened binary file data/feature_maps_improved/layer_13_pool2_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 10 ---
+Timer Layer Inference: elapsed=4412.722168ms
+Layer 10 output dimensions: 26 26 64 (total: 43264 elements)
+Expected file size: 173056 bytes (43264 elements)
+Opened binary file data/feature_maps_improved/layer_14_conv3_1_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 11 ---
+Timer Layer Inference: elapsed=4414.511230ms
+Layer 11 output dimensions: 26 26 64 (total: 43264 elements)
+Expected file size: 173056 bytes (43264 elements)
+Opened binary file data/feature_maps_improved/layer_16_relu3_1_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 12 ---
+Timer Layer Inference: elapsed=4732.936035ms
+Layer 12 output dimensions: 24 24 128 (total: 73728 elements)
+Expected file size: 294912 bytes (73728 elements)
+Opened binary file data/feature_maps_improved/layer_17_conv3_2_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 13 ---
+Timer Layer Inference: elapsed=4800.151855ms
+Layer 13 output dimensions: 24 24 128 (total: 73728 elements)
+Expected file size: 294912 bytes (73728 elements)
+Opened binary file data/feature_maps_improved/layer_19_relu3_2_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 14 ---
+Timer Layer Inference: elapsed=4804.488770ms
+Layer 14 output dimensions: 12 12 128 (total: 18432 elements)
+Expected file size: 73728 bytes (18432 elements)
+Opened binary file data/feature_maps_improved/layer_20_pool3_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 15 ---
+Timer Layer Inference: elapsed=4813.140137ms
+Layer 15 output dimensions: 18432 (total: 18432 elements)
+Expected file size: 73728 bytes (18432 elements)
+Opened binary file data/feature_maps_improved/layer_21_flatten_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 16 ---
+Timer Layer Inference: elapsed=4862.375977ms
+Layer 16 output dimensions: 256 (total: 256 elements)
+Expected file size: 1024 bytes (256 elements)
+Opened binary file data/feature_maps_improved/layer_22_fc1_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 17 ---
+Timer Layer Inference: elapsed=4892.792969ms
+Layer 17 output dimensions: 256 (total: 256 elements)
+Expected file size: 1024 bytes (256 elements)
+Opened binary file data/feature_maps_improved/layer_24_relu_fc1_features.bin
+Comparing Outputs (Cosine Similarity): True 100%  (1)
+[[36mInfo[39m]: --- Running Layer Test 18 ---
+Timer Layer Inference: elapsed=4817.312988ms
+Layer 18 output dimensions: 10 (total: 10 elements)
+Expected file size: 40 bytes (10 elements)
+Opened binary file data/feature_maps_improved/layer_26_fc2_features.bin
+Comparing Outputs (Cosine Similarity): False 50.1142%  (0.501142)
+[[36mInfo[39m]: --- Running Layer Test 19 ---
+Timer Layer Inference: elapsed=4818.137207ms
+Layer 19 output dimensions: 10 (total: 10 elements)
+No Python feature map available for layer 19
+Skipping comparison for layer 19
+[[36mInfo[39m]: --- Running Full Inference Test ---
+Timer Full Inference: elapsed=4845.583008ms
+
+Final output dimensions: 10 (total: 10 elements)
+
+Top-5 predictions:
+  1. Cello (class 0): 95.8405%
+  2. Violin (class 9): 3.43175%
+  3. Saxophone (class 7): 0.523602%
+  4. Acoustic Guitar (class 3): 0.0895876%
+  5. Clarinet (class 1): 0.0407433%
+
+
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   INT8 QUANTIZED INFERENCE TEST
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]: 
+--- Step 1: Running FP32 NAIVE baseline ---
+Timer FP32 NAIVE Inference: elapsed=4988.113770ms
+FP32 NAIVE Top prediction: Cello (95.8405%)
+[[36mInfo[39m]: 
+--- Step 2: Running INT8 QUANTIZED inference ---
+[[36mInfo[39m]: Loaded calibration stats for 20 layers
+[QUANT] Conv Layer 0 - Using calibration: _input
+[QUANT]   Input scale (Si): 127.317, zero-point (zi): -62
+[QUANT]   Weight max: 0.178109, scale (Sw): 713.047
+[QUANT]   Bias scale (Sb): 90782.9
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0.209268, max: 0.263453, mean: 0.00280012
+[QUANT]   Sample FP32 outputs: 0.040382 0.0477733 0.0140886 0.0633489 -0.0407676 
+[QUANT] Conv Layer 0 - Using calibration: _input
+[QUANT]   Input scale (Si): 127.317, zero-point (zi): -62
+[QUANT]   Weight max: 0.157999, scale (Sw): 803.804
+[QUANT]   Bias scale (Sb): 102338
+[QUANT]   Sample INT8 inputs: -62 -62 -17 -62 -40 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -4.44432, max: 5.11804, mean: 0.620265
+[QUANT]   Sample FP32 outputs: 1.7813 0.326409 1.67196 1.86447 -0.418839 
+[QUANT] Conv Layer 1 - Using calibration: conv1_1
+[QUANT]   Input scale (Si): 299.371, zero-point (zi): -4
+[QUANT]   Weight max: 0.142085, scale (Sw): 893.833
+[QUANT]   Bias scale (Sb): 267588
+[QUANT]   Sample INT8 inputs: 127 16 127 127 -4 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -1.39708, max: 1.39185, mean: -0.117741
+[QUANT]   Sample FP32 outputs: 0.0932178 0.417911 0.235418 0.0227476 -0.691667 
+[QUANT] Conv Layer 2 - Using calibration: conv1_2
+[QUANT]   Input scale (Si): 14.4028, zero-point (zi): 8
+[QUANT]   Weight max: 0.146738, scale (Sw): 865.487
+[QUANT]   Bias scale (Sb): 12465.4
+[QUANT]   Sample INT8 inputs: 13 11 8 11 8 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -4.46867, max: 3.11846, mean: -0.866752
+[QUANT]   Sample FP32 outputs: -0.955521 0.477721 -0.706272 -2.35427 1.48739 
+[QUANT] Conv Layer 3 - Using calibration: conv2_1
+[QUANT]   Input scale (Si): 29.4177, zero-point (zi): 6
+[QUANT]   Weight max: 0.161663, scale (Sw): 785.584
+[QUANT]   Bias scale (Sb): 23110
+[QUANT]   Sample INT8 inputs: 6 9 6 6 22 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -2.4247, max: 2.09082, mean: -0.35128
+[QUANT]   Sample FP32 outputs: -0.679055 0.95716 0.120034 -1.22916 -0.715793 
+[QUANT] Conv Layer 4 - Using calibration: conv2_2
+[QUANT]   Input scale (Si): 20.0718, zero-point (zi): 6
+[QUANT]   Weight max: 0.141833, scale (Sw): 895.421
+[QUANT]   Bias scale (Sb): 17972.7
+[QUANT]   Sample INT8 inputs: 6 6 6 6 6 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -1.92164, max: 1.5784, mean: -0.404553
+[QUANT]   Sample FP32 outputs: -0.635186 0.222616 -0.294447 -0.266516 -0.219166 
+[QUANT] Dense Layer 0 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25.3516, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5.00954], mean: 0.529793
+[QUANT]   Weight max: 0.06848, scale (Sw): 1854.56
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 0.313378 0 0.0545541 0 
+[QUANT]   Sample INT8 inputs: -13 -5 -13 -12 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -7.82782, max: 5.09331, mean: -0.748925
+[QUANT]   Sample FP32 outputs: 0.41656 -3.70523 -0.370767 -0.0641909 -1.56591 
+[QUANT] Dense Layer 1 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 37.8858, zero-point (zi): 3
+[QUANT]   Calibration range: [-2.85125, 3.35218], mean: -0.0772174
+[QUANT]   Weight max: 0.222322, scale (Sw): 571.243
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0.476905 0 0 0.117832 0 
+[QUANT]   Sample INT8 inputs: 21 3 3 7 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -6.89497, max: 1.17554, mean: -1.73221
+[QUANT]   Sample FP32 outputs: 0.275668 -5.47154 -2.59879 -0.626929 -2.29461 
+Timer INT8 QUANTIZED Inference: elapsed=588.598022ms
+INT8 QUANTIZED Top prediction: Piano (41.5903%)
+[[36mInfo[39m]: 
+--- Step 3: Comparing FP32 vs INT8 results ---
+Cosine similarity: 35.0859%
+Max absolute error: 0.78929
+Top prediction match: NO
+[[36mInfo[39m]: 
+--- Step 4: Performance comparison ---
+FP32 NAIVE time:     4988.11 ms
+INT8 QUANTIZED time: 588.598 ms
+Speedup:             8.47457x
+INT8 is FASTER by 747.457%
+
+Detailed probability comparison:
+Class | FP32        | INT8        | Diff
+------|-------------|-------------|-------------
+    0 |    95.8405% |    16.9116% |    78.9290%
+    1 |     0.0407% |     0.0540% |    -0.0132%
+    2 |     0.0331% |     0.9546% |    -0.9215%
+    3 |     0.0896% |     6.8579% |    -6.7683%
+    4 |     0.0135% |     1.2940% |    -1.2805%
+    5 |     0.0000% |     0.0130% |    -0.0130%
+    6 |     0.0040% |    41.5903% |   -41.5863%
+    7 |     0.5236% |     4.5105% |    -3.9869%
+    8 |     0.0231% |    13.5570% |   -13.5338%
+    9 |     3.4318% |    14.2572% |   -10.8255%
+
+
+----- ML::runTests() COMPLETE -----

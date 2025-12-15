@@ -33,10 +33,17 @@ namespace ML
     };
     #endif
 
-    static int dense_layer_count = 0;
-
-    void resetDenseLayerCounter() {
-        dense_layer_count = 0;
+    // Helper function to extract layer name from file path
+    std::string extractDenseLayerNameFromPath(const std::string& filepath) {
+        size_t last_slash = filepath.find_last_of("/\\");
+        std::string filename = (last_slash != std::string::npos) ? filepath.substr(last_slash + 1) : filepath;
+        
+        // Remove "_weights.bin" suffix
+        size_t underscore_pos = filename.find("_weights.bin");
+        if (underscore_pos != std::string::npos) {
+            return filename.substr(0, underscore_pos);
+        }
+        return filename;
     }
 
     void DenseLayer::computeNaive(const LayerData &dataIn) const
@@ -142,13 +149,17 @@ namespace ML
         const LayerData& bias = getBiasData();
 
         // --- Use Calibration Stats ---
-        // Dense layers: flatten -> fc1 -> bn_fc1 -> fc2
-        // So dense_layer_count: 0 = fc1 (input from flatten), 1 = fc2 (input from bn_fc1)
+        // Extract layer name from weight file path to determine calibration stats
+        // E.g., "fc1_weights.bin" -> "fc1"
+        std::string layer_name = extractDenseLayerNameFromPath(getWeightParams().filePath);
+
+        // Map layer name to input calibration stats
+        // Architecture: flatten -> fc1 -> bn_fc1 -> fc2
         std::string input_stats_name;
-        if (dense_layer_count == 0) {
-            input_stats_name = "flatten";  // First dense layer gets input from flatten
-        } else if (dense_layer_count == 1) {
-            input_stats_name = "bn_fc1";   // Second dense layer gets input from bn_fc1
+        if (layer_name == "fc1") {
+            input_stats_name = "flatten";  // FC1 gets input from flatten
+        } else if (layer_name == "fc2") {
+            input_stats_name = "bn_fc1";   // FC2 gets input from bn_fc1
         } else {
             input_stats_name = "bn_fc1";   // Fallback
         }
@@ -165,9 +176,9 @@ namespace ML
                 if (val > input_max) input_max = val;
             }
             fp32 Si = (input_max > 0) ? (127.0f / input_max) : 1.0f;
-            i8 zi = 0;
+            
 
-            std::cout << "[QUANT] Dense Layer " << dense_layer_count << " - Dynamic fallback" << std::endl;
+            std::cout << "[QUANT] " << layer_name << " - Dynamic fallback" << std::endl;
             std::cout << "[QUANT]   Input max: " << input_max << ", scale (Si): " << Si << std::endl;
 
             fp32 weight_max = 0.0f;
@@ -181,7 +192,7 @@ namespace ML
             std::cout << "[QUANT]   Weight max: " << weight_max << ", scale (Sw): " << Sw << std::endl;
             std::cout << "[QUANT]   Bias scale (Sb): " << Sb << std::endl;
 
-            dense_layer_count++;
+            //dense_layer_count++;
             computeNaive(dataIn);
             return;
         }
@@ -190,11 +201,11 @@ namespace ML
         fp32 Si = input_stats.Si;
         i8 zi = input_stats.zi;
 
-        std::cout << "[QUANT] Dense Layer " << dense_layer_count << " - Using calibration: " << input_stats_name << std::endl;
+        std::cout << "[QUANT] " << layer_name << " - Using calibration: " << input_stats_name << std::endl;
         std::cout << "[QUANT]   Input scale (Si): " << Si << ", zero-point (zi): " << static_cast<int>(zi) << std::endl;
         std::cout << "[QUANT]   Calibration range: [" << input_stats.min << ", " << input_stats.max << "], mean: " << input_stats.mean << std::endl;
 
-        dense_layer_count++;
+        //dense_layer_count++;
 
         // Calculate weight scale
         fp32 weight_max = 0.0f;
@@ -253,6 +264,15 @@ namespace ML
         }
         std::cout << std::endl;
 
+        // Precompute sum of quantized weights for each output feature (for zero-point correction)
+        std::vector<i32> weight_sum_per_output(outputSize, 0);
+        for (size_t out_idx = 0; out_idx < outputSize; out_idx++) {
+            for (size_t in_idx = 0; in_idx < totalInputFeatures; in_idx++) {
+                size_t weightIdx = in_idx * outputSize + out_idx;
+                weight_sum_per_output[out_idx] += static_cast<i32>(weights_quantized[weightIdx]);
+            }
+        }
+
         // --- INT8 Matrix-Vector Multiply ---
         for (size_t out_idx = 0; out_idx < outputSize; out_idx++) {
             i32 accumulator = bias_quantized[out_idx];
@@ -265,6 +285,9 @@ namespace ML
                 accumulator += static_cast<i32>(input_quantized[in_idx]) *
                                static_cast<i32>(weights_quantized[weightIdx]);
             }
+
+            // Apply zero-point correction: subtract zi * sum_of_weights
+            accumulator -= static_cast<i32>(zi) * weight_sum_per_output[out_idx];
 
             // Dequantize: divide by (Si * Sw)
             fp32 result = static_cast<fp32>(accumulator) / (Si * Sw);
