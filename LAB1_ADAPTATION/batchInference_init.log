@@ -1,0 +1,1102 @@
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   AudioCNN_IRMAS Model Testing
+[[36mInfo[39m]:   Musical Instrument Classification
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]: --- Building AudioCNN_IRMAS Model ---
+[[36mInfo[39m]: AudioCNN_IRMAS Model built successfully!
+[[36mInfo[39m]: Total layers: 20 (8 Conv, 7 BatchNorm, 3 MaxPool, 1 Flatten, 2 Dense, 1 Softmax)
+Opened binary file data/model_weights_improved/conv1_1_weights.bin
+Opened binary file data/model_weights_improved/conv1_1_bias.bin
+Opened binary file data/model_weights_improved/bn1_1_mean.bin
+Opened binary file data/model_weights_improved/bn1_1_variance.bin
+Opened binary file data/model_weights_improved/bn1_1_gamma.bin
+Opened binary file data/model_weights_improved/bn1_1_beta.bin
+Opened binary file data/model_weights_improved/conv1_2_weights.bin
+Opened binary file data/model_weights_improved/conv1_2_bias.bin
+Opened binary file data/model_weights_improved/bn1_2_mean.bin
+Opened binary file data/model_weights_improved/bn1_2_variance.bin
+Opened binary file data/model_weights_improved/bn1_2_gamma.bin
+Opened binary file data/model_weights_improved/bn1_2_beta.bin
+Opened binary file data/model_weights_improved/conv2_1_weights.bin
+Opened binary file data/model_weights_improved/conv2_1_bias.bin
+Opened binary file data/model_weights_improved/bn2_1_mean.bin
+Opened binary file data/model_weights_improved/bn2_1_variance.bin
+Opened binary file data/model_weights_improved/bn2_1_gamma.bin
+Opened binary file data/model_weights_improved/bn2_1_beta.bin
+Opened binary file data/model_weights_improved/conv2_2_weights.bin
+Opened binary file data/model_weights_improved/conv2_2_bias.bin
+Opened binary file data/model_weights_improved/bn2_2_mean.bin
+Opened binary file data/model_weights_improved/bn2_2_variance.bin
+Opened binary file data/model_weights_improved/bn2_2_gamma.bin
+Opened binary file data/model_weights_improved/bn2_2_beta.bin
+Opened binary file data/model_weights_improved/conv3_1_weights.bin
+Opened binary file data/model_weights_improved/conv3_1_bias.bin
+Opened binary file data/model_weights_improved/bn3_1_mean.bin
+Opened binary file data/model_weights_improved/bn3_1_variance.bin
+Opened binary file data/model_weights_improved/bn3_1_gamma.bin
+Opened binary file data/model_weights_improved/bn3_1_beta.bin
+Opened binary file data/model_weights_improved/conv3_2_weights.bin
+Opened binary file data/model_weights_improved/conv3_2_bias.bin
+Opened binary file data/model_weights_improved/bn3_2_mean.bin
+Opened binary file data/model_weights_improved/bn3_2_variance.bin
+Opened binary file data/model_weights_improved/bn3_2_gamma.bin
+Opened binary file data/model_weights_improved/bn3_2_beta.bin
+Opened binary file data/model_weights_improved/fc1_weights.bin
+Opened binary file data/model_weights_improved/fc1_bias.bin
+Opened binary file data/model_weights_improved/bn_fc1_mean.bin
+Opened binary file data/model_weights_improved/bn_fc1_variance.bin
+Opened binary file data/model_weights_improved/bn_fc1_gamma.bin
+Opened binary file data/model_weights_improved/bn_fc1_beta.bin
+Opened binary file data/model_weights_improved/fc2_weights.bin
+Opened binary file data/model_weights_improved/fc2_bias.bin
+[[36mInfo[39m]: Loading test mel-spectrogram...
+Opened binary file data/test_input.bin
+[[36mInfo[39m]: Test input loaded successfully!
+
+
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   LAYER-BY-LAYER QUANTIZATION DIAGNOSTIC
+[[36mInfo[39m]: ========================================
+
+[DIAGNOSTIC] Running FP32 NAIVE inference...
+
+
+[DIAGNOSTIC] Running INT8 QUANTIZED inference...
+
+[[36mInfo[39m]: Loaded calibration stats for 20 layers
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127.317, zero-point (zi): -62
+[QUANT]   Weight max: 0.178109, scale (Sw): 713.047
+[QUANT]   Bias scale (Sb): 90782.9
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0.315566, max: 0.426853, mean: 0.0120626
+[QUANT]   Sample FP32 outputs: 0.0970667 0.0566516 0.0222839 0.0503729 -0.0421335 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 35.6977, zero-point (zi): -1
+[QUANT]   Weight max: 0.157999, scale (Sw): 803.804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -7.55075, max: 8.85904, mean: -0.576767
+[QUANT]   Sample FP32 outputs: -1.10609 1.47846 -0.500523 0.419391 -0.475291 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 24.6118, zero-point (zi): -12
+[QUANT]   Weight max: 0.142085, scale (Sw): 893.833
+[QUANT]   Bias scale (Sb): 21998.8
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4.32032, max: 4.21604, mean: -0.188024
+[QUANT]   Sample FP32 outputs: 0.0908231 0.622352 0.695355 0.0806861 -1.23061 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22.0524, zero-point (zi): 0
+[QUANT]   Weight max: 0.146738, scale (Sw): 865.487
+[QUANT]   Bias scale (Sb): 19086.1
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5.48935, max: 6.36601, mean: -0.303625
+[QUANT]   Sample FP32 outputs: -0.0917948 -0.00932618 0.395105 -0.598028 0.187257 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 18.5332, zero-point (zi): -13
+[QUANT]   Weight max: 0.161663, scale (Sw): 785.584
+[QUANT]   Bias scale (Sb): 14559.4
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8.252, max: 10.5043, mean: 0.136185
+[QUANT]   Sample FP32 outputs: -2.46755 3.10748 -1.71979 -3.33277 -1.3221 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 23.5049, zero-point (zi): 2
+[QUANT]   Weight max: 0.141833, scale (Sw): 895.421
+[QUANT]   Bias scale (Sb): 21046.8
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -4.71886, max: 3.19749, mean: -0.425507
+[QUANT]   Sample FP32 outputs: -1.11014 0.628219 -1.52579 -1.36291 -1.28666 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25.3516, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5.00954], mean: 0.529793
+[QUANT]   Weight max: 0.06848, scale (Sw): 1854.56
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 0.860535 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -9.8526, max: 12.7066, mean: 0.896536
+[QUANT]   Sample FP32 outputs: -4.35486 6.8388 3.12553 0.679853 2.58053 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 37.8858, zero-point (zi): 3
+[QUANT]   Calibration range: [-2.85125, 3.35218], mean: -0.0772174
+[QUANT]   Weight max: 0.222322, scale (Sw): 571.243
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0.0190403 0.860093 0.341029 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -8.87164, max: 6.15253, mean: -1.13112
+[QUANT]   Sample FP32 outputs: 6.15253 -1.4988 -1.75991 -0.692311 -2.57277 
+
+[DIAGNOSTIC] Comparing layer outputs:
+
+Layer | Cosine Sim | Max Error | Min(FP32) | Max(FP32) | Min(INT8) | Max(INT8)
+------|-----------|-----------|-----------|-----------|-----------|----------
+    0 |     99.99% |    0.0068 |   -0.3192 |    0.4242 |   -0.3156 |    0.4269
+    1 |     99.92% |    0.1633 |    0.0000 |    3.5576 |    0.0000 |    3.5556
+    2 |     99.99% |    0.1920 |   -7.5085 |    8.8177 |   -7.5507 |    8.8590
+    3 |     99.96% |    0.1690 |    0.0000 |    5.1601 |    0.0000 |    5.1893
+    4 |     99.97% |    0.1690 |    0.0000 |    5.1601 |    0.0000 |    5.1893
+    5 |     99.99% |    0.1094 |   -4.3171 |    4.1886 |   -4.3203 |    4.2160
+    6 |     99.96% |    0.1928 |    0.0000 |    5.7590 |    0.0000 |    5.6955
+    7 |     99.98% |    0.2495 |   -5.4873 |    6.3273 |   -5.4893 |    6.3660
+    8 |     99.96% |    0.2587 |    0.0000 |    6.8526 |    0.0000 |    6.8956
+    9 |     99.97% |    0.2587 |    0.0000 |    6.8526 |    0.0000 |    6.8956
+   10 |     99.98% |    0.1705 |   -8.2563 |   10.5385 |   -8.2520 |   10.5043
+   11 |     99.96% |    0.1377 |    0.0000 |    5.4031 |    0.0000 |    5.3948
+   12 |     99.97% |    0.1394 |   -4.7185 |    3.2285 |   -4.7189 |    3.1975
+   13 |     99.93% |    0.1643 |    0.0000 |    5.0095 |    0.0000 |    5.0293
+   14 |     99.95% |    0.1643 |    0.0000 |    5.0095 |    0.0000 |    5.0293
+   15 |     99.95% |    0.1643 |    0.0000 |    5.0095 |    0.0000 |    5.0293
+   16 |     99.98% |    0.2522 |   -9.8838 |   12.7074 |   -9.8526 |   12.7066
+   17 |     99.97% |    0.0825 |    0.0000 |    3.3522 |    0.0000 |    3.4328
+   18 |     99.99% |    0.1072 |   -8.9126 |    6.2337 |   -8.8716 |    6.1525
+   19 |    100.00% |    0.0009 |    0.0000 |    0.9584 |    0.0000 |    0.9587
+
+[DIAGNOSTIC] All layers match well! Quantization is working correctly.
+
+
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   INT8 QUANTIZED INFERENCE TEST (WITH LAYER TIMING)
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]: 
+--- Step 1: Running FP32 NAIVE baseline ---
+Timer FP32 NAIVE Inference: elapsed=674.784973ms
+FP32 NAIVE Top prediction: Cello (95.8405%)
+[[36mInfo[39m]: 
+--- Step 2: Running INT8 QUANTIZED inference with layer timing ---
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127.3169, zero-point (zi): -62
+[QUANT]   Weight max: 0.1781, scale (Sw): 713.0471
+[QUANT]   Bias scale (Sb): 90782.9219
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0.3156, max: 0.4269, mean: 0.0121
+[QUANT]   Sample FP32 outputs: 0.0971 0.0567 0.0223 0.0504 -0.0421 
+Timer Layer 0: elapsed=3.432000ms
+Timer Layer 1: elapsed=1.117000ms
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 35.6977, zero-point (zi): -1
+[QUANT]   Weight max: 0.1580, scale (Sw): 803.8037
+[QUANT]   Bias scale (Sb): 28693.9727
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -7.5507, max: 8.8590, mean: -0.5768
+[QUANT]   Sample FP32 outputs: -1.1061 1.4785 -0.5005 0.4194 -0.4753 
+Timer Layer 2: elapsed=41.467999ms
+Timer Layer 3: elapsed=2.207000ms
+Timer Layer 4: elapsed=1.166000ms
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 24.6118, zero-point (zi): -12
+[QUANT]   Weight max: 0.1421, scale (Sw): 893.8335
+[QUANT]   Bias scale (Sb): 21998.8203
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4.3203, max: 4.2160, mean: -0.1880
+[QUANT]   Sample FP32 outputs: 0.0908 0.6224 0.6954 0.0807 -1.2306 
+Timer Layer 5: elapsed=16.719000ms
+Timer Layer 6: elapsed=0.605000ms
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22.0524, zero-point (zi): 0
+[QUANT]   Weight max: 0.1467, scale (Sw): 865.4865
+[QUANT]   Bias scale (Sb): 19086.0547
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5.4893, max: 6.3660, mean: -0.3036
+[QUANT]   Sample FP32 outputs: -0.0918 -0.0093 0.3951 -0.5980 0.1873 
+Timer Layer 7: elapsed=23.080000ms
+Timer Layer 8: elapsed=0.721000ms
+Timer Layer 9: elapsed=0.627000ms
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 18.5332, zero-point (zi): -13
+[QUANT]   Weight max: 0.1617, scale (Sw): 785.5839
+[QUANT]   Bias scale (Sb): 14559.3711
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8.2520, max: 10.5043, mean: 0.1362
+[QUANT]   Sample FP32 outputs: -2.4676 3.1075 -1.7198 -3.3328 -1.3221 
+Timer Layer 10: elapsed=3.778000ms
+Timer Layer 11: elapsed=0.112000ms
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 23.5049, zero-point (zi): 2
+[QUANT]   Weight max: 0.1418, scale (Sw): 895.4209
+[QUANT]   Bias scale (Sb): 21046.8125
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -4.7189, max: 3.1975, mean: -0.4255
+[QUANT]   Sample FP32 outputs: -1.1101 0.6282 -1.5258 -1.3629 -1.2867 
+Timer Layer 12: elapsed=8.048000ms
+Timer Layer 13: elapsed=0.192000ms
+Timer Layer 14: elapsed=0.191000ms
+Timer Layer 15: elapsed=0.011000ms
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25.3516, zero-point (zi): -13
+[QUANT]   Calibration range: [0.0000, 5.0095], mean: 0.5298
+[QUANT]   Weight max: 0.0685, scale (Sw): 1854.5551
+[QUANT]   Bias scale (Sb): 47016.0117
+[QUANT]   Sample FP32 inputs: 0.0000 0.8605 0.0000 0.0000 0.0000 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -9.8526, max: 12.7066, mean: 0.8965
+[QUANT]   Sample FP32 outputs: -4.3549 6.8388 3.1255 0.6799 2.5805 
+Timer Layer 16: elapsed=63.174999ms
+Timer Layer 17: elapsed=0.006000ms
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 37.8858, zero-point (zi): 3
+[QUANT]   Calibration range: [-2.8512, 3.3522], mean: -0.0772
+[QUANT]   Weight max: 0.2223, scale (Sw): 571.2433
+[QUANT]   Bias scale (Sb): 21642.0039
+[QUANT]   Sample FP32 inputs: 0.0000 0.0190 0.8601 0.3410 0.0000 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -8.8716, max: 6.1525, mean: -1.1311
+[QUANT]   Sample FP32 outputs: 6.1525 -1.4988 -1.7599 -0.6923 -2.5728 
+Timer Layer 18: elapsed=0.050000ms
+Timer Layer 19: elapsed=0.001000ms
+INT8 QUANTIZED Top prediction: Cello (95.8744%)
+[[36mInfo[39m]: 
+--- Step 3: Comparing FP32 vs INT8 results ---
+Cosine similarity: 100.0000%
+Max absolute error: 0.0009
+Top prediction match: YES
+[[36mInfo[39m]: 
+--- Step 4: Layer-wise timing breakdown ---
+
+INT8 QUANTIZED Layer Timing:
+Layer |      Name      |   Time (ms)  | % of Total
+------|----------------|--------------|----------
+    0 | conv1_1        | 3.432000     | 2.06    %
+1     | bn1_1          | 1.117000     | 0.67    %
+2     | conv1_2        | 41.467999    | 24.87   %
+3     | bn1_2          | 2.207000     | 1.32    %
+4     | pool1          | 1.166000     | 0.70    %
+5     | conv2_1        | 16.719000    | 10.03   %
+6     | bn2_1          | 0.605000     | 0.36    %
+7     | conv2_2        | 23.080000    | 13.84   %
+8     | bn2_2          | 0.721000     | 0.43    %
+9     | pool2          | 0.627000     | 0.38    %
+10    | conv3_1        | 3.778000     | 2.27    %
+11    | bn3_1          | 0.112000     | 0.07    %
+12    | conv3_2        | 8.048000     | 4.83    %
+13    | bn3_2          | 0.192000     | 0.12    %
+14    | pool3          | 0.191000     | 0.11    %
+15    | flatten        | 0.011000     | 0.01    %
+16    | fc1            | 63.174999    | 37.90   %
+17    | bn_fc1         | 0.006000     | 0.00    %
+18    | fc2            | 0.050000     | 0.03    %
+19    | softmax        | 0.001000     | 0.00    %
+------|----------------|--------------|----------
+TOTAL |                | 166.705998   | 100.00%
+[[36mInfo[39m]: 
+--- Step 5: Overall performance comparison ---
+FP32 NAIVE time:     674.784973 ms
+INT8 QUANTIZED time: 166.705998 ms
+Speedup:             4.047755x
+INT8 is FASTER by 304.775482%
+
+Detailed probability comparison:
+Class | FP32        | INT8        | Diff
+------|-------------|-------------|-------------
+0     | 95.8405   % | 95.8744   % | -0.0339   %
+1     | 0.0407    % | 0.0456    % | -0.0048   %
+2     | 0.0331    % | 0.0351    % | -0.0020   %
+3     | 0.0896    % | 0.1021    % | -0.0125   %
+4     | 0.0135    % | 0.0156    % | -0.0021   %
+5     | 0.0000    % | 0.0000    % | -0.0000   %
+6     | 0.0040    % | 0.0048    % | -0.0008   %
+7     | 0.5236    % | 0.5529    % | -0.0293   %
+8     | 0.0231    % | 0.0248    % | -0.0016   %
+9     | 3.4318    % | 3.3447    % | 0.0870    %
+
+
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   BATCH INFERENCE TEST
+[[36mInfo[39m]: ========================================
+
+Loading batch test metadata...
+
+Opened binary file data/test_input_000.bin
+Timer FP32: elapsed=682.549011ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127.3169, zero-point (zi): -62
+[QUANT]   Weight max: 0.1781, scale (Sw): 713.0471
+[QUANT]   Bias scale (Sb): 90782.9219
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0.3156, max: 0.4269, mean: 0.0121
+[QUANT]   Sample FP32 outputs: 0.0971 0.0567 0.0223 0.0504 -0.0421 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 35.6977, zero-point (zi): -1
+[QUANT]   Weight max: 0.1580, scale (Sw): 803.8037
+[QUANT]   Bias scale (Sb): 28693.9727
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -7.5507, max: 8.8590, mean: -0.5768
+[QUANT]   Sample FP32 outputs: -1.1061 1.4785 -0.5005 0.4194 -0.4753 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 24.6118, zero-point (zi): -12
+[QUANT]   Weight max: 0.1421, scale (Sw): 893.8335
+[QUANT]   Bias scale (Sb): 21998.8203
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4.3203, max: 4.2160, mean: -0.1880
+[QUANT]   Sample FP32 outputs: 0.0908 0.6224 0.6954 0.0807 -1.2306 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22.0524, zero-point (zi): 0
+[QUANT]   Weight max: 0.1467, scale (Sw): 865.4865
+[QUANT]   Bias scale (Sb): 19086.0547
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5.4893, max: 6.3660, mean: -0.3036
+[QUANT]   Sample FP32 outputs: -0.0918 -0.0093 0.3951 -0.5980 0.1873 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 18.5332, zero-point (zi): -13
+[QUANT]   Weight max: 0.1617, scale (Sw): 785.5839
+[QUANT]   Bias scale (Sb): 14559.3711
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8.2520, max: 10.5043, mean: 0.1362
+[QUANT]   Sample FP32 outputs: -2.4676 3.1075 -1.7198 -3.3328 -1.3221 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 23.5049, zero-point (zi): 2
+[QUANT]   Weight max: 0.1418, scale (Sw): 895.4209
+[QUANT]   Bias scale (Sb): 21046.8125
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -4.7189, max: 3.1975, mean: -0.4255
+[QUANT]   Sample FP32 outputs: -1.1101 0.6282 -1.5258 -1.3629 -1.2867 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25.3516, zero-point (zi): -13
+[QUANT]   Calibration range: [0.0000, 5.0095], mean: 0.5298
+[QUANT]   Weight max: 0.0685, scale (Sw): 1854.5551
+[QUANT]   Bias scale (Sb): 47016.0117
+[QUANT]   Sample FP32 inputs: 0.0000 0.8605 0.0000 0.0000 0.0000 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -9.8526, max: 12.7066, mean: 0.8965
+[QUANT]   Sample FP32 outputs: -4.3549 6.8388 3.1255 0.6799 2.5805 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 37.8858, zero-point (zi): 3
+[QUANT]   Calibration range: [-2.8512, 3.3522], mean: -0.0772
+[QUANT]   Weight max: 0.2223, scale (Sw): 571.2433
+[QUANT]   Bias scale (Sb): 21642.0039
+[QUANT]   Sample FP32 inputs: 0.0000 0.0190 0.8601 0.3410 0.0000 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -8.8716, max: 6.1525, mean: -1.1311
+[QUANT]   Sample FP32 outputs: 6.1525 -1.4988 -1.7599 -0.6923 -2.5728 
+Timer INT8: elapsed=148.427002ms
+  [OK] Sample 0   | True: cel | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 683  ms | INT8: 148  ms
+Opened binary file data/test_input_001.bin
+Timer FP32: elapsed=671.966980ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=148.389008ms
+  [XX] Sample 1   | True: cla | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 672  ms | INT8: 148  ms
+Opened binary file data/test_input_002.bin
+Timer FP32: elapsed=1091.197998ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=397.678009ms
+  [XX] Sample 2   | True: flu | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 1091 ms | INT8: 398  ms
+Opened binary file data/test_input_003.bin
+Timer FP32: elapsed=1218.512939ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=314.955994ms
+  [XX] Sample 3   | True: gac | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 1219 ms | INT8: 315  ms
+Opened binary file data/test_input_004.bin
+Timer FP32: elapsed=1120.621948ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=317.523010ms
+  [XX] Sample 4   | True: gel | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 1121 ms | INT8: 318  ms
+Opened binary file data/test_input_005.bin
+Timer FP32: elapsed=765.581970ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=148.477005ms
+  [XX] Sample 5   | True: org | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 766  ms | INT8: 148  ms
+Opened binary file data/test_input_006.bin
+Timer FP32: elapsed=857.870972ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=236.192993ms
+  [XX] Sample 6   | True: pia | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 858  ms | INT8: 236  ms
+Opened binary file data/test_input_007.bin
+Timer FP32: elapsed=895.921997ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=151.240997ms
+  [XX] Sample 7   | True: sax | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 896  ms | INT8: 151  ms
+Opened binary file data/test_input_008.bin
+Timer FP32: elapsed=722.853027ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=189.233994ms
+  [XX] Sample 8   | True: tru | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 723  ms | INT8: 189  ms
+Opened binary file data/test_input_009.bin
+Timer FP32: elapsed=723.255981ms
+[QUANT] conv1_1 - Using calibration: _input
+[QUANT]   Input scale (Si): 127, zero-point (zi): -62
+[QUANT]   Weight max: 0, scale (Sw): 713
+[QUANT]   Bias scale (Sb): 90783
+[QUANT]   Sample INT8 inputs: 9 23 26 25 27 
+[QUANT]   Sample INT8 weights: -78 12 -67 -63 -12 
+[QUANT]   Output stats - min: -0, max: 0, mean: 0
+[QUANT]   Sample FP32 outputs: 0 0 0 0 -0 
+[QUANT] conv1_2 - Using calibration: bn1_1
+[QUANT]   Input scale (Si): 36, zero-point (zi): -1
+[QUANT]   Weight max: 0, scale (Sw): 804
+[QUANT]   Bias scale (Sb): 28694
+[QUANT]   Sample INT8 inputs: 32 -1 19 -1 4 
+[QUANT]   Sample INT8 weights: -5 -27 -12 31 -19 
+[QUANT]   Output stats - min: -8, max: 9, mean: -1
+[QUANT]   Sample FP32 outputs: -1 1 -1 0 -0 
+[QUANT] conv2_1 - Using calibration: pool1
+[QUANT]   Input scale (Si): 25, zero-point (zi): -12
+[QUANT]   Weight max: 0, scale (Sw): 894
+[QUANT]   Bias scale (Sb): 21999
+[QUANT]   Sample INT8 inputs: -8 6 3 10 -12 
+[QUANT]   Sample INT8 weights: 11 26 28 -2 -20 
+[QUANT]   Output stats - min: -4, max: 4, mean: -0
+[QUANT]   Sample FP32 outputs: 0 1 1 0 -1 
+[QUANT] conv2_2 - Using calibration: bn2_1
+[QUANT]   Input scale (Si): 22, zero-point (zi): 0
+[QUANT]   Weight max: 0, scale (Sw): 865
+[QUANT]   Bias scale (Sb): 19086
+[QUANT]   Sample INT8 inputs: 8 12 1 7 0 
+[QUANT]   Sample INT8 weights: -40 -2 37 16 48 
+[QUANT]   Output stats - min: -5, max: 6, mean: -0
+[QUANT]   Sample FP32 outputs: -0 -0 0 -1 0 
+[QUANT] conv3_1 - Using calibration: pool2
+[QUANT]   Input scale (Si): 19, zero-point (zi): -13
+[QUANT]   Weight max: 0, scale (Sw): 786
+[QUANT]   Bias scale (Sb): 14559
+[QUANT]   Sample INT8 inputs: 4 -13 7 -11 -13 
+[QUANT]   Sample INT8 weights: -1 -6 -28 -24 12 
+[QUANT]   Output stats - min: -8, max: 11, mean: 0
+[QUANT]   Sample FP32 outputs: -2 3 -2 -3 -1 
+[QUANT] conv3_2 - Using calibration: bn3_1
+[QUANT]   Input scale (Si): 24, zero-point (zi): 2
+[QUANT]   Weight max: 0, scale (Sw): 895
+[QUANT]   Bias scale (Sb): 21047
+[QUANT]   Sample INT8 inputs: 2 20 2 2 2 
+[QUANT]   Sample INT8 weights: -6 -1 3 -14 -42 
+[QUANT]   Output stats - min: -5, max: 3, mean: -0
+[QUANT]   Sample FP32 outputs: -1 1 -2 -1 -1 
+[QUANT] fc1 - Using calibration: flatten
+[QUANT]   Input scale (Si): 25, zero-point (zi): -13
+[QUANT]   Calibration range: [0, 5], mean: 1
+[QUANT]   Weight max: 0, scale (Sw): 1855
+[QUANT]   Bias scale (Sb): 47016
+[QUANT]   Sample FP32 inputs: 0 1 0 0 0 
+[QUANT]   Sample INT8 inputs: -13 9 -13 -13 -13 
+[QUANT]   Sample INT8 weights: 24 13 9 11 -1 
+[QUANT]   Output stats - min: -10, max: 13, mean: 1
+[QUANT]   Sample FP32 outputs: -4 7 3 1 3 
+[QUANT] fc2 - Using calibration: bn_fc1
+[QUANT]   Input scale (Si): 38, zero-point (zi): 3
+[QUANT]   Calibration range: [-3, 3], mean: -0
+[QUANT]   Weight max: 0, scale (Sw): 571
+[QUANT]   Bias scale (Sb): 21642
+[QUANT]   Sample FP32 inputs: 0 0 1 0 0 
+[QUANT]   Sample INT8 inputs: 3 4 36 16 3 
+[QUANT]   Sample INT8 weights: 33 -71 -45 36 22 
+[QUANT]   Output stats - min: -9, max: 6, mean: -1
+[QUANT]   Sample FP32 outputs: 6 -1 -2 -1 -3 
+Timer INT8: elapsed=148.565994ms
+  [XX] Sample 9   | True: vio | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 723  ms | INT8: 149  ms
+
+======================================================================
+BATCH TEST SUMMARY
+======================================================================
+
+ACCURACY METRICS:
+  Total samples: 10 / 10
+
+FP32 ACCURACY:
+  Top-1 Accuracy: 1 / 10 (10.00%)
+  Top-5 Accuracy: 5 / 10 (50.00%)
+
+INT8 ACCURACY:
+  Top-1 Accuracy: 1 / 10 (10.00%)
+  Top-5 Accuracy: 5 / 10 (50.00%)
+
+QUANTIZATION ACCURACY LOSS:
+  Top-1 Loss: 0.00%
+  Top-5 Loss: 0.00%
+
+FP32 RUNTIME STATISTICS:
+  Mean:   875.03 ms
+  Std:    190.32 ms
+  Min:    671.97 ms
+  Max:    1218.51 ms
+
+INT8 RUNTIME STATISTICS:
+  Mean:   220.07 ms
+  Std:    87.47 ms
+  Min:    148.39 ms
+  Max:    397.68 ms
+
+SPEEDUP (FP32 → INT8):
+  Average Speedup: 3.98x
+  Performance Gain: 297.62%
+
+QUANTIZATION QUALITY (Cosine Similarity):
+  Mean:   100.0000%
+  Std:    0.0000%
+  Min:    100.0000%
+  Max:    100.0000%
+
+PER-CLASS ACCURACY:
+Class | Name             | Correct | Total | Accuracy
+------|------------------|---------|-------|----------
+0     | Cello            |       1 |     1 |  100.00%
+    1 | Clarinet         |       0 |     1 |    0.00%
+    2 | Flute            |       0 |     1 |    0.00%
+    3 | Acoustic Guitar  |       0 |     1 |    0.00%
+    4 | Electric Guitar  |       0 |     1 |    0.00%
+    5 | Organ            |       0 |     1 |    0.00%
+    6 | Piano            |       0 |     1 |    0.00%
+    7 | Saxophone        |       0 |     1 |    0.00%
+    8 | Trumpet          |       0 |     1 |    0.00%
+    9 | Violin           |       0 |     1 |    0.00%
+
+======================================================================
+
+
+----- ML::runTests() COMPLETE -----

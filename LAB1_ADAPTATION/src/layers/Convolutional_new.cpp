@@ -317,8 +317,8 @@ namespace ML
         i8 zi = input_stats.zi;
 
         // Log quantization parameters
-        std::cout << "[QUANT] " << layer_name << " - Using calibration: " << input_stats_name << std::endl;
-        std::cout << "[QUANT]   Input scale (Si): " << Si << ", zero-point (zi): " << static_cast<int>(zi) << std::endl;
+        // std::cout << "[QUANT] " << layer_name << " - Using calibration: " << input_stats_name << std::endl;
+        // std::cout << "[QUANT]   Input scale (Si): " << Si << ", zero-point (zi): " << static_cast<int>(zi) << std::endl;
 
         // Calculate weight scale (Sw)
         size_t weight_size = getWeightParams().flat_count();
@@ -337,8 +337,8 @@ namespace ML
         // Bias scale
         fp32 Sb = Si * Sw;
 
-        std::cout << "[QUANT]   Weight max: " << max_weight << ", scale (Sw): " << Sw << std::endl;
-        std::cout << "[QUANT]   Bias scale (Sb): " << Sb << std::endl;
+        // std::cout << "[QUANT]   Weight max: " << max_weight << ", scale (Sw): " << Sw << std::endl;
+        // std::cout << "[QUANT]   Bias scale (Sb): " << Sb << std::endl;
 
         // Quantize inputs
         size_t input_size = getInputParams().flat_count();
@@ -362,13 +362,13 @@ namespace ML
         }
 
         // Log sample quantized values (first 5 of each)
-        std::cout << "[QUANT]   Sample INT8 inputs: ";
+        // std::cout << "[QUANT]   Sample INT8 inputs: ";
         for (size_t i = 0; i < std::min(size_t(5), input_size); i++) {
             std::cout << static_cast<int>(quantized_input[i]) << " ";
         }
         std::cout << std::endl;
 
-        std::cout << "[QUANT]   Sample INT8 weights: ";
+        // std::cout << "[QUANT]   Sample INT8 weights: ";
         for (size_t i = 0; i < std::min(size_t(5), weight_size); i++) {
             std::cout << static_cast<int>(quantized_weights[i]) << " ";
         }
@@ -436,13 +436,13 @@ namespace ML
             output_sum += val;
         }
 
-        fp32 output_mean = output_sum / output_size;
+        //fp32 output_mean = output_sum / output_size;
 
-        std::cout << "[QUANT]   Output stats - min: " << output_min
-                  << ", max: " << output_max
-                  << ", mean: " << output_mean << std::endl;
+        // std::cout << "[QUANT]   Output stats - min: " << output_min
+                  //<< ", max: " << output_max
+                  //<< ", mean: " << output_mean << std::endl;
 
-        std::cout << "[QUANT]   Sample FP32 outputs: ";
+        // std::cout << "[QUANT]   Sample FP32 outputs: ";
         for (size_t i = 0; i < std::min(size_t(5), output_size); i++) {
             std::cout << getOutputData().get<fp32>(i) << " ";
         }

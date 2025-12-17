@@ -781,7 +781,7 @@ void runAllLayerTests(const Model& model, const Path& basePath, const LayerData&
     }
 }
 
-void runBatchInferenceTest(const Model& model, const Path& dataPath, int numSamples = 10) {
+void runBatchInferenceTest(const Model& model, const Path& dataPath, int numSamples = 100) {
     logInfo("========================================");
     logInfo("  BATCH INFERENCE TEST");
     logInfo("========================================");
@@ -954,10 +954,8 @@ void runBatchInferenceTest(const Model& model, const Path& dataPath, int numSamp
         }
         std::sort(predictions.begin(), predictions.end(), std::greater<std::pair<fp32, int>>());
 
-        bool in_top5 = false;
         for (int k = 0; k < 5; k++) {
             if (predictions[k].second == true_label) {
-                in_top5 = true;
                 results.correct_top5_int8++;
                 break;
             }
@@ -1148,7 +1146,7 @@ void runTests() {
 
     // Run batch inference test on multiple validation samples
     std::cout << "\n\n";
-    runBatchInferenceTest(model, basePath, 10);
+    runBatchInferenceTest(model, basePath, 100);
 
     // Clean up
     model.freeLayers();

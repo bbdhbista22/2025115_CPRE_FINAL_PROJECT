@@ -1,0 +1,3297 @@
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   AudioCNN_IRMAS Model Testing
+[[36mInfo[39m]:   Musical Instrument Classification
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]: --- Building AudioCNN_IRMAS Model ---
+[[36mInfo[39m]: AudioCNN_IRMAS Model built successfully!
+[[36mInfo[39m]: Total layers: 20 (8 Conv, 7 BatchNorm, 3 MaxPool, 1 Flatten, 2 Dense, 1 Softmax)
+Opened binary file data/model_weights_improved/conv1_1_weights.bin
+Opened binary file data/model_weights_improved/conv1_1_bias.bin
+Opened binary file data/model_weights_improved/bn1_1_mean.bin
+Opened binary file data/model_weights_improved/bn1_1_variance.bin
+Opened binary file data/model_weights_improved/bn1_1_gamma.bin
+Opened binary file data/model_weights_improved/bn1_1_beta.bin
+Opened binary file data/model_weights_improved/conv1_2_weights.bin
+Opened binary file data/model_weights_improved/conv1_2_bias.bin
+Opened binary file data/model_weights_improved/bn1_2_mean.bin
+Opened binary file data/model_weights_improved/bn1_2_variance.bin
+Opened binary file data/model_weights_improved/bn1_2_gamma.bin
+Opened binary file data/model_weights_improved/bn1_2_beta.bin
+Opened binary file data/model_weights_improved/conv2_1_weights.bin
+Opened binary file data/model_weights_improved/conv2_1_bias.bin
+Opened binary file data/model_weights_improved/bn2_1_mean.bin
+Opened binary file data/model_weights_improved/bn2_1_variance.bin
+Opened binary file data/model_weights_improved/bn2_1_gamma.bin
+Opened binary file data/model_weights_improved/bn2_1_beta.bin
+Opened binary file data/model_weights_improved/conv2_2_weights.bin
+Opened binary file data/model_weights_improved/conv2_2_bias.bin
+Opened binary file data/model_weights_improved/bn2_2_mean.bin
+Opened binary file data/model_weights_improved/bn2_2_variance.bin
+Opened binary file data/model_weights_improved/bn2_2_gamma.bin
+Opened binary file data/model_weights_improved/bn2_2_beta.bin
+Opened binary file data/model_weights_improved/conv3_1_weights.bin
+Opened binary file data/model_weights_improved/conv3_1_bias.bin
+Opened binary file data/model_weights_improved/bn3_1_mean.bin
+Opened binary file data/model_weights_improved/bn3_1_variance.bin
+Opened binary file data/model_weights_improved/bn3_1_gamma.bin
+Opened binary file data/model_weights_improved/bn3_1_beta.bin
+Opened binary file data/model_weights_improved/conv3_2_weights.bin
+Opened binary file data/model_weights_improved/conv3_2_bias.bin
+Opened binary file data/model_weights_improved/bn3_2_mean.bin
+Opened binary file data/model_weights_improved/bn3_2_variance.bin
+Opened binary file data/model_weights_improved/bn3_2_gamma.bin
+Opened binary file data/model_weights_improved/bn3_2_beta.bin
+Opened binary file data/model_weights_improved/fc1_weights.bin
+Opened binary file data/model_weights_improved/fc1_bias.bin
+Opened binary file data/model_weights_improved/bn_fc1_mean.bin
+Opened binary file data/model_weights_improved/bn_fc1_variance.bin
+Opened binary file data/model_weights_improved/bn_fc1_gamma.bin
+Opened binary file data/model_weights_improved/bn_fc1_beta.bin
+Opened binary file data/model_weights_improved/fc2_weights.bin
+Opened binary file data/model_weights_improved/fc2_bias.bin
+[[36mInfo[39m]: Loading test mel-spectrogram...
+Opened binary file data/test_input.bin
+[[36mInfo[39m]: Test input loaded successfully!
+
+
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   LAYER-BY-LAYER QUANTIZATION DIAGNOSTIC
+[[36mInfo[39m]: ========================================
+
+[DIAGNOSTIC] Running FP32 NAIVE inference...
+
+
+[DIAGNOSTIC] Running INT8 QUANTIZED inference...
+
+[[36mInfo[39m]: Loaded calibration stats for 20 layers
+9 23 26 25 27 
+-78 12 -67 -63 -12 
+0.0970667 0.0566516 0.0222839 0.0503729 -0.0421335 
+32 -1 19 -1 4 
+-5 -27 -12 31 -19 
+-1.10609 1.47846 -0.500523 0.419391 -0.475291 
+-8 6 3 10 -12 
+11 26 28 -2 -20 
+0.0908231 0.622352 0.695355 0.0806861 -1.23061 
+8 12 1 7 0 
+-40 -2 37 16 48 
+-0.0917948 -0.00932618 0.395105 -0.598028 0.187257 
+4 -13 7 -11 -13 
+-1 -6 -28 -24 12 
+-2.46755 3.10748 -1.71979 -3.33277 -1.3221 
+2 20 2 2 2 
+-6 -1 3 -14 -42 
+-1.11014 0.628219 -1.52579 -1.36291 -1.28666 
+0 0.860535 0 0 0 
+-13 9 -13 -13 -13 
+24 13 9 11 -1 
+-4.35486 6.8388 3.12553 0.679853 2.58053 
+0 0.0190403 0.860093 0.341029 0 
+3 4 36 16 3 
+33 -71 -45 36 22 
+6.15253 -1.4988 -1.75991 -0.692311 -2.57277 
+
+[DIAGNOSTIC] Comparing layer outputs:
+
+Layer | Cosine Sim | Max Error | Min(FP32) | Max(FP32) | Min(INT8) | Max(INT8)
+------|-----------|-----------|-----------|-----------|-----------|----------
+    0 |     99.99% |    0.0068 |   -0.3192 |    0.4242 |   -0.3156 |    0.4269
+    1 |     99.92% |    0.1633 |    0.0000 |    3.5576 |    0.0000 |    3.5556
+    2 |     99.99% |    0.1920 |   -7.5085 |    8.8177 |   -7.5507 |    8.8590
+    3 |     99.96% |    0.1690 |    0.0000 |    5.1601 |    0.0000 |    5.1893
+    4 |     99.97% |    0.1690 |    0.0000 |    5.1601 |    0.0000 |    5.1893
+    5 |     99.99% |    0.1094 |   -4.3171 |    4.1886 |   -4.3203 |    4.2160
+    6 |     99.96% |    0.1928 |    0.0000 |    5.7590 |    0.0000 |    5.6955
+    7 |     99.98% |    0.2495 |   -5.4873 |    6.3273 |   -5.4893 |    6.3660
+    8 |     99.96% |    0.2587 |    0.0000 |    6.8526 |    0.0000 |    6.8956
+    9 |     99.97% |    0.2587 |    0.0000 |    6.8526 |    0.0000 |    6.8956
+   10 |     99.98% |    0.1705 |   -8.2563 |   10.5385 |   -8.2520 |   10.5043
+   11 |     99.96% |    0.1377 |    0.0000 |    5.4031 |    0.0000 |    5.3948
+   12 |     99.97% |    0.1394 |   -4.7185 |    3.2285 |   -4.7189 |    3.1975
+   13 |     99.93% |    0.1643 |    0.0000 |    5.0095 |    0.0000 |    5.0293
+   14 |     99.95% |    0.1643 |    0.0000 |    5.0095 |    0.0000 |    5.0293
+   15 |     99.95% |    0.1643 |    0.0000 |    5.0095 |    0.0000 |    5.0293
+   16 |     99.98% |    0.2522 |   -9.8838 |   12.7074 |   -9.8526 |   12.7066
+   17 |     99.97% |    0.0825 |    0.0000 |    3.3522 |    0.0000 |    3.4328
+   18 |     99.99% |    0.1072 |   -8.9126 |    6.2337 |   -8.8716 |    6.1525
+   19 |    100.00% |    0.0009 |    0.0000 |    0.9584 |    0.0000 |    0.9587
+
+[DIAGNOSTIC] All layers match well! Quantization is working correctly.
+
+
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   INT8 QUANTIZED INFERENCE TEST (WITH LAYER TIMING)
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]: 
+--- Step 1: Running FP32 NAIVE baseline ---
+Timer FP32 NAIVE Inference: elapsed=692.515991ms
+FP32 NAIVE Top prediction: Cello (95.8405%)
+[[36mInfo[39m]: 
+--- Step 2: Running INT8 QUANTIZED inference with layer timing ---
+9 23 26 25 27 
+-78 12 -67 -63 -12 
+0.0971 0.0567 0.0223 0.0504 -0.0421 
+Timer Layer 0: elapsed=4.082000ms
+Timer Layer 1: elapsed=1.231000ms
+32 -1 19 -1 4 
+-5 -27 -12 31 -19 
+-1.1061 1.4785 -0.5005 0.4194 -0.4753 
+Timer Layer 2: elapsed=40.125999ms
+Timer Layer 3: elapsed=1.085000ms
+Timer Layer 4: elapsed=0.887000ms
+-8 6 3 10 -12 
+11 26 28 -2 -20 
+0.0908 0.6224 0.6954 0.0807 -1.2306 
+Timer Layer 5: elapsed=8.875000ms
+Timer Layer 6: elapsed=0.528000ms
+8 12 1 7 0 
+-40 -2 37 16 48 
+-0.0918 -0.0093 0.3951 -0.5980 0.1873 
+Timer Layer 7: elapsed=15.968000ms
+Timer Layer 8: elapsed=0.493000ms
+Timer Layer 9: elapsed=0.604000ms
+4 -13 7 -11 -13 
+-1 -6 -28 -24 12 
+-2.4676 3.1075 -1.7198 -3.3328 -1.3221 
+Timer Layer 10: elapsed=3.699000ms
+Timer Layer 11: elapsed=0.100000ms
+2 20 2 2 2 
+-6 -1 3 -14 -42 
+-1.1101 0.6282 -1.5258 -1.3629 -1.2867 
+Timer Layer 12: elapsed=6.832000ms
+Timer Layer 13: elapsed=0.171000ms
+Timer Layer 14: elapsed=0.180000ms
+Timer Layer 15: elapsed=0.014000ms
+0.0000 0.8605 0.0000 0.0000 0.0000 
+-13 9 -13 -13 -13 
+24 13 9 11 -1 
+-4.3549 6.8388 3.1255 0.6799 2.5805 
+Timer Layer 16: elapsed=63.040001ms
+Timer Layer 17: elapsed=0.006000ms
+0.0000 0.0190 0.8601 0.3410 0.0000 
+3 4 36 16 3 
+33 -71 -45 36 22 
+6.1525 -1.4988 -1.7599 -0.6923 -2.5728 
+Timer Layer 18: elapsed=0.042000ms
+Timer Layer 19: elapsed=0.001000ms
+INT8 QUANTIZED Top prediction: Cello (95.8744%)
+[[36mInfo[39m]: 
+--- Step 3: Comparing FP32 vs INT8 results ---
+Cosine similarity: 100.0000%
+Max absolute error: 0.0009
+Top prediction match: YES
+[[36mInfo[39m]: 
+--- Step 4: Layer-wise timing breakdown ---
+
+INT8 QUANTIZED Layer Timing:
+Layer |      Name      |   Time (ms)  | % of Total
+------|----------------|--------------|----------
+    0 | conv1_1        | 4.082000     | 2.76    %
+1     | bn1_1          | 1.231000     | 0.83    %
+2     | conv1_2        | 40.125999    | 27.12   %
+3     | bn1_2          | 1.085000     | 0.73    %
+4     | pool1          | 0.887000     | 0.60    %
+5     | conv2_1        | 8.875000     | 6.00    %
+6     | bn2_1          | 0.528000     | 0.36    %
+7     | conv2_2        | 15.968000    | 10.79   %
+8     | bn2_2          | 0.493000     | 0.33    %
+9     | pool2          | 0.604000     | 0.41    %
+10    | conv3_1        | 3.699000     | 2.50    %
+11    | bn3_1          | 0.100000     | 0.07    %
+12    | conv3_2        | 6.832000     | 4.62    %
+13    | bn3_2          | 0.171000     | 0.12    %
+14    | pool3          | 0.180000     | 0.12    %
+15    | flatten        | 0.014000     | 0.01    %
+16    | fc1            | 63.040001    | 42.60   %
+17    | bn_fc1         | 0.006000     | 0.00    %
+18    | fc2            | 0.042000     | 0.03    %
+19    | softmax        | 0.001000     | 0.00    %
+------|----------------|--------------|----------
+TOTAL |                | 147.964000   | 100.00%
+[[36mInfo[39m]: 
+--- Step 5: Overall performance comparison ---
+FP32 NAIVE time:     692.515991 ms
+INT8 QUANTIZED time: 147.964000 ms
+Speedup:             4.680301x
+INT8 is FASTER by 368.030060%
+
+Detailed probability comparison:
+Class | FP32        | INT8        | Diff
+------|-------------|-------------|-------------
+0     | 95.8405   % | 95.8744   % | -0.0339   %
+1     | 0.0407    % | 0.0456    % | -0.0048   %
+2     | 0.0331    % | 0.0351    % | -0.0020   %
+3     | 0.0896    % | 0.1021    % | -0.0125   %
+4     | 0.0135    % | 0.0156    % | -0.0021   %
+5     | 0.0000    % | 0.0000    % | -0.0000   %
+6     | 0.0040    % | 0.0048    % | -0.0008   %
+7     | 0.5236    % | 0.5529    % | -0.0293   %
+8     | 0.0231    % | 0.0248    % | -0.0016   %
+9     | 3.4318    % | 3.3447    % | 0.0870    %
+
+
+[[36mInfo[39m]: ========================================
+[[36mInfo[39m]:   BATCH INFERENCE TEST
+[[36mInfo[39m]: ========================================
+Loaded ground truth for 100 samples from CSV
+
+Opened binary file data/test_inputs/test_01.bin
+Timer FP32: elapsed=658.375977ms
+9 23 26 25 27 
+-78 12 -67 -63 -12 
+0.0971 0.0567 0.0223 0.0504 -0.0421 
+32 -1 19 -1 4 
+-5 -27 -12 31 -19 
+-1.1061 1.4785 -0.5005 0.4194 -0.4753 
+-8 6 3 10 -12 
+11 26 28 -2 -20 
+0.0908 0.6224 0.6954 0.0807 -1.2306 
+8 12 1 7 0 
+-40 -2 37 16 48 
+-0.0918 -0.0093 0.3951 -0.5980 0.1873 
+4 -13 7 -11 -13 
+-1 -6 -28 -24 12 
+-2.4676 3.1075 -1.7198 -3.3328 -1.3221 
+2 20 2 2 2 
+-6 -1 3 -14 -42 
+-1.1101 0.6282 -1.5258 -1.3629 -1.2867 
+0.0000 0.8605 0.0000 0.0000 0.0000 
+-13 9 -13 -13 -13 
+24 13 9 11 -1 
+-4.3549 6.8388 3.1255 0.6799 2.5805 
+0.0000 0.0190 0.8601 0.3410 0.0000 
+3 4 36 16 3 
+33 -71 -45 36 22 
+6.1525 -1.4988 -1.7599 -0.6923 -2.5728 
+Timer INT8: elapsed=155.707001ms
+  [OK] Sample 1   | True: cel | Pred: cel | Conf: 95.87 % | CosSim: 100.00% | FP32: 658  ms | INT8: 156  ms
+Opened binary file data/test_inputs/test_02.bin
+Timer FP32: elapsed=654.046997ms
+31 34 30 23 24 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+46 43 6 -1 -1 
+-5 -27 -12 31 -19 
+-1 -1 -3 -1 1 
+1 5 -12 8 8 
+11 26 28 -2 -20 
+1 -0 2 -0 -0 
+30 0 22 0 16 
+-40 -2 37 16 48 
+-0 1 -1 1 1 
+3 11 -3 16 14 
+-1 -6 -28 -24 12 
+-1 2 1 -0 1 
+2 2 4 2 10 
+-6 -1 3 -14 -42 
+-2 -0 -0 -1 -1 
+0 0 0 0 0 
+-13 -13 -10 -13 -13 
+24 13 9 11 -1 
+2 5 5 -1 5 
+1 0 1 0 0 
+34 3 55 3 16 
+33 -71 -45 36 22 
+6 -2 -2 -2 -3 
+Timer INT8: elapsed=155.630005ms
+  [OK] Sample 2   | True: cel | Pred: cel | Conf: 98.55 % | CosSim: 100.00% | FP32: 654  ms | INT8: 156  ms
+Opened binary file data/test_inputs/test_03.bin
+Timer FP32: elapsed=655.552002ms
+20 23 20 22 26 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+0 -1 14 -1 -1 
+-5 -27 -12 31 -19 
+-2 -2 -2 -2 -1 
+-12 -12 -12 -12 -9 
+11 26 28 -2 -20 
+-0 0 -0 -1 0 
+0 0 0 0 25 
+-40 -2 37 16 48 
+0 -1 -1 -1 1 
+-3 -9 -13 12 3 
+-1 -6 -28 -24 12 
+-3 4 -1 1 1 
+2 41 2 30 6 
+-6 -1 3 -14 -42 
+-2 3 1 -3 -1 
+0 6 3 0 0 
+-13 127 50 -13 -13 
+24 13 9 11 -1 
+-5 8 5 -1 5 
+0 0 2 0 0 
+3 18 63 3 16 
+33 -71 -45 36 22 
+8 1 -3 -7 -1 
+Timer INT8: elapsed=144.481995ms
+  [OK] Sample 3   | True: cel | Pred: cel | Conf: 97.67 % | CosSim: 100.00% | FP32: 656  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_04.bin
+Timer FP32: elapsed=659.208008ms
+9 7 5 13 19 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+3 -1 21 16 7 
+-5 -27 -12 31 -19 
+-2 -1 -2 -3 1 
+-12 -12 -12 -12 20 
+11 26 28 -2 -20 
+1 -0 1 -0 -0 
+25 0 10 0 5 
+-40 -2 37 16 48 
+-1 -1 1 -0 1 
+-13 -9 14 7 -5 
+-1 -6 -28 -24 12 
+-2 3 -0 0 1 
+2 26 2 18 10 
+-6 -1 3 -14 -42 
+-1 2 0 -2 0 
+0 3 2 0 2 
+-13 59 31 -13 29 
+24 13 9 11 -1 
+-6 8 -0 -3 5 
+0 0 0 0 0 
+3 16 3 3 17 
+33 -71 -45 36 22 
+5 -3 -3 -2 -1 
+Timer INT8: elapsed=147.235001ms
+  [OK] Sample 4   | True: cel | Pred: cel | Conf: 52.53 % | CosSim: 99.99 % | FP32: 659  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_05.bin
+Timer FP32: elapsed=657.862976ms
+22 20 12 8 12 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+-1 -1 0 3 23 
+-5 -27 -12 31 -19 
+-3 -4 -2 -3 1 
+-12 -12 -12 -11 27 
+11 26 28 -2 -20 
+-1 -1 1 -0 0 
+0 0 6 0 28 
+-40 -2 37 16 48 
+-1 1 -1 0 1 
+-13 27 -13 58 2 
+-1 -6 -28 -24 12 
+-3 4 -1 2 0 
+2 32 2 58 2 
+-6 -1 3 -14 -42 
+-1 -0 -0 -2 -1 
+0 0 0 0 0 
+-13 -13 -13 -13 -13 
+24 13 9 11 -1 
+-11 5 7 -1 3 
+0 0 2 0 0 
+3 3 81 3 3 
+33 -71 -45 36 22 
+8 -2 -3 -3 -3 
+Timer INT8: elapsed=145.682999ms
+  [OK] Sample 5   | True: cel | Pred: cel | Conf: 98.68 % | CosSim: 100.00% | FP32: 658  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_06.bin
+Timer FP32: elapsed=655.786011ms
+15 12 2 -5 -9 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+-1 -1 -1 -1 18 
+-5 -27 -12 31 -19 
+-2 -3 -2 -3 1 
+-12 -12 -12 -12 24 
+11 26 28 -2 -20 
+-2 -1 0 -1 1 
+0 0 0 0 55 
+-40 -2 37 16 48 
+1 1 -0 -2 1 
+20 23 -3 0 4 
+-1 -6 -28 -24 12 
+-3 2 -1 -1 -0 
+2 2 2 2 2 
+-6 -1 3 -14 -42 
+-1 0 -1 -2 1 
+1 0 0 0 1 
+2 -8 -13 -13 15 
+24 13 9 11 -1 
+3 3 4 -2 1 
+1 0 1 0 0 
+53 3 52 3 3 
+33 -71 -45 36 22 
+10 -2 -3 -3 -5 
+Timer INT8: elapsed=150.466995ms
+  [OK] Sample 6   | True: cel | Pred: cel | Conf: 99.98 % | CosSim: 100.00% | FP32: 656  ms | INT8: 150  ms
+Opened binary file data/test_inputs/test_07.bin
+Timer FP32: elapsed=670.094971ms
+3 7 13 9 8 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+22 0 10 3 25 
+-5 -27 -12 31 -19 
+-1 -1 -2 -1 2 
+-1 -12 -12 -12 22 
+11 26 28 -2 -20 
+1 0 1 0 -0 
+38 3 18 11 6 
+-40 -2 37 16 48 
+-1 -1 -1 -2 2 
+5 -9 -13 7 25 
+-1 -6 -28 -24 12 
+-1 1 -1 -1 1 
+2 2 2 2 7 
+-6 -1 3 -14 -42 
+-2 -0 -1 -0 0 
+0 0 0 0 1 
+-13 -13 -13 -8 2 
+24 13 9 11 -1 
+-3 8 1 -0 1 
+0 0 0 0 0 
+3 12 12 8 3 
+33 -71 -45 36 22 
+5 -0 -4 -2 -2 
+Timer INT8: elapsed=154.832001ms
+  [OK] Sample 7   | True: cel | Pred: cel | Conf: 79.58 % | CosSim: 99.90 % | FP32: 670  ms | INT8: 155  ms
+Opened binary file data/test_inputs/test_08.bin
+Timer FP32: elapsed=657.369019ms
+18 11 -6 -1 2 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+48 22 -1 8 56 
+-5 -27 -12 31 -19 
+-3 -3 -3 1 1 
+7 -12 -12 16 34 
+11 26 28 -2 -20 
+-1 -1 2 -0 1 
+0 0 36 0 45 
+-40 -2 37 16 48 
+0 2 -2 0 -0 
+-2 27 -4 18 -4 
+-1 -6 -28 -24 12 
+-1 1 -0 -1 2 
+2 2 2 2 24 
+-6 -1 3 -14 -42 
+-1 -0 -0 -1 0 
+0 0 1 0 1 
+-7 -13 9 -13 12 
+24 13 9 11 -1 
+-4 4 5 -5 4 
+0 0 1 0 0 
+3 3 56 3 4 
+33 -71 -45 36 22 
+8 -4 -4 -4 -0 
+Timer INT8: elapsed=155.195999ms
+  [OK] Sample 8   | True: cel | Pred: cel | Conf: 96.68 % | CosSim: 100.00% | FP32: 657  ms | INT8: 155  ms
+Opened binary file data/test_inputs/test_09.bin
+Timer FP32: elapsed=668.489014ms
+-6 -10 -19 -17 -14 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+47 27 29 47 7 
+-5 -27 -12 31 -19 
+-3 -2 -3 -4 2 
+1 -12 -12 -7 31 
+11 26 28 -2 -20 
+0 -1 2 -0 1 
+6 0 26 0 38 
+-40 -2 37 16 48 
+-0 1 -2 1 1 
+-13 30 -13 51 17 
+-1 -6 -28 -24 12 
+-0 1 -1 1 3 
+5 2 2 32 49 
+-6 -1 3 -14 -42 
+-2 -1 -1 -2 0 
+0 0 0 0 1 
+-8 -13 -13 -13 10 
+24 13 9 11 -1 
+-1 5 -0 -5 3 
+0 0 0 0 0 
+3 3 3 3 3 
+33 -71 -45 36 22 
+4 -2 -1 1 -2 
+Timer INT8: elapsed=146.794006ms
+  [OK] Sample 9   | True: cel | Pred: cel | Conf: 90.28 % | CosSim: 100.00% | FP32: 668  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_10.bin
+Timer FP32: elapsed=658.544006ms
+3 16 21 19 10 
+-78 12 -67 -63 -12 
+0 0 0 0 0 
+24 -1 18 -1 32 
+-5 -27 -12 31 -19 
+-2 -1 -2 -1 1 
+-2 -12 -12 -5 9 
+11 26 28 -2 -20 
+1 0 1 -0 -1 
+28 7 13 0 0 
+-40 -2 37 16 48 
+0 -1 1 -1 1 
+2 -13 13 0 -13 
+-1 -6 -28 -24 12 
+-2 1 -0 0 -0 
+2 2 2 15 2 
+-6 -1 3 -14 -42 
+-1 0 -0 -2 0 
+0 1 1 0 1 
+-13 4 8 -13 4 
+24 13 9 11 -1 
+-5 6 3 -1 6 
+0 0 1 0 1 
+3 3 30 3 29 
+33 -71 -45 36 22 
+6 1 -3 -4 -2 
+Timer INT8: elapsed=145.057007ms
+  [OK] Sample 10  | True: cel | Pred: cel | Conf: 87.88 % | CosSim: 100.00% | FP32: 659  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_11.bin
+Timer FP32: elapsed=667.768005ms
+-9 -17 -24 -37 -35 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+38 29 14 22 26 
+-5 -27 -12 31 -19 
+-3 -1 -1 -0 1 
+-12 -12 -1 15 6 
+11 26 28 -2 -20 
+-0 -0 0 0 -0 
+0 0 0 14 15 
+-40 -2 37 16 48 
+-0 -1 -1 -1 3 
+-9 -13 -9 -8 28 
+-1 -6 -28 -24 12 
+-1 3 0 -0 0 
+2 25 2 2 2 
+-6 -1 3 -14 -42 
+0 -1 0 1 1 
+2 0 1 2 1 
+29 -10 5 31 20 
+24 13 9 11 -1 
+-4 13 -5 5 5 
+0 2 0 2 0 
+3 72 3 66 15 
+33 -71 -45 36 22 
+-5 8 -1 -4 0 
+Timer INT8: elapsed=147.132996ms
+  [OK] Sample 11  | True: cla | Pred: cla | Conf: 99.74 % | CosSim: 100.00% | FP32: 668  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_12.bin
+Timer FP32: elapsed=660.460999ms
+31 24 18 18 18 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+67 42 10 12 12 
+-5 -27 -12 31 -19 
+-2 -1 -3 1 2 
+20 0 -12 16 21 
+11 26 28 -2 -20 
+0 -0 2 -0 -0 
+20 0 37 1 8 
+-40 -2 37 16 48 
+-1 0 -1 -0 1 
+-13 -9 -13 9 -2 
+-1 -6 -28 -24 12 
+-0 1 -1 0 1 
+9 2 2 12 15 
+-6 -1 3 -14 -42 
+-2 -1 -1 -2 0 
+0 0 0 0 1 
+-13 -13 -13 -13 7 
+24 13 9 11 -1 
+-4 13 -3 4 2 
+0 2 0 1 0 
+3 78 3 52 3 
+33 -71 -45 36 22 
+-3 6 -1 -4 -3 
+Timer INT8: elapsed=146.014999ms
+  [OK] Sample 12  | True: cla | Pred: cla | Conf: 93.95 % | CosSim: 100.00% | FP32: 660  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_13.bin
+Timer FP32: elapsed=660.046997ms
+45 43 41 44 41 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+-1 -1 -1 -1 -1 
+-5 -27 -12 31 -19 
+-1 1 -1 -0 -3 
+1 6 -12 2 -12 
+11 26 28 -2 -20 
+-0 0 -0 0 -1 
+1 2 0 11 0 
+-40 -2 37 16 48 
+-1 2 -1 -0 2 
+-13 26 -13 0 1 
+-1 -6 -28 -24 12 
+0 -1 0 0 0 
+14 2 3 12 2 
+-6 -1 3 -14 -42 
+-0 -1 -1 1 -0 
+0 1 1 2 1 
+-2 9 22 26 8 
+24 13 9 11 -1 
+-6 14 3 4 7 
+0 2 1 1 1 
+3 86 30 54 32 
+33 -71 -45 36 22 
+-4 5 3 -7 -3 
+Timer INT8: elapsed=154.619003ms
+  [OK] Sample 13  | True: cla | Pred: cla | Conf: 85.07 % | CosSim: 99.98 % | FP32: 660  ms | INT8: 155  ms
+Opened binary file data/test_inputs/test_14.bin
+Timer FP32: elapsed=652.080017ms
+7 2 5 2 3 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+57 -1 44 12 21 
+-5 -27 -12 31 -19 
+-2 2 0 -0 -0 
+-12 19 16 9 -12 
+11 26 28 -2 -20 
+-0 0 1 -0 -1 
+0 6 0 0 0 
+-40 -2 37 16 48 
+-2 0 3 -1 2 
+-13 12 49 38 24 
+-1 -6 -28 -24 12 
+-2 4 1 2 0 
+2 36 6 54 2 
+-6 -1 3 -14 -42 
+-2 0 -1 -4 -2 
+0 1 0 0 0 
+-13 16 -13 -13 -13 
+24 13 9 11 -1 
+-7 18 1 -2 2 
+0 3 0 0 0 
+3 127 13 3 3 
+33 -71 -45 36 22 
+-5 6 -0 -4 -0 
+Timer INT8: elapsed=150.479996ms
+  [OK] Sample 14  | True: cla | Pred: cla | Conf: 81.45 % | CosSim: 100.00% | FP32: 652  ms | INT8: 150  ms
+Opened binary file data/test_inputs/test_15.bin
+Timer FP32: elapsed=652.419983ms
+25 20 13 14 16 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+32 2 25 13 6 
+-5 -27 -12 31 -19 
+-3 0 -1 -1 0 
+-12 -11 -4 -12 -4 
+11 26 28 -2 -20 
+-1 -0 0 -0 0 
+0 0 0 0 20 
+-40 -2 37 16 48 
+-1 1 -0 -0 1 
+-10 -5 -6 4 -5 
+-1 -6 -28 -24 12 
+-1 3 0 -1 1 
+2 11 2 2 16 
+-6 -1 3 -14 -42 
+-0 0 -0 -0 1 
+0 0 0 0 1 
+-10 -6 -9 -13 17 
+24 13 9 11 -1 
+-5 10 -0 5 3 
+0 1 0 2 0 
+3 37 3 66 3 
+33 -71 -45 36 22 
+-4 4 0 -3 -3 
+Timer INT8: elapsed=144.123001ms
+  [OK] Sample 15  | True: cla | Pred: cla | Conf: 93.86 % | CosSim: 100.00% | FP32: 652  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_16.bin
+Timer FP32: elapsed=714.184021ms
+17 17 14 14 15 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+-1 -1 -1 -1 22 
+-5 -27 -12 31 -19 
+-2 -1 -3 -4 2 
+-12 0 -12 -12 29 
+11 26 28 -2 -20 
+-0 -1 1 1 1 
+2 0 4 39 50 
+-40 -2 37 16 48 
+-1 1 -0 -2 1 
+-13 4 17 -10 2 
+-1 -6 -28 -24 12 
+-0 4 -1 -1 1 
+4 42 2 2 15 
+-6 -1 3 -14 -42 
+-1 0 -0 -1 -1 
+0 1 1 0 0 
+-13 21 2 -13 -13 
+24 13 9 11 -1 
+-6 12 2 -1 7 
+0 2 1 0 1 
+3 61 26 3 41 
+33 -71 -45 36 22 
+-3 4 2 -5 -1 
+Timer INT8: elapsed=146.498001ms
+  [OK] Sample 16  | True: cla | Pred: cla | Conf: 85.02 % | CosSim: 100.00% | FP32: 714  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_17.bin
+Timer FP32: elapsed=679.023010ms
+-4 8 6 -3 5 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+32 -1 53 46 -1 
+-5 -27 -12 31 -19 
+-3 1 -0 -2 -1 
+-12 -4 1 -7 -12 
+11 26 28 -2 -20 
+-1 1 -0 -0 -1 
+0 11 0 0 0 
+-40 -2 37 16 48 
+0 -1 -1 -1 1 
+9 -13 -13 -13 -10 
+-1 -6 -28 -24 12 
+-2 2 -1 -1 -0 
+2 6 2 2 2 
+-6 -1 3 -14 -42 
+-1 -0 -1 -1 -1 
+0 1 0 0 0 
+-13 5 -3 -13 -13 
+24 13 9 11 -1 
+1 7 3 5 3 
+1 0 1 2 0 
+24 9 31 68 3 
+33 -71 -45 36 22 
+-4 2 -2 -1 -2 
+Timer INT8: elapsed=147.291000ms
+  [OK] Sample 17  | True: cla | Pred: cla | Conf: 47.71 % | CosSim: 99.83 % | FP32: 679  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_18.bin
+Timer FP32: elapsed=670.461975ms
+12 6 4 9 14 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+23 16 12 10 -1 
+-5 -27 -12 31 -19 
+-3 4 -2 -3 2 
+-12 51 2 -12 32 
+11 26 28 -2 -20 
+-1 -0 2 -1 -0 
+0 0 28 0 5 
+-40 -2 37 16 48 
+0 0 -1 -0 1 
+18 2 -11 14 11 
+-1 -6 -28 -24 12 
+-1 2 -0 -0 -0 
+2 2 2 6 2 
+-6 -1 3 -14 -42 
+-1 -0 -1 -1 -0 
+1 0 0 0 0 
+23 -10 -13 -12 -13 
+24 13 9 11 -1 
+-4 6 1 3 9 
+0 0 0 1 2 
+3 3 9 39 60 
+33 -71 -45 36 22 
+-3 6 -3 -2 -1 
+Timer INT8: elapsed=152.302994ms
+  [OK] Sample 18  | True: cla | Pred: cla | Conf: 96.97 % | CosSim: 100.00% | FP32: 670  ms | INT8: 152  ms
+Opened binary file data/test_inputs/test_19.bin
+Timer FP32: elapsed=652.465027ms
+-14 -4 -4 -11 -7 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+-1 -1 -1 -1 10 
+-5 -27 -12 31 -19 
+-1 -2 -0 -1 -0 
+-10 -12 1 -11 4 
+11 26 28 -2 -20 
+-1 0 0 0 0 
+0 0 0 15 21 
+-40 -2 37 16 48 
+1 1 1 -2 0 
+25 -7 9 -13 -13 
+-1 -6 -28 -24 12 
+-0 4 -1 -3 -0 
+4 38 2 2 2 
+-6 -1 3 -14 -42 
+1 -0 -1 2 -0 
+3 0 0 3 0 
+74 -13 -13 60 -9 
+24 13 9 11 -1 
+-4 20 -4 8 5 
+0 4 0 2 0 
+3 127 3 94 15 
+33 -71 -45 36 22 
+-6 10 2 -6 -3 
+Timer INT8: elapsed=146.951996ms
+  [OK] Sample 19  | True: cla | Pred: cla | Conf: 99.83 % | CosSim: 100.00% | FP32: 652  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_20.bin
+Timer FP32: elapsed=651.931030ms
+22 24 17 15 14 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+29 6 40 32 -1 
+-5 -27 -12 31 -19 
+-3 0 -2 -3 -0 
+-12 -9 -12 37 -7 
+11 26 28 -2 -20 
+0 0 1 -0 -1 
+13 6 12 0 3 
+-40 -2 37 16 48 
+-0 0 1 -1 2 
+-13 -11 9 -13 18 
+-1 -6 -28 -24 12 
+-0 1 1 -0 2 
+7 2 20 7 28 
+-6 -1 3 -14 -42 
+-1 -1 0 0 -1 
+0 0 3 1 0 
+-13 -13 51 10 -13 
+24 13 9 11 -1 
+-7 20 0 2 4 
+0 4 0 1 0 
+3 127 3 28 5 
+33 -71 -45 36 22 
+-8 8 3 -7 0 
+Timer INT8: elapsed=151.867996ms
+  [OK] Sample 20  | True: cla | Pred: cla | Conf: 98.73 % | CosSim: 100.00% | FP32: 652  ms | INT8: 152  ms
+Opened binary file data/test_inputs/test_21.bin
+Timer FP32: elapsed=660.442017ms
+25 17 1 1 2 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+86 57 8 24 19 
+-5 -27 -12 31 -19 
+-3 2 -1 3 -1 
+-12 10 -12 42 -12 
+11 26 28 -2 -20 
+-0 -0 2 -0 -1 
+0 0 28 0 0 
+-40 -2 37 16 48 
+-1 -1 -0 -1 2 
+-12 4 -3 18 11 
+-1 -6 -28 -24 12 
+-1 3 -1 -0 -0 
+2 14 2 6 2 
+-6 -1 3 -14 -42 
+-1 -0 -1 -1 0 
+0 1 0 0 1 
+-5 1 -13 -13 18 
+24 13 9 11 -1 
+-3 3 -2 -2 3 
+0 0 0 0 0 
+3 3 3 3 3 
+33 -71 -45 36 22 
+-3 -1 -1 2 0 
+Timer INT8: elapsed=144.628998ms
+  [XX] Sample 21  | True: flu | Pred: gac | Conf: 44.21 % | CosSim: 99.98 % | FP32: 660  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_22.bin
+Timer FP32: elapsed=657.481018ms
+8 11 16 11 4 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+21 -1 10 2 -1 
+-5 -27 -12 31 -19 
+-1 0 -1 -0 -2 
+-12 -8 -6 0 -12 
+11 26 28 -2 -20 
+0 0 -0 0 -0 
+7 3 0 15 9 
+-40 -2 37 16 48 
+-1 -0 -2 -1 2 
+-9 -13 5 -12 32 
+-1 -6 -28 -24 12 
+-3 4 -0 2 -0 
+2 40 2 50 2 
+-6 -1 3 -14 -42 
+-2 -0 0 -2 -2 
+0 1 1 0 0 
+-13 7 13 -13 -13 
+24 13 9 11 -1 
+-5 14 4 -2 0 
+0 2 1 0 0 
+3 82 46 3 3 
+33 -71 -45 36 22 
+-2 0 7 -5 -3 
+Timer INT8: elapsed=150.643997ms
+  [OK] Sample 22  | True: flu | Pred: flu | Conf: 99.03 % | CosSim: 100.00% | FP32: 657  ms | INT8: 151  ms
+Opened binary file data/test_inputs/test_23.bin
+Timer FP32: elapsed=728.231995ms
+-7 3 4 -2 -10 
+-78 12 -67 -63 -12 
+0 0 0 0 0 
+44 15 31 58 36 
+-5 -27 -12 31 -19 
+-4 -0 -1 -3 3 
+-12 -12 -12 10 39 
+11 26 28 -2 -20 
+0 -0 2 1 0 
+6 0 41 39 22 
+-40 -2 37 16 48 
+-1 1 -0 -2 1 
+-10 7 -12 0 -2 
+-1 -6 -28 -24 12 
+-1 -1 0 0 2 
+2 2 2 15 33 
+-6 -1 3 -14 -42 
+-2 -0 -1 -2 -0 
+0 0 0 0 1 
+-13 -13 -13 -13 0 
+24 13 9 11 -1 
+-4 17 1 -1 1 
+0 3 0 0 0 
+3 112 14 3 3 
+33 -71 -45 36 22 
+-6 1 6 -1 0 
+Timer INT8: elapsed=146.445007ms
+  [OK] Sample 23  | True: flu | Pred: flu | Conf: 97.57 % | CosSim: 100.00% | FP32: 728  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_24.bin
+Timer FP32: elapsed=655.453979ms
+18 8 -26 -29 -30 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+-1 21 -1 -1 86 
+-5 -27 -12 31 -19 
+-3 1 -1 0 2 
+-12 16 5 4 24 
+11 26 28 -2 -20 
+1 1 2 -0 -1 
+44 22 38 0 0 
+-40 -2 37 16 48 
+-2 1 3 0 1 
+-13 -5 57 10 -5 
+-1 -6 -28 -24 12 
+-0 3 0 0 0 
+2 10 2 18 2 
+-6 -1 3 -14 -42 
+0 -0 -0 -0 1 
+1 0 0 0 2 
+22 -5 -2 -6 32 
+24 13 9 11 -1 
+-1 6 6 -1 2 
+0 0 2 0 0 
+7 3 66 3 3 
+33 -71 -45 36 22 
+-1 -2 4 -3 -2 
+Timer INT8: elapsed=147.216995ms
+  [OK] Sample 24  | True: flu | Pred: flu | Conf: 91.96 % | CosSim: 100.00% | FP32: 655  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_25.bin
+Timer FP32: elapsed=654.846985ms
+23 28 27 21 13 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+40 -1 9 -1 19 
+-5 -27 -12 31 -19 
+-2 1 -2 -1 2 
+-12 7 3 3 29 
+11 26 28 -2 -20 
+-0 -0 1 0 -0 
+0 0 18 14 5 
+-40 -2 37 16 48 
+-2 0 0 -1 -0 
+-2 -10 -4 -11 -13 
+-1 -6 -28 -24 12 
+-0 2 1 2 1 
+9 9 10 48 8 
+-6 -1 3 -14 -42 
+-1 -0 -0 -1 -1 
+0 0 1 2 1 
+-9 -13 5 34 4 
+24 13 9 11 -1 
+-3 14 3 -0 2 
+0 2 1 0 0 
+3 78 39 3 3 
+33 -71 -45 36 22 
+-2 -1 4 -3 -0 
+Timer INT8: elapsed=153.600006ms
+  [OK] Sample 25  | True: flu | Pred: flu | Conf: 96.14 % | CosSim: 100.00% | FP32: 655  ms | INT8: 154  ms
+Opened binary file data/test_inputs/test_26.bin
+Timer FP32: elapsed=653.398987ms
+32 25 24 16 18 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+44 27 5 -1 -1 
+-5 -27 -12 31 -19 
+-1 1 -0 -0 0 
+-12 5 13 5 -2 
+11 26 28 -2 -20 
+-1 -0 0 -1 -0 
+0 0 0 0 11 
+-40 -2 37 16 48 
+0 1 -1 1 1 
+3 -2 -10 22 -11 
+-1 -6 -28 -24 12 
+-2 4 -1 -2 -1 
+2 32 2 2 2 
+-6 -1 3 -14 -42 
+-1 1 -1 -1 -0 
+0 1 0 0 1 
+-13 9 -13 -13 1 
+24 13 9 11 -1 
+-2 3 -1 -0 4 
+0 0 0 0 0 
+3 3 3 3 3 
+33 -71 -45 36 22 
+-5 -1 4 0 -1 
+Timer INT8: elapsed=154.576996ms
+  [OK] Sample 26  | True: flu | Pred: flu | Conf: 85.18 % | CosSim: 99.99 % | FP32: 653  ms | INT8: 155  ms
+Opened binary file data/test_inputs/test_27.bin
+Timer FP32: elapsed=658.143005ms
+17 8 -8 4 -1 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+81 39 36 33 6 
+-5 -27 -12 31 -19 
+-3 0 -1 0 1 
+-2 -8 -7 12 16 
+11 26 28 -2 -20 
+-1 -0 1 0 0 
+0 0 13 26 25 
+-40 -2 37 16 48 
+-1 1 -0 -2 2 
+-13 3 -12 -13 -2 
+-1 -6 -28 -24 12 
+-1 2 0 0 1 
+2 2 3 18 2 
+-6 -1 3 -14 -42 
+-1 0 -0 -2 -1 
+0 0 0 0 0 
+-13 -1 -7 -13 -11 
+24 13 9 11 -1 
+-3 8 4 -2 4 
+0 0 1 0 0 
+3 11 41 3 3 
+33 -71 -45 36 22 
+-4 1 2 -4 -1 
+Timer INT8: elapsed=147.143005ms
+  [OK] Sample 27  | True: flu | Pred: flu | Conf: 56.86 % | CosSim: 99.99 % | FP32: 658  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_28.bin
+Timer FP32: elapsed=672.724976ms
+1 3 8 5 1 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+54 2 45 38 -1 
+-5 -27 -12 31 -19 
+-3 -1 -2 -3 2 
+-12 -12 -12 19 29 
+11 26 28 -2 -20 
+1 -0 2 -1 -0 
+30 0 26 0 12 
+-40 -2 37 16 48 
+-1 1 0 1 1 
+-13 2 -3 23 -13 
+-1 -6 -28 -24 12 
+-1 3 0 2 1 
+2 13 2 49 16 
+-6 -1 3 -14 -42 
+-1 0 0 -1 -1 
+0 0 1 0 0 
+-13 -8 10 -13 -13 
+24 13 9 11 -1 
+-4 8 3 -2 5 
+0 1 1 0 0 
+3 22 38 3 7 
+33 -71 -45 36 22 
+-4 0 3 -4 3 
+Timer INT8: elapsed=145.977997ms
+  [OK] Sample 28  | True: flu | Pred: flu | Conf: 39.24 % | CosSim: 99.89 % | FP32: 673  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_29.bin
+Timer FP32: elapsed=659.632019ms
+7 5 1 -1 0 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+29 19 17 18 12 
+-5 -27 -12 31 -19 
+-2 0 -0 -0 0 
+9 -12 5 13 -5 
+11 26 28 -2 -20 
+-1 -0 1 -1 -0 
+0 0 0 0 10 
+-40 -2 37 16 48 
+1 -0 -0 0 2 
+9 -13 8 5 11 
+-1 -6 -28 -24 12 
+1 4 1 -2 1 
+28 31 4 2 20 
+-6 -1 3 -14 -42 
+-1 -0 -0 -1 -1 
+0 0 0 0 0 
+-13 -13 -13 -13 -13 
+24 13 9 11 -1 
+-8 12 3 -6 3 
+0 2 1 0 0 
+3 62 35 3 3 
+33 -71 -45 36 22 
+-2 0 5 -4 0 
+Timer INT8: elapsed=148.608994ms
+  [OK] Sample 29  | True: flu | Pred: flu | Conf: 79.19 % | CosSim: 99.94 % | FP32: 660  ms | INT8: 149  ms
+Opened binary file data/test_inputs/test_30.bin
+Timer FP32: elapsed=661.656006ms
+-1 -7 -22 -17 -11 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+-1 -1 -1 -1 10 
+-5 -27 -12 31 -19 
+-1 0 -1 0 -2 
+0 -12 -9 9 -12 
+11 26 28 -2 -20 
+-0 1 -0 0 -0 
+0 10 0 9 4 
+-40 -2 37 16 48 
+-0 0 -0 -1 1 
+-5 -13 -2 -12 -13 
+-1 -6 -28 -24 12 
+-0 3 -0 -1 -0 
+5 18 2 2 2 
+-6 -1 3 -14 -42 
+-0 -1 -0 1 0 
+1 0 0 3 1 
+13 -13 -13 54 9 
+24 13 9 11 -1 
+-2 10 1 -5 3 
+0 1 0 0 0 
+3 44 10 3 3 
+33 -71 -45 36 22 
+-2 -4 5 -4 -0 
+Timer INT8: elapsed=144.632004ms
+  [OK] Sample 30  | True: flu | Pred: flu | Conf: 98.49 % | CosSim: 100.00% | FP32: 662  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_31.bin
+Timer FP32: elapsed=672.857971ms
+-10 -14 -13 -10 -8 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+-1 -1 -1 -1 14 
+-5 -27 -12 31 -19 
+-1 -2 -1 -2 -2 
+-6 -12 -6 -12 -12 
+11 26 28 -2 -20 
+-1 -1 1 -0 1 
+0 0 5 0 38 
+-40 -2 37 16 48 
+0 -1 -1 -2 1 
+-3 -13 -11 -13 -7 
+-1 -6 -28 -24 12 
+-3 5 -1 1 -1 
+2 47 2 30 2 
+-6 -1 3 -14 -42 
+0 -1 -1 -1 -1 
+2 0 0 0 0 
+27 -13 -13 -13 -13 
+24 13 9 11 -1 
+8 2 -5 -1 3 
+3 0 0 0 0 
+106 3 3 3 3 
+33 -71 -45 36 22 
+-3 -7 -2 10 2 
+Timer INT8: elapsed=154.003006ms
+  [OK] Sample 31  | True: gac | Pred: gac | Conf: 99.93 % | CosSim: 100.00% | FP32: 673  ms | INT8: 154  ms
+Opened binary file data/test_inputs/test_32.bin
+Timer FP32: elapsed=652.565979ms
+3 -7 -19 -19 -14 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+9 -1 34 29 27 
+-5 -27 -12 31 -19 
+-3 -1 -2 -2 2 
+-12 -12 -12 20 18 
+11 26 28 -2 -20 
+0 1 2 -1 -1 
+16 15 27 0 0 
+-40 -2 37 16 48 
+-0 -2 -2 -2 0 
+-13 -13 28 -13 0 
+-1 -6 -28 -24 12 
+-2 4 -0 0 -1 
+2 30 2 15 2 
+-6 -1 3 -14 -42 
+-1 -0 -0 -1 0 
+0 0 0 0 1 
+-13 -13 -9 -13 6 
+24 13 9 11 -1 
+5 3 -4 -2 5 
+2 0 0 0 0 
+75 3 3 3 8 
+33 -71 -45 36 22 
+-4 -4 -4 6 1 
+Timer INT8: elapsed=158.427002ms
+  [OK] Sample 32  | True: gac | Pred: gac | Conf: 92.96 % | CosSim: 100.00% | FP32: 653  ms | INT8: 158  ms
+Opened binary file data/test_inputs/test_33.bin
+Timer FP32: elapsed=661.205017ms
+12 3 5 4 0 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+87 41 56 55 -1 
+-5 -27 -12 31 -19 
+-5 0 -3 -1 2 
+-12 11 -12 62 29 
+11 26 28 -2 -20 
+0 0 2 0 -0 
+6 4 38 9 9 
+-40 -2 37 16 48 
+-1 1 -1 -0 1 
+-10 11 24 0 4 
+-1 -6 -28 -24 12 
+-1 3 1 -1 -0 
+2 20 7 2 2 
+-6 -1 3 -14 -42 
+-1 -1 -1 -1 -1 
+0 0 1 0 0 
+-13 -13 12 -13 -13 
+24 13 9 11 -1 
+-0 1 -4 -1 2 
+0 0 0 0 0 
+15 3 3 3 3 
+33 -71 -45 36 22 
+-0 -3 -5 4 0 
+Timer INT8: elapsed=145.106003ms
+  [OK] Sample 33  | True: gac | Pred: gac | Conf: 73.29 % | CosSim: 100.00% | FP32: 661  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_34.bin
+Timer FP32: elapsed=657.239014ms
+8 -1 -34 -33 -34 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+-1 8 -1 -1 39 
+-5 -27 -12 31 -19 
+-3 -3 -2 -3 0 
+-12 -12 -12 -12 5 
+11 26 28 -2 -20 
+-3 -2 1 -1 2 
+0 0 12 0 71 
+-40 -2 37 16 48 
+-0 2 -3 -0 1 
+-8 20 -13 -7 -13 
+-1 -6 -28 -24 12 
+-3 3 -2 -1 1 
+2 12 2 2 9 
+-6 -1 3 -14 -42 
+-3 -0 -1 -2 -0 
+0 0 0 0 0 
+-13 -12 -13 -13 -13 
+24 13 9 11 -1 
+0 2 -7 -1 3 
+0 0 0 0 0 
+18 3 3 3 3 
+33 -71 -45 36 22 
+-5 -5 -3 10 -0 
+Timer INT8: elapsed=150.089996ms
+  [OK] Sample 34  | True: gac | Pred: gac | Conf: 99.99 % | CosSim: 100.00% | FP32: 657  ms | INT8: 150  ms
+Opened binary file data/test_inputs/test_35.bin
+Timer FP32: elapsed=689.768005ms
+28 20 0 3 3 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+22 13 14 18 11 
+-5 -27 -12 31 -19 
+-2 2 -1 -1 2 
+-12 14 -12 -5 24 
+11 26 28 -2 -20 
+-1 -0 1 -0 -0 
+0 0 15 0 6 
+-40 -2 37 16 48 
+-1 2 0 -1 1 
+-13 16 5 -13 12 
+-1 -6 -28 -24 12 
+-0 0 1 -0 1 
+3 2 16 7 12 
+-6 -1 3 -14 -42 
+-1 -1 -0 -1 -0 
+0 0 1 1 0 
+-13 -3 18 0 -12 
+24 13 9 11 -1 
+1 4 -0 5 0 
+1 0 0 2 0 
+22 3 3 60 3 
+33 -71 -45 36 22 
+-2 -3 -4 5 -2 
+Timer INT8: elapsed=146.746002ms
+  [OK] Sample 35  | True: gac | Pred: gac | Conf: 96.00 % | CosSim: 100.00% | FP32: 690  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_36.bin
+Timer FP32: elapsed=656.229004ms
+-3 5 11 8 8 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+18 -1 40 35 4 
+-5 -27 -12 31 -19 
+-2 1 -0 -2 -1 
+-12 -3 0 -12 -12 
+11 26 28 -2 -20 
+-1 -0 0 -1 -0 
+0 0 0 0 9 
+-40 -2 37 16 48 
+-1 -0 -0 0 0 
+-3 0 -13 10 -13 
+-1 -6 -28 -24 12 
+-1 3 -0 1 3 
+2 17 2 24 47 
+-6 -1 3 -14 -42 
+-1 1 -0 -2 -1 
+0 1 0 0 0 
+-13 12 -10 -13 -13 
+24 13 9 11 -1 
+2 8 -6 2 7 
+1 0 0 1 1 
+36 12 3 26 34 
+33 -71 -45 36 22 
+-3 -3 -4 5 0 
+Timer INT8: elapsed=152.503998ms
+  [OK] Sample 36  | True: gac | Pred: gac | Conf: 95.38 % | CosSim: 100.00% | FP32: 656  ms | INT8: 153  ms
+Opened binary file data/test_inputs/test_37.bin
+Timer FP32: elapsed=654.952026ms
+8 1 6 8 0 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+5 13 -1 -1 2 
+-5 -27 -12 31 -19 
+-2 -2 -1 -2 -0 
+-12 -12 -11 -12 2 
+11 26 28 -2 -20 
+-1 -0 0 -0 1 
+0 0 0 0 35 
+-40 -2 37 16 48 
+1 -0 -1 -1 1 
+11 -13 -9 -13 -12 
+-1 -6 -28 -24 12 
+-4 3 -1 1 -4 
+2 17 2 39 2 
+-6 -1 3 -14 -42 
+-2 1 -1 -1 -1 
+0 2 0 0 0 
+-13 38 -13 -13 -13 
+24 13 9 11 -1 
+3 8 -2 0 1 
+1 0 0 0 0 
+48 21 3 12 3 
+33 -71 -45 36 22 
+-1 -3 -3 5 1 
+Timer INT8: elapsed=156.927002ms
+  [OK] Sample 37  | True: gac | Pred: gac | Conf: 94.13 % | CosSim: 100.00% | FP32: 655  ms | INT8: 157  ms
+Opened binary file data/test_inputs/test_38.bin
+Timer FP32: elapsed=652.241028ms
+7 9 2 -2 -3 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+10 -1 -1 -1 61 
+-5 -27 -12 31 -19 
+-2 -3 -3 -1 2 
+-12 -12 -12 -12 34 
+11 26 28 -2 -20 
+-0 -1 1 0 1 
+2 0 17 9 42 
+-40 -2 37 16 48 
+-0 0 -2 -1 0 
+-4 -4 -13 31 15 
+-1 -6 -28 -24 12 
+-2 2 -1 -0 -0 
+2 8 2 2 2 
+-6 -1 3 -14 -42 
+-1 -0 -1 -2 -0 
+0 0 0 0 0 
+-13 -13 -13 -13 -10 
+24 13 9 11 -1 
+5 3 -2 2 -1 
+2 0 0 1 0 
+72 3 3 32 3 
+33 -71 -45 36 22 
+-2 -5 -3 5 -0 
+Timer INT8: elapsed=151.121002ms
+  [OK] Sample 38  | True: gac | Pred: gac | Conf: 77.66 % | CosSim: 99.98 % | FP32: 652  ms | INT8: 151  ms
+Opened binary file data/test_inputs/test_39.bin
+Timer FP32: elapsed=657.177979ms
+11 11 20 25 29 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+59 -1 59 14 -1 
+-5 -27 -12 31 -19 
+-1 3 -1 -2 1 
+-2 31 -12 -8 14 
+11 26 28 -2 -20 
+-1 -1 2 -1 0 
+0 0 27 0 31 
+-40 -2 37 16 48 
+0 1 -2 -0 0 
+-4 4 -13 2 -13 
+-1 -6 -28 -24 12 
+-1 0 -1 1 1 
+2 2 2 35 2 
+-6 -1 3 -14 -42 
+-1 -0 -0 -1 0 
+0 1 0 0 1 
+-13 0 -1 -13 18 
+24 13 9 11 -1 
+0 7 -2 -0 0 
+0 0 0 0 0 
+19 4 3 8 3 
+33 -71 -45 36 22 
+-2 -2 -2 4 -0 
+Timer INT8: elapsed=144.835999ms
+  [OK] Sample 39  | True: gac | Pred: gac | Conf: 90.75 % | CosSim: 100.00% | FP32: 657  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_40.bin
+Timer FP32: elapsed=657.114990ms
+-4 -10 -8 -7 -7 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+10 -1 26 27 1 
+-5 -27 -12 31 -19 
+-3 -0 -0 -3 1 
+-12 -12 10 -3 5 
+11 26 28 -2 -20 
+0 1 1 -1 -1 
+6 17 0 0 0 
+-40 -2 37 16 48 
+0 -2 -0 -1 2 
+-2 -13 33 -13 10 
+-1 -6 -28 -24 12 
+-2 4 1 2 -1 
+2 40 16 50 2 
+-6 -1 3 -14 -42 
+-1 -0 -1 -1 -0 
+0 1 0 0 0 
+-13 6 -13 -13 -13 
+24 13 9 11 -1 
+3 7 -6 2 1 
+1 0 0 1 0 
+52 3 3 29 3 
+33 -71 -45 36 22 
+-5 -2 -2 5 1 
+Timer INT8: elapsed=147.580002ms
+  [OK] Sample 40  | True: gac | Pred: gac | Conf: 95.61 % | CosSim: 100.00% | FP32: 657  ms | INT8: 148  ms
+Opened binary file data/test_inputs/test_41.bin
+Timer FP32: elapsed=666.536987ms
+17 6 -12 -17 -20 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+47 22 16 35 25 
+-5 -27 -12 31 -19 
+-3 -1 -3 -2 3 
+-12 6 -12 42 45 
+11 26 28 -2 -20 
+0 -0 3 1 -0 
+8 0 58 36 11 
+-40 -2 37 16 48 
+-1 1 -1 -0 1 
+-13 11 -9 2 -8 
+-1 -6 -28 -24 12 
+-1 2 0 -1 0 
+2 8 2 2 2 
+-6 -1 3 -14 -42 
+-1 -2 -1 -0 -1 
+0 0 0 0 0 
+-13 -13 -13 -6 -13 
+24 13 9 11 -1 
+-6 8 -0 0 12 
+0 0 0 0 2 
+3 20 3 9 96 
+33 -71 -45 36 22 
+-5 -1 -2 -3 4 
+Timer INT8: elapsed=153.259003ms
+  [OK] Sample 41  | True: gel | Pred: gel | Conf: 83.88 % | CosSim: 100.00% | FP32: 667  ms | INT8: 153  ms
+Opened binary file data/test_inputs/test_42.bin
+Timer FP32: elapsed=657.289001ms
+38 28 8 -4 -2 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+37 35 -1 4 30 
+-5 -27 -12 31 -19 
+-2 2 -1 -1 1 
+-12 21 6 -9 15 
+11 26 28 -2 -20 
+0 0 2 0 -1 
+13 0 23 4 0 
+-40 -2 37 16 48 
+-0 0 1 -1 1 
+1 -3 15 8 -11 
+-1 -6 -28 -24 12 
+-1 2 -0 -0 0 
+2 2 2 2 2 
+-6 -1 3 -14 -42 
+-1 0 -0 -1 -1 
+0 1 0 0 0 
+-13 0 -2 -13 -13 
+24 13 9 11 -1 
+-1 6 2 -6 7 
+0 0 1 0 1 
+6 3 23 3 40 
+33 -71 -45 36 22 
+-1 -2 -1 -1 4 
+Timer INT8: elapsed=152.179001ms
+  [OK] Sample 42  | True: gel | Pred: gel | Conf: 92.45 % | CosSim: 100.00% | FP32: 657  ms | INT8: 152  ms
+Opened binary file data/test_inputs/test_43.bin
+Timer FP32: elapsed=832.026978ms
+24 33 34 25 19 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+44 11 -1 0 15 
+-5 -27 -12 31 -19 
+-3 2 -1 -0 2 
+26 23 -8 11 19 
+11 26 28 -2 -20 
+0 0 2 -0 -1 
+10 5 34 0 0 
+-40 -2 37 16 48 
+-1 2 0 -1 2 
+-13 14 9 -11 14 
+-1 -6 -28 -24 12 
+-1 1 1 0 0 
+2 2 19 19 2 
+-6 -1 3 -14 -42 
+-3 -1 -1 -2 -2 
+0 0 0 0 0 
+-13 -13 -13 -13 -13 
+24 13 9 11 -1 
+1 6 -0 -4 7 
+1 0 0 0 1 
+27 3 3 3 36 
+33 -71 -45 36 22 
+-2 -3 -1 -0 4 
+Timer INT8: elapsed=150.356995ms
+  [OK] Sample 43  | True: gel | Pred: gel | Conf: 82.92 % | CosSim: 99.99 % | FP32: 832  ms | INT8: 150  ms
+Opened binary file data/test_inputs/test_44.bin
+Timer FP32: elapsed=651.810974ms
+26 27 21 21 35 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+49 13 13 0 -1 
+-5 -27 -12 31 -19 
+-1 4 -2 -2 1 
+-2 45 1 -12 10 
+11 26 28 -2 -20 
+-0 0 2 0 -1 
+1 0 27 9 0 
+-40 -2 37 16 48 
+-1 1 -1 -1 1 
+-2 11 -13 0 -6 
+-1 -6 -28 -24 12 
+-0 2 1 1 1 
+10 2 19 32 8 
+-6 -1 3 -14 -42 
+-2 -1 -0 -1 -1 
+0 0 0 0 0 
+-13 -13 -2 -6 -13 
+24 13 9 11 -1 
+-4 9 2 -5 10 
+0 1 0 0 2 
+3 33 17 3 70 
+33 -71 -45 36 22 
+-1 -1 -2 -6 7 
+Timer INT8: elapsed=153.085999ms
+  [OK] Sample 44  | True: gel | Pred: gel | Conf: 97.99 % | CosSim: 100.00% | FP32: 652  ms | INT8: 153  ms
+Opened binary file data/test_inputs/test_45.bin
+Timer FP32: elapsed=652.585022ms
+9 13 15 15 10 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+38 -1 54 45 -1 
+-5 -27 -12 31 -19 
+-3 3 0 -2 -2 
+-12 28 15 -4 -12 
+11 26 28 -2 -20 
+-1 -0 1 -0 -1 
+0 0 7 0 0 
+-40 -2 37 16 48 
+0 2 1 -0 1 
+-4 20 22 -6 -5 
+-1 -6 -28 -24 12 
+-0 1 1 -1 1 
+11 2 6 2 13 
+-6 -1 3 -14 -42 
+-2 -1 -0 -1 -1 
+0 0 0 0 0 
+-13 -1 -13 -13 -13 
+24 13 9 11 -1 
+-0 7 2 -3 4 
+0 0 1 0 0 
+16 9 28 3 3 
+33 -71 -45 36 22 
+-1 -4 -0 -2 5 
+Timer INT8: elapsed=146.541000ms
+  [OK] Sample 45  | True: gel | Pred: gel | Conf: 98.36 % | CosSim: 100.00% | FP32: 653  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_46.bin
+Timer FP32: elapsed=667.395996ms
+27 26 20 19 20 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+34 17 -1 -1 18 
+-5 -27 -12 31 -19 
+-2 -2 -3 0 2 
+-7 -12 -12 5 24 
+11 26 28 -2 -20 
+-0 -0 1 -0 1 
+5 0 8 0 43 
+-40 -2 37 16 48 
+-1 2 -1 1 0 
+2 20 6 33 -5 
+-1 -6 -28 -24 12 
+-1 3 -3 -3 -2 
+2 12 2 2 2 
+-6 -1 3 -14 -42 
+-1 1 -1 -2 -2 
+0 2 0 0 0 
+-13 29 -13 -13 -13 
+24 13 9 11 -1 
+-6 6 0 -4 9 
+0 0 0 0 2 
+3 3 3 3 62 
+33 -71 -45 36 22 
+-2 -1 -3 -3 6 
+Timer INT8: elapsed=154.544998ms
+  [OK] Sample 46  | True: gel | Pred: gel | Conf: 97.29 % | CosSim: 100.00% | FP32: 667  ms | INT8: 155  ms
+Opened binary file data/test_inputs/test_47.bin
+Timer FP32: elapsed=673.737000ms
+20 10 -1 -4 -1 
+-78 12 -67 -63 -12 
+0 0 0 0 0 
+13 7 1 6 51 
+-5 -27 -12 31 -19 
+-2 3 -1 0 -0 
+-12 36 6 8 -12 
+11 26 28 -2 -20 
+0 1 2 0 -2 
+16 8 41 6 0 
+-40 -2 37 16 48 
+-3 -1 1 -2 4 
+-5 -3 9 24 52 
+-1 -6 -28 -24 12 
+-2 5 0 1 -0 
+2 52 2 37 2 
+-6 -1 3 -14 -42 
+-1 -2 -0 -2 -0 
+0 0 0 0 0 
+-13 -13 -13 -13 -13 
+24 13 9 11 -1 
+-3 9 3 -5 8 
+0 1 1 0 1 
+3 31 36 3 46 
+33 -71 -45 36 22 
+-4 -1 -3 -1 5 
+Timer INT8: elapsed=165.376007ms
+  [OK] Sample 47  | True: gel | Pred: gel | Conf: 96.11 % | CosSim: 100.00% | FP32: 674  ms | INT8: 165  ms
+Opened binary file data/test_inputs/test_48.bin
+Timer FP32: elapsed=655.038025ms
+9 1 -8 -16 -24 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+-1 -1 -1 -1 71 
+-5 -27 -12 31 -19 
+-3 -5 -3 -2 1 
+-12 -12 -12 -12 38 
+11 26 28 -2 -20 
+-0 -1 1 0 -0 
+0 0 16 16 18 
+-40 -2 37 16 48 
+-1 -1 -1 -2 2 
+-4 -13 -13 36 1 
+-1 -6 -28 -24 12 
+-4 3 0 0 1 
+2 25 2 16 9 
+-6 -1 3 -14 -42 
+-3 1 -0 -3 -1 
+0 2 1 0 0 
+-13 37 10 -13 -11 
+24 13 9 11 -1 
+-4 12 -8 -2 14 
+0 1 0 0 3 
+3 59 3 3 122 
+33 -71 -45 36 22 
+-3 1 -6 -0 7 
+Timer INT8: elapsed=148.492996ms
+  [OK] Sample 48  | True: gel | Pred: gel | Conf: 94.71 % | CosSim: 100.00% | FP32: 655  ms | INT8: 148  ms
+Opened binary file data/test_inputs/test_49.bin
+Timer FP32: elapsed=654.270020ms
+31 24 17 16 14 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+30 9 5 6 17 
+-5 -27 -12 31 -19 
+-2 0 -2 -2 2 
+-12 -5 -12 -3 22 
+11 26 28 -2 -20 
+-0 -1 2 0 0 
+0 0 29 4 33 
+-40 -2 37 16 48 
+-1 1 -0 1 -0 
+-13 2 8 16 -13 
+-1 -6 -28 -24 12 
+-1 3 -1 -1 1 
+2 17 2 2 13 
+-6 -1 3 -14 -42 
+-2 -0 -0 -1 -1 
+0 0 0 0 0 
+-13 -13 -8 -13 -13 
+24 13 9 11 -1 
+-3 10 2 -5 8 
+0 1 0 0 1 
+3 35 17 3 44 
+33 -71 -45 36 22 
+-1 -1 -2 -2 4 
+Timer INT8: elapsed=146.539001ms
+  [OK] Sample 49  | True: gel | Pred: gel | Conf: 62.13 % | CosSim: 99.89 % | FP32: 654  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_50.bin
+Timer FP32: elapsed=656.033997ms
+29 26 31 37 30 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+62 -1 51 6 -1 
+-5 -27 -12 31 -19 
+-1 3 -0 -0 -0 
+-12 35 8 7 -7 
+11 26 28 -2 -20 
+-1 -0 1 -0 -0 
+0 0 19 0 10 
+-40 -2 37 16 48 
+-0 1 0 -0 1 
+-8 0 4 -6 -10 
+-1 -6 -28 -24 12 
+-0 1 0 0 1 
+6 2 2 8 11 
+-6 -1 3 -14 -42 
+-2 -0 -0 -2 0 
+0 0 0 0 0 
+-13 -13 -13 -13 -2 
+24 13 9 11 -1 
+3 5 2 -5 6 
+1 0 0 0 1 
+51 3 20 3 28 
+33 -71 -45 36 22 
+2 -6 -3 -2 6 
+Timer INT8: elapsed=144.488007ms
+  [OK] Sample 50  | True: gel | Pred: gel | Conf: 97.40 % | CosSim: 100.00% | FP32: 656  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_51.bin
+Timer FP32: elapsed=653.629028ms
+29 21 15 19 22 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+21 12 18 17 16 
+-5 -27 -12 31 -19 
+-2 2 -1 -2 1 
+-12 15 -6 -12 5 
+11 26 28 -2 -20 
+-0 0 1 -0 -1 
+5 0 10 0 0 
+-40 -2 37 16 48 
+-2 -0 -0 -0 1 
+1 27 2 27 -8 
+-1 -6 -28 -24 12 
+-2 3 -1 1 0 
+2 18 2 29 2 
+-6 -1 3 -14 -42 
+-1 0 -0 -2 -1 
+0 1 0 0 0 
+-13 4 -13 -13 -13 
+24 13 9 11 -1 
+0 6 3 -3 5 
+0 0 1 0 0 
+17 3 34 3 9 
+33 -71 -45 36 22 
+-6 -4 -1 1 0 
+Timer INT8: elapsed=148.572998ms
+  [OK] Sample 51  | True: org | Pred: org | Conf: 99.33 % | CosSim: 100.00% | FP32: 654  ms | INT8: 149  ms
+Opened binary file data/test_inputs/test_52.bin
+Timer FP32: elapsed=663.077026ms
+18 15 3 9 11 
+-78 12 -67 -63 -12 
+0 0 0 0 0 
+29 21 1 -1 39 
+-5 -27 -12 31 -19 
+-0 -1 -2 -1 1 
+2 -12 -12 -7 23 
+11 26 28 -2 -20 
+-0 0 1 1 -0 
+0 3 20 44 11 
+-40 -2 37 16 48 
+-1 1 -1 -2 2 
+-5 29 -13 6 10 
+-1 -6 -28 -24 12 
+-1 1 1 0 2 
+2 2 15 17 21 
+-6 -1 3 -14 -42 
+-1 -1 -0 -2 -0 
+0 0 0 0 0 
+-13 -13 -4 -2 -13 
+24 13 9 11 -1 
+-3 4 -1 -6 5 
+0 0 0 0 0 
+3 3 3 3 8 
+33 -71 -45 36 22 
+-5 -4 1 1 3 
+Timer INT8: elapsed=146.380997ms
+  [OK] Sample 52  | True: org | Pred: org | Conf: 87.37 % | CosSim: 100.00% | FP32: 663  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_53.bin
+Timer FP32: elapsed=688.590027ms
+25 26 27 25 20 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+55 21 11 4 23 
+-5 -27 -12 31 -19 
+-2 1 -1 1 0 
+-12 11 2 16 -3 
+11 26 28 -2 -20 
+-1 -0 1 0 -1 
+0 0 12 9 0 
+-40 -2 37 16 48 
+-1 -1 0 -1 2 
+-13 -13 -3 6 36 
+-1 -6 -28 -24 12 
+-2 3 1 0 1 
+2 11 19 21 9 
+-6 -1 3 -14 -42 
+-2 0 -0 -1 -2 
+0 1 1 0 0 
+-13 7 16 -13 -13 
+24 13 9 11 -1 
+-3 4 4 -2 10 
+0 0 1 0 2 
+3 3 41 3 69 
+33 -71 -45 36 22 
+-5 -2 0 -3 -0 
+Timer INT8: elapsed=144.559998ms
+  [OK] Sample 53  | True: org | Pred: org | Conf: 99.92 % | CosSim: 100.00% | FP32: 689  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_54.bin
+Timer FP32: elapsed=656.588013ms
+12 5 -18 -19 -24 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+-1 0 -1 -1 92 
+-5 -27 -12 31 -19 
+-1 1 -2 1 2 
+-11 24 15 18 25 
+11 26 28 -2 -20 
+1 1 2 -0 -2 
+42 14 47 0 0 
+-40 -2 37 16 48 
+-1 1 2 0 2 
+-12 16 33 13 -2 
+-1 -6 -28 -24 12 
+-0 2 1 -0 2 
+6 7 4 2 34 
+-6 -1 3 -14 -42 
+-2 -1 -1 -1 0 
+0 0 0 0 1 
+-9 -13 -4 -13 13 
+24 13 9 11 -1 
+0 2 -1 -6 4 
+0 0 0 0 0 
+17 3 3 3 3 
+33 -71 -45 36 22 
+-6 -5 2 2 2 
+Timer INT8: elapsed=153.065994ms
+  [OK] Sample 54  | True: org | Pred: org | Conf: 99.12 % | CosSim: 100.00% | FP32: 657  ms | INT8: 153  ms
+Opened binary file data/test_inputs/test_55.bin
+Timer FP32: elapsed=668.075989ms
+28 17 7 11 0 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+67 45 -1 0 -1 
+-5 -27 -12 31 -19 
+-3 3 -1 -0 0 
+-2 22 11 19 -2 
+11 26 28 -2 -20 
+-1 0 1 0 -0 
+0 1 12 19 4 
+-40 -2 37 16 48 
+-0 2 0 -2 1 
+-6 29 -4 -8 -12 
+-1 -6 -28 -24 12 
+0 2 1 1 1 
+22 6 5 28 5 
+-6 -1 3 -14 -42 
+-1 -1 -0 -1 -1 
+1 0 0 0 0 
+3 -13 -13 -3 -13 
+24 13 9 11 -1 
+-1 9 -3 -2 6 
+0 1 0 0 1 
+7 26 3 3 24 
+33 -71 -45 36 22 
+-5 -0 -0 -2 3 
+Timer INT8: elapsed=144.414001ms
+  [OK] Sample 55  | True: org | Pred: org | Conf: 86.61 % | CosSim: 100.00% | FP32: 668  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_56.bin
+Timer FP32: elapsed=655.737000ms
+26 15 -2 -9 -5 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+21 17 -1 1 31 
+-5 -27 -12 31 -19 
+-1 2 -2 -1 3 
+-12 32 -5 -11 42 
+11 26 28 -2 -20 
+-0 -0 2 0 -1 
+0 0 29 17 0 
+-40 -2 37 16 48 
+-1 1 -0 -0 2 
+-13 -3 -10 43 13 
+-1 -6 -28 -24 12 
+-1 2 0 0 -0 
+2 8 2 17 2 
+-6 -1 3 -14 -42 
+-2 -2 -1 -2 -1 
+0 0 0 0 0 
+-13 -13 -1 -13 -13 
+24 13 9 11 -1 
+-2 4 2 -5 5 
+0 0 0 0 0 
+3 3 22 3 14 
+33 -71 -45 36 22 
+-7 -3 0 -1 2 
+Timer INT8: elapsed=144.804993ms
+  [OK] Sample 56  | True: org | Pred: org | Conf: 99.52 % | CosSim: 100.00% | FP32: 656  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_57.bin
+Timer FP32: elapsed=661.937012ms
+32 23 8 4 5 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+43 4 39 43 9 
+-5 -27 -12 31 -19 
+-4 2 -2 -3 2 
+-12 10 -12 32 22 
+11 26 28 -2 -20 
+-0 -0 2 -1 -0 
+4 0 44 0 17 
+-40 -2 37 16 48 
+-1 2 1 -1 1 
+-13 13 37 -3 21 
+-1 -6 -28 -24 12 
+1 3 1 0 2 
+24 10 8 11 28 
+-6 -1 3 -14 -42 
+-2 -1 -1 -1 -1 
+0 0 0 0 0 
+-13 -13 -13 -13 -13 
+24 13 9 11 -1 
+-6 5 5 -4 5 
+0 0 2 0 0 
+3 3 60 3 14 
+33 -71 -45 36 22 
+-4 -1 -1 -4 1 
+Timer INT8: elapsed=145.720993ms
+  [OK] Sample 57  | True: org | Pred: org | Conf: 98.11 % | CosSim: 100.00% | FP32: 662  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_58.bin
+Timer FP32: elapsed=652.786987ms
+37 30 21 8 15 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+63 30 4 -1 19 
+-5 -27 -12 31 -19 
+-1 2 -2 1 2 
+-3 30 -9 20 25 
+11 26 28 -2 -20 
+-1 -1 2 -0 -0 
+0 0 29 2 12 
+-40 -2 37 16 48 
+-1 1 -1 -2 1 
+-13 0 -13 3 -1 
+-1 -6 -28 -24 12 
+-1 2 1 1 1 
+2 2 15 23 13 
+-6 -1 3 -14 -42 
+-1 -0 -1 -1 -1 
+1 0 0 1 0 
+2 -13 -13 8 -13 
+24 13 9 11 -1 
+-4 6 -1 -7 7 
+0 0 0 0 1 
+3 3 3 3 42 
+33 -71 -45 36 22 
+-4 -3 -2 -1 3 
+Timer INT8: elapsed=144.563004ms
+  [OK] Sample 58  | True: org | Pred: org | Conf: 93.71 % | CosSim: 100.00% | FP32: 653  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_59.bin
+Timer FP32: elapsed=654.846985ms
+30 28 30 32 30 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+54 22 28 18 -1 
+-5 -27 -12 31 -19 
+-2 1 -1 -1 -3 
+-11 6 -1 -8 -12 
+11 26 28 -2 -20 
+-1 -1 1 -0 0 
+0 0 1 0 33 
+-40 -2 37 16 48 
+-0 2 0 -0 1 
+-10 30 1 9 -8 
+-1 -6 -28 -24 12 
+0 1 1 0 0 
+19 2 23 13 2 
+-6 -1 3 -14 -42 
+-0 -1 0 0 -1 
+1 0 1 1 0 
+9 -13 11 17 -13 
+24 13 9 11 -1 
+-0 8 2 -2 4 
+0 0 0 0 0 
+13 18 18 3 3 
+33 -71 -45 36 22 
+-4 -1 -0 -2 1 
+Timer INT8: elapsed=146.302994ms
+  [OK] Sample 59  | True: org | Pred: org | Conf: 96.37 % | CosSim: 100.00% | FP32: 655  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_60.bin
+Timer FP32: elapsed=656.080994ms
+35 34 28 20 20 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+54 18 20 18 10 
+-5 -27 -12 31 -19 
+-3 1 -1 -1 1 
+-12 21 -12 28 17 
+11 26 28 -2 -20 
+1 0 2 -0 -0 
+34 0 39 0 13 
+-40 -2 37 16 48 
+-0 1 -1 2 1 
+-2 8 14 49 -11 
+-1 -6 -28 -24 12 
+0 1 0 1 2 
+17 2 2 25 26 
+-6 -1 3 -14 -42 
+-1 -1 -0 -2 0 
+1 0 0 0 1 
+13 -13 -11 -13 7 
+24 13 9 11 -1 
+-3 4 1 -1 6 
+0 0 0 0 1 
+3 3 13 3 28 
+33 -71 -45 36 22 
+-6 -4 0 0 0 
+Timer INT8: elapsed=144.962006ms
+  [OK] Sample 60  | True: org | Pred: org | Conf: 98.31 % | CosSim: 100.00% | FP32: 656  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_61.bin
+Timer FP32: elapsed=656.591980ms
+43 45 45 40 32 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+43 18 2 -1 7 
+-5 -27 -12 31 -19 
+-1 0 -1 0 -1 
+-10 7 -12 6 2 
+11 26 28 -2 -20 
+-1 -1 1 0 -1 
+0 0 11 17 2 
+-40 -2 37 16 48 
+-0 0 -2 -1 1 
+-10 -13 -13 -8 -13 
+-1 -6 -28 -24 12 
+-0 1 0 -0 1 
+3 2 2 7 7 
+-6 -1 3 -14 -42 
+-1 -1 -1 -1 1 
+0 0 0 1 2 
+-13 -13 -13 8 31 
+24 13 9 11 -1 
+6 9 -2 3 1 
+2 1 0 1 0 
+76 27 3 41 3 
+33 -71 -45 36 22 
+-6 -3 -3 2 1 
+Timer INT8: elapsed=144.014008ms
+  [OK] Sample 61  | True: pia | Pred: pia | Conf: 99.58 % | CosSim: 100.00% | FP32: 657  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_62.bin
+Timer FP32: elapsed=663.148987ms
+12 22 25 25 29 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+9 -1 33 17 -1 
+-5 -27 -12 31 -19 
+-3 0 -0 -3 -2 
+-12 -11 4 -5 -12 
+11 26 28 -2 -20 
+-1 0 -0 -0 0 
+0 0 0 0 29 
+-40 -2 37 16 48 
+2 1 0 -1 0 
+38 -7 10 -12 -13 
+-1 -6 -28 -24 12 
+-1 2 -1 -2 0 
+2 2 2 2 2 
+-6 -1 3 -14 -42 
+1 -0 -0 -0 -0 
+2 0 1 1 1 
+36 -13 16 16 20 
+24 13 9 11 -1 
+8 7 -2 5 -1 
+3 0 0 2 0 
+106 3 3 63 3 
+33 -71 -45 36 22 
+-7 -3 -0 1 1 
+Timer INT8: elapsed=144.128006ms
+  [OK] Sample 62  | True: pia | Pred: pia | Conf: 99.91 % | CosSim: 100.00% | FP32: 663  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_63.bin
+Timer FP32: elapsed=651.820984ms
+9 13 21 28 29 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+22 -1 25 13 -1 
+-5 -27 -12 31 -19 
+-2 0 -2 -3 -1 
+-12 -5 -12 -12 -7 
+11 26 28 -2 -20 
+-1 -1 1 -0 -0 
+0 0 0 0 16 
+-40 -2 37 16 48 
+1 1 -3 0 1 
+24 5 -9 5 -13 
+-1 -6 -28 -24 12 
+-1 1 -1 -0 2 
+2 2 2 2 27 
+-6 -1 3 -14 -42 
+-1 -0 0 -0 -0 
+0 2 2 0 1 
+-13 28 28 -13 1 
+24 13 9 11 -1 
+1 7 -2 -1 1 
+1 0 0 0 0 
+31 9 3 3 3 
+33 -71 -45 36 22 
+-3 -3 -1 2 1 
+Timer INT8: elapsed=144.106995ms
+  [OK] Sample 63  | True: pia | Pred: pia | Conf: 95.81 % | CosSim: 100.00% | FP32: 652  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_64.bin
+Timer FP32: elapsed=653.168030ms
+13 3 -4 -1 -2 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+-1 -1 -1 -1 14 
+-5 -27 -12 31 -19 
+-2 -2 -2 -2 -0 
+-12 -12 -12 -12 5 
+11 26 28 -2 -20 
+-1 -1 0 0 0 
+0 0 0 13 27 
+-40 -2 37 16 48 
+0 -0 -1 -1 1 
+24 -13 -13 7 -13 
+-1 -6 -28 -24 12 
+-3 2 -2 -1 -3 
+2 2 2 2 2 
+-6 -1 3 -14 -42 
+-1 0 -1 0 -0 
+0 0 0 0 0 
+-13 -3 -13 -2 -13 
+24 13 9 11 -1 
+6 7 -5 2 -4 
+2 0 0 1 0 
+82 9 3 28 3 
+33 -71 -45 36 22 
+-3 -5 -3 4 0 
+Timer INT8: elapsed=145.046005ms
+  [OK] Sample 64  | True: pia | Pred: pia | Conf: 96.69 % | CosSim: 100.00% | FP32: 653  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_65.bin
+Timer FP32: elapsed=659.398987ms
+31 44 43 34 34 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+53 14 19 9 2 
+-5 -27 -12 31 -19 
+-3 0 -2 -0 1 
+7 6 -12 10 14 
+11 26 28 -2 -20 
+-0 -0 1 -0 -0 
+0 0 21 2 11 
+-40 -2 37 16 48 
+-1 1 -1 1 2 
+-13 -5 -13 15 13 
+-1 -6 -28 -24 12 
+-0 1 1 -0 2 
+9 2 18 4 21 
+-6 -1 3 -14 -42 
+-1 -1 -0 -1 0 
+0 0 1 0 1 
+-13 -13 4 -13 11 
+24 13 9 11 -1 
+4 6 -3 -1 2 
+1 0 0 0 0 
+57 3 3 3 3 
+33 -71 -45 36 22 
+-3 -3 -3 1 1 
+Timer INT8: elapsed=144.326996ms
+  [OK] Sample 65  | True: pia | Pred: pia | Conf: 97.63 % | CosSim: 100.00% | FP32: 659  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_66.bin
+Timer FP32: elapsed=671.434021ms
+11 10 13 15 10 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+30 -1 34 15 3 
+-5 -27 -12 31 -19 
+-2 -1 -1 -2 0 
+-12 -12 -12 -12 13 
+11 26 28 -2 -20 
+-1 -0 0 0 0 
+0 0 0 6 22 
+-40 -2 37 16 48 
+0 -0 0 -2 0 
+7 -9 -2 -13 -13 
+-1 -6 -28 -24 12 
+-0 1 1 -0 1 
+7 2 20 2 18 
+-6 -1 3 -14 -42 
+-0 -1 -0 -1 0 
+1 0 0 0 1 
+8 -13 -9 -13 8 
+24 13 9 11 -1 
+3 7 -3 -1 -0 
+1 0 0 0 0 
+44 3 3 3 3 
+33 -71 -45 36 22 
+-1 -1 -3 2 -2 
+Timer INT8: elapsed=144.179001ms
+  [OK] Sample 66  | True: pia | Pred: pia | Conf: 89.23 % | CosSim: 99.99 % | FP32: 671  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_67.bin
+Timer FP32: elapsed=666.848022ms
+1 -1 -5 0 3 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+31 15 17 11 19 
+-5 -27 -12 31 -19 
+-1 -1 -1 0 1 
+8 -12 -12 7 4 
+11 26 28 -2 -20 
+0 0 1 -0 -0 
+5 0 3 0 7 
+-40 -2 37 16 48 
+-1 -1 -0 -1 1 
+-13 -13 23 -13 -8 
+-1 -6 -28 -24 12 
+-0 2 1 0 -0 
+11 4 5 10 2 
+-6 -1 3 -14 -42 
+-0 -2 -1 -0 -0 
+1 0 0 0 0 
+4 -13 -13 -1 -3 
+24 13 9 11 -1 
+6 9 -4 2 2 
+2 1 0 1 0 
+86 28 3 28 3 
+33 -71 -45 36 22 
+-5 -3 -4 0 1 
+Timer INT8: elapsed=143.143997ms
+  [OK] Sample 67  | True: pia | Pred: pia | Conf: 99.74 % | CosSim: 100.00% | FP32: 667  ms | INT8: 143  ms
+Opened binary file data/test_inputs/test_68.bin
+Timer FP32: elapsed=651.937988ms
+29 18 -7 -5 -3 
+-78 12 -67 -63 -12 
+0 0 0 0 0 
+85 65 10 29 32 
+-5 -27 -12 31 -19 
+-4 -0 -2 2 1 
+16 -2 -12 33 15 
+11 26 28 -2 -20 
+-0 0 1 -0 -1 
+2 0 18 0 0 
+-40 -2 37 16 48 
+0 -0 -1 0 1 
+0 -10 -13 14 8 
+-1 -6 -28 -24 12 
+-1 0 -1 -0 0 
+2 2 2 8 2 
+-6 -1 3 -14 -42 
+-1 -1 -1 -2 1 
+0 0 1 0 1 
+-13 -13 20 -13 24 
+24 13 9 11 -1 
+4 6 -2 1 5 
+2 0 0 0 0 
+62 3 3 16 6 
+33 -71 -45 36 22 
+-3 -3 -4 -0 -0 
+Timer INT8: elapsed=149.880005ms
+  [OK] Sample 68  | True: pia | Pred: pia | Conf: 99.86 % | CosSim: 100.00% | FP32: 652  ms | INT8: 150  ms
+Opened binary file data/test_inputs/test_69.bin
+Timer FP32: elapsed=660.411011ms
+14 4 -13 -17 -9 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+-1 8 -1 -1 73 
+-5 -27 -12 31 -19 
+-1 1 -1 1 1 
+-12 5 10 13 5 
+11 26 28 -2 -20 
+1 1 2 -0 -2 
+31 11 33 0 0 
+-40 -2 37 16 48 
+-0 0 1 -0 2 
+-13 -6 22 -8 19 
+-1 -6 -28 -24 12 
+-2 3 1 -0 -1 
+2 17 4 3 2 
+-6 -1 3 -14 -42 
+-1 -1 -1 -1 0 
+1 0 1 0 1 
+1 -12 2 -7 13 
+24 13 9 11 -1 
+9 6 -4 3 1 
+3 0 0 1 0 
+109 3 3 37 3 
+33 -71 -45 36 22 
+-4 -4 -4 3 1 
+Timer INT8: elapsed=149.341995ms
+  [OK] Sample 69  | True: pia | Pred: pia | Conf: 99.30 % | CosSim: 100.00% | FP32: 660  ms | INT8: 149  ms
+Opened binary file data/test_inputs/test_70.bin
+Timer FP32: elapsed=657.229980ms
+25 16 -7 -4 0 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+83 60 17 39 19 
+-5 -27 -12 31 -19 
+-4 2 -1 0 1 
+-6 15 -5 10 5 
+11 26 28 -2 -20 
+0 1 1 -0 -0 
+6 11 16 0 9 
+-40 -2 37 16 48 
+0 -1 -1 -0 1 
+0 -13 -9 10 2 
+-1 -6 -28 -24 12 
+-3 3 -0 1 -2 
+2 10 2 33 2 
+-6 -1 3 -14 -42 
+-0 0 -0 -1 -0 
+0 0 0 0 0 
+-12 -12 -4 -13 -9 
+24 13 9 11 -1 
+4 6 -0 1 3 
+1 0 0 0 0 
+55 3 3 16 3 
+33 -71 -45 36 22 
+-6 -4 -3 1 2 
+Timer INT8: elapsed=144.440994ms
+  [OK] Sample 70  | True: pia | Pred: pia | Conf: 93.47 % | CosSim: 100.00% | FP32: 657  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_71.bin
+Timer FP32: elapsed=676.794983ms
+33 41 38 37 36 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+55 -1 31 3 0 
+-5 -27 -12 31 -19 
+-1 3 -1 -1 1 
+-8 31 12 -12 8 
+11 26 28 -2 -20 
+0 0 1 -1 -1 
+12 6 9 0 0 
+-40 -2 37 16 48 
+-1 -1 -0 -1 1 
+-13 -13 -5 -13 -11 
+-1 -6 -28 -24 12 
+-2 2 1 1 -1 
+2 9 17 30 2 
+-6 -1 3 -14 -42 
+-1 -1 0 -1 -1 
+0 0 1 0 0 
+-13 -13 25 -10 -5 
+24 13 9 11 -1 
+-4 10 -2 2 10 
+0 1 0 1 2 
+3 40 3 36 69 
+33 -71 -45 36 22 
+-3 2 -1 -3 -1 
+Timer INT8: elapsed=147.677002ms
+  [OK] Sample 71  | True: sax | Pred: sax | Conf: 85.63 % | CosSim: 100.00% | FP32: 677  ms | INT8: 148  ms
+Opened binary file data/test_inputs/test_72.bin
+Timer FP32: elapsed=665.445007ms
+7 -1 -3 0 0 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+9 2 2 -1 2 
+-5 -27 -12 31 -19 
+-2 -1 -2 -2 -0 
+-12 -12 -12 -12 1 
+11 26 28 -2 -20 
+-0 0 1 0 -1 
+1 0 4 17 0 
+-40 -2 37 16 48 
+-1 -1 -1 -1 2 
+-13 -13 7 -13 7 
+-1 -6 -28 -24 12 
+-1 3 1 -0 -1 
+2 22 15 2 2 
+-6 -1 3 -14 -42 
+-1 -1 -1 -0 0 
+0 0 0 1 1 
+-13 -13 -13 0 6 
+24 13 9 11 -1 
+-3 8 2 8 -0 
+0 0 1 2 0 
+3 17 26 94 3 
+33 -71 -45 36 22 
+-5 1 -7 -2 -1 
+Timer INT8: elapsed=143.528000ms
+  [OK] Sample 72  | True: sax | Pred: sax | Conf: 96.26 % | CosSim: 100.00% | FP32: 665  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_73.bin
+Timer FP32: elapsed=659.010986ms
+6 -2 -25 -34 -31 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+10 14 -1 -1 82 
+-5 -27 -12 31 -19 
+-2 1 -1 1 2 
+-12 18 8 22 23 
+11 26 28 -2 -20 
+1 1 2 0 -2 
+26 20 43 6 0 
+-40 -2 37 16 48 
+-1 -1 2 -1 2 
+-13 -10 43 -1 33 
+-1 -6 -28 -24 12 
+-3 5 1 -0 -3 
+2 58 22 2 2 
+-6 -1 3 -14 -42 
+-2 -1 -1 -3 -1 
+0 1 0 0 0 
+-13 4 -13 -13 -13 
+24 13 9 11 -1 
+-4 9 -3 5 2 
+0 1 0 2 0 
+3 26 3 70 3 
+33 -71 -45 36 22 
+-4 1 -5 0 -2 
+Timer INT8: elapsed=146.419998ms
+  [OK] Sample 73  | True: sax | Pred: sax | Conf: 97.27 % | CosSim: 100.00% | FP32: 659  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_74.bin
+Timer FP32: elapsed=660.648987ms
+28 21 12 -2 5 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+58 39 28 36 -1 
+-5 -27 -12 31 -19 
+-3 3 0 -0 -2 
+-12 26 9 5 -12 
+11 26 28 -2 -20 
+-0 -0 1 -1 -1 
+0 0 4 0 0 
+-40 -2 37 16 48 
+0 0 -2 -1 1 
+29 -8 -11 -6 3 
+-1 -6 -28 -24 12 
+-2 5 -1 -0 -1 
+2 45 2 3 2 
+-6 -1 3 -14 -42 
+-1 -1 -1 -1 -1 
+0 1 2 0 0 
+-13 23 31 -13 -13 
+24 13 9 11 -1 
+-3 9 -6 3 9 
+0 1 0 1 2 
+3 28 3 39 63 
+33 -71 -45 36 22 
+-5 2 -2 -4 -1 
+Timer INT8: elapsed=152.434006ms
+  [OK] Sample 74  | True: sax | Pred: sax | Conf: 94.04 % | CosSim: 99.99 % | FP32: 661  ms | INT8: 152  ms
+Opened binary file data/test_inputs/test_75.bin
+Timer FP32: elapsed=655.182007ms
+14 6 -2 3 -3 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+75 46 38 47 -1 
+-5 -27 -12 31 -19 
+-2 0 -2 -1 -1 
+-8 -5 -12 -1 -5 
+11 26 28 -2 -20 
+0 0 1 0 -1 
+13 5 9 4 0 
+-40 -2 37 16 48 
+-1 1 -0 0 1 
+-13 -9 3 4 -10 
+-1 -6 -28 -24 12 
+-1 1 -1 -0 -1 
+2 2 2 4 2 
+-6 -1 3 -14 -42 
+-2 0 -0 -1 -0 
+0 2 1 0 0 
+-13 42 0 -13 -13 
+24 13 9 11 -1 
+-2 6 -1 6 6 
+0 0 0 2 1 
+3 3 3 78 22 
+33 -71 -45 36 22 
+-3 2 -3 -3 -0 
+Timer INT8: elapsed=143.306000ms
+  [OK] Sample 75  | True: sax | Pred: sax | Conf: 93.36 % | CosSim: 100.00% | FP32: 655  ms | INT8: 143  ms
+Opened binary file data/test_inputs/test_76.bin
+Timer FP32: elapsed=660.697998ms
+-2 -7 -4 3 5 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+16 4 50 56 2 
+-5 -27 -12 31 -19 
+-3 1 -0 -3 -0 
+-12 6 0 17 -7 
+11 26 28 -2 -20 
+-0 0 1 -0 -1 
+4 4 4 0 0 
+-40 -2 37 16 48 
+-2 -1 -0 -1 1 
+-13 -13 -5 12 -4 
+-1 -6 -28 -24 12 
+-1 1 1 1 1 
+2 2 5 44 14 
+-6 -1 3 -14 -42 
+-1 0 -0 -2 0 
+0 0 1 0 1 
+-13 -10 4 -13 19 
+24 13 9 11 -1 
+-1 12 -2 2 4 
+0 2 0 1 0 
+4 61 3 26 3 
+33 -71 -45 36 22 
+-2 -0 -5 2 0 
+Timer INT8: elapsed=145.729996ms
+  [OK] Sample 76  | True: sax | Pred: sax | Conf: 66.12 % | CosSim: 99.96 % | FP32: 661  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_77.bin
+Timer FP32: elapsed=661.405029ms
+10 6 4 2 3 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+-1 -1 -1 0 13 
+-5 -27 -12 31 -19 
+-2 -1 -0 -2 -1 
+-12 -12 8 -12 -12 
+11 26 28 -2 -20 
+-0 0 0 -0 -1 
+0 0 0 0 0 
+-40 -2 37 16 48 
+-1 -1 -0 -2 2 
+-7 -1 -12 -11 4 
+-1 -6 -28 -24 12 
+-3 5 1 2 0 
+2 48 20 53 2 
+-6 -1 3 -14 -42 
+-1 0 0 -2 -1 
+0 2 1 0 0 
+-13 44 25 -13 -13 
+24 13 9 11 -1 
+-8 10 -3 2 10 
+0 1 0 1 2 
+3 37 3 33 78 
+33 -71 -45 36 22 
+-0 3 -7 -4 -2 
+Timer INT8: elapsed=145.235001ms
+  [OK] Sample 77  | True: sax | Pred: sax | Conf: 99.85 % | CosSim: 100.00% | FP32: 661  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_78.bin
+Timer FP32: elapsed=660.551025ms
+6 3 3 8 11 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+41 23 42 44 -1 
+-5 -27 -12 31 -19 
+-3 1 -1 -2 -1 
+-12 3 -2 23 -12 
+11 26 28 -2 -20 
+-0 0 1 0 -1 
+0 0 11 9 0 
+-40 -2 37 16 48 
+-0 -1 -0 -1 1 
+28 -13 -9 -12 -5 
+-1 -6 -28 -24 12 
+-2 2 -1 -2 -2 
+2 9 2 2 2 
+-6 -1 3 -14 -42 
+-1 2 -1 -2 -0 
+0 4 1 0 0 
+-13 85 7 -13 -13 
+24 13 9 11 -1 
+-6 11 -2 -1 4 
+0 1 0 0 0 
+3 49 3 3 3 
+33 -71 -45 36 22 
+1 3 -4 -3 -1 
+Timer INT8: elapsed=145.024002ms
+  [OK] Sample 78  | True: sax | Pred: sax | Conf: 93.97 % | CosSim: 100.00% | FP32: 661  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_79.bin
+Timer FP32: elapsed=665.896973ms
+37 27 18 8 -14 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+64 32 -1 7 27 
+-5 -27 -12 31 -19 
+-1 -0 -2 -1 -0 
+0 -2 -12 -6 1 
+11 26 28 -2 -20 
+-0 -0 2 0 -0 
+5 0 28 9 17 
+-40 -2 37 16 48 
+-1 1 -0 -0 0 
+-13 6 1 -6 -13 
+-1 -6 -28 -24 12 
+1 1 1 0 1 
+22 2 12 17 14 
+-6 -1 3 -14 -42 
+-1 -1 -1 -1 -1 
+0 0 0 0 0 
+-4 -13 -13 -13 -13 
+24 13 9 11 -1 
+-8 12 -3 -1 10 
+0 2 0 0 2 
+3 65 3 3 73 
+33 -71 -45 36 22 
+-1 1 -6 -3 2 
+Timer INT8: elapsed=144.503998ms
+  [OK] Sample 79  | True: sax | Pred: sax | Conf: 97.41 % | CosSim: 100.00% | FP32: 666  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_80.bin
+Timer FP32: elapsed=663.685974ms
+30 24 22 15 5 
+-78 12 -67 -63 -12 
+0 0 0 0 0 
+97 34 15 10 30 
+-5 -27 -12 31 -19 
+-2 1 -1 2 1 
+15 17 -9 44 11 
+11 26 28 -2 -20 
+1 1 3 -0 -2 
+31 8 49 0 0 
+-40 -2 37 16 48 
+-1 -0 -0 0 2 
+-12 -13 2 4 14 
+-1 -6 -28 -24 12 
+-1 2 0 -0 1 
+2 2 2 2 11 
+-6 -1 3 -14 -42 
+-1 -1 -1 -1 0 
+0 0 0 0 1 
+-13 -13 -12 -13 4 
+24 13 9 11 -1 
+0 8 -3 1 12 
+0 0 0 1 3 
+18 21 3 23 102 
+33 -71 -45 36 22 
+-2 -0 -7 -1 2 
+Timer INT8: elapsed=145.544006ms
+  [OK] Sample 80  | True: sax | Pred: sax | Conf: 99.32 % | CosSim: 100.00% | FP32: 664  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_81.bin
+Timer FP32: elapsed=655.044983ms
+24 27 19 13 16 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+21 -1 16 5 18 
+-5 -27 -12 31 -19 
+-2 2 -0 -1 0 
+-12 22 11 1 -5 
+11 26 28 -2 -20 
+-0 1 0 -0 -1 
+1 9 0 0 0 
+-40 -2 37 16 48 
+-2 -1 1 -1 2 
+-8 -13 6 -10 15 
+-1 -6 -28 -24 12 
+-0 4 2 1 0 
+5 27 31 31 2 
+-6 -1 3 -14 -42 
+-1 -1 0 -1 0 
+0 0 2 0 1 
+-13 -2 28 -5 1 
+24 13 9 11 -1 
+-9 7 1 6 3 
+0 0 0 2 0 
+3 10 6 79 3 
+33 -71 -45 36 22 
+-4 1 -5 -3 -3 
+Timer INT8: elapsed=144.179001ms
+  [OK] Sample 81  | True: tru | Pred: tru | Conf: 99.00 % | CosSim: 100.00% | FP32: 655  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_82.bin
+Timer FP32: elapsed=657.752991ms
+19 20 25 22 22 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+14 -1 -1 -1 -1 
+-5 -27 -12 31 -19 
+-1 0 -2 -3 1 
+-3 0 -8 -12 11 
+11 26 28 -2 -20 
+0 -0 1 0 0 
+16 0 8 24 24 
+-40 -2 37 16 48 
+-2 -0 -0 -1 1 
+11 -10 -13 6 -13 
+-1 -6 -28 -24 12 
+-1 1 -0 0 -0 
+2 2 2 20 2 
+-6 -1 3 -14 -42 
+-1 -1 -1 -1 -0 
+2 0 0 0 0 
+31 -13 -9 -5 -8 
+24 13 9 11 -1 
+-5 8 4 6 4 
+0 0 1 2 0 
+3 14 50 75 3 
+33 -71 -45 36 22 
+-4 2 -4 -6 -5 
+Timer INT8: elapsed=145.311996ms
+  [OK] Sample 82  | True: tru | Pred: tru | Conf: 98.90 % | CosSim: 100.00% | FP32: 658  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_83.bin
+Timer FP32: elapsed=651.440002ms
+6 1 -10 -8 -3 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+-1 -1 -1 -1 44 
+-5 -27 -12 31 -19 
+-3 3 -3 -3 3 
+-9 48 -12 -12 42 
+11 26 28 -2 -20 
+-0 0 2 0 -1 
+0 0 33 7 0 
+-40 -2 37 16 48 
+-1 1 -0 -0 1 
+-13 7 0 -4 -10 
+-1 -6 -28 -24 12 
+-0 -0 -0 1 2 
+10 2 2 24 21 
+-6 -1 3 -14 -42 
+-1 -0 -0 -1 -0 
+0 0 1 0 1 
+-13 -9 22 -13 9 
+24 13 9 11 -1 
+-3 6 0 6 5 
+0 0 0 2 0 
+3 3 3 82 10 
+33 -71 -45 36 22 
+-4 1 -4 -3 -1 
+Timer INT8: elapsed=149.130997ms
+  [OK] Sample 83  | True: tru | Pred: tru | Conf: 98.46 % | CosSim: 100.00% | FP32: 651  ms | INT8: 149  ms
+Opened binary file data/test_inputs/test_84.bin
+Timer FP32: elapsed=653.226013ms
+27 20 25 24 16 
+-78 12 -67 -63 -12 
+0 0 -0 0 -0 
+33 9 -1 -1 -1 
+-5 -27 -12 31 -19 
+-3 1 -1 -0 0 
+6 6 -5 5 -1 
+11 26 28 -2 -20 
+-0 0 1 -1 -1 
+1 0 20 0 0 
+-40 -2 37 16 48 
+-1 -0 -1 -1 1 
+-13 -13 -13 -2 -8 
+-1 -6 -28 -24 12 
+-1 2 -0 -0 -1 
+2 2 2 6 2 
+-6 -1 3 -14 -42 
+-0 -1 -0 -1 1 
+0 0 0 0 1 
+-4 -13 -13 -13 16 
+24 13 9 11 -1 
+-5 5 5 2 1 
+0 0 1 1 0 
+3 3 58 35 3 
+33 -71 -45 36 22 
+-3 -0 -3 -4 -3 
+Timer INT8: elapsed=143.785995ms
+  [OK] Sample 84  | True: tru | Pred: tru | Conf: 97.68 % | CosSim: 100.00% | FP32: 653  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_85.bin
+Timer FP32: elapsed=658.599976ms
+-1 -3 -3 -1 -3 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+73 20 53 40 4 
+-5 -27 -12 31 -19 
+-1 1 -0 -1 0 
+0 2 2 8 2 
+11 26 28 -2 -20 
+-1 0 2 -0 -1 
+0 1 23 0 0 
+-40 -2 37 16 48 
+-1 1 0 -2 1 
+16 9 14 -13 6 
+-1 -6 -28 -24 12 
+0 3 2 1 2 
+20 12 26 21 37 
+-6 -1 3 -14 -42 
+-1 0 -0 -1 -1 
+0 0 1 0 0 
+-13 -8 2 -13 -11 
+24 13 9 11 -1 
+-4 7 5 4 2 
+0 0 1 1 0 
+3 11 57 48 3 
+33 -71 -45 36 22 
+-1 0 -1 -5 -4 
+Timer INT8: elapsed=144.429001ms
+  [OK] Sample 85  | True: tru | Pred: tru | Conf: 97.63 % | CosSim: 100.00% | FP32: 659  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_86.bin
+Timer FP32: elapsed=655.794006ms
+19 23 21 23 27 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+35 6 39 30 7 
+-5 -27 -12 31 -19 
+-2 1 -1 -3 2 
+-12 -2 -12 12 19 
+11 26 28 -2 -20 
+1 0 2 -0 -0 
+24 0 23 0 9 
+-40 -2 37 16 48 
+-0 0 -0 1 1 
+-6 -6 7 24 -9 
+-1 -6 -28 -24 12 
+-1 0 -0 0 1 
+2 2 2 19 12 
+-6 -1 3 -14 -42 
+-1 -1 0 -0 -0 
+0 2 1 0 0 
+-13 25 17 -13 -5 
+24 13 9 11 -1 
+-6 11 6 1 2 
+0 1 2 0 0 
+3 49 72 21 3 
+33 -71 -45 36 22 
+-2 0 1 -7 -2 
+Timer INT8: elapsed=146.488998ms
+  [OK] Sample 86  | True: tru | Pred: tru | Conf: 92.84 % | CosSim: 100.00% | FP32: 656  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_87.bin
+Timer FP32: elapsed=657.658997ms
+-14 -12 -14 -19 -27 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+-1 -1 -1 -1 35 
+-5 -27 -12 31 -19 
+-1 -1 -0 -0 -1 
+-12 -12 7 2 -12 
+11 26 28 -2 -20 
+0 0 1 -0 -1 
+10 0 5 0 0 
+-40 -2 37 16 48 
+-1 -0 -1 0 1 
+14 -5 -13 26 -7 
+-1 -6 -28 -24 12 
+-1 2 0 0 0 
+2 2 2 17 2 
+-6 -1 3 -14 -42 
+-1 -1 0 -1 1 
+0 0 1 1 2 
+-2 -13 3 1 40 
+24 13 9 11 -1 
+-4 12 3 8 4 
+0 2 1 3 0 
+3 62 40 99 3 
+33 -71 -45 36 22 
+-3 2 2 -6 -4 
+Timer INT8: elapsed=147.110992ms
+  [OK] Sample 87  | True: tru | Pred: tru | Conf: 92.68 % | CosSim: 100.00% | FP32: 658  ms | INT8: 147  ms
+Opened binary file data/test_inputs/test_88.bin
+Timer FP32: elapsed=651.632019ms
+26 19 17 20 20 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+36 17 6 3 18 
+-5 -27 -12 31 -19 
+-2 0 -1 -0 1 
+3 -12 -12 2 15 
+11 26 28 -2 -20 
+-1 0 1 -0 -0 
+0 0 13 0 11 
+-40 -2 37 16 48 
+0 -1 -0 -2 1 
+0 -13 -9 2 -11 
+-1 -6 -28 -24 12 
+-1 4 0 -2 -0 
+2 33 3 2 2 
+-6 -1 3 -14 -42 
+-2 -0 -0 -1 -1 
+0 0 1 0 0 
+-13 -13 8 -13 -13 
+24 13 9 11 -1 
+-8 7 3 4 1 
+0 0 1 1 0 
+3 5 34 59 3 
+33 -71 -45 36 22 
+-2 -1 -3 -2 -1 
+Timer INT8: elapsed=144.444000ms
+  [OK] Sample 88  | True: tru | Pred: tru | Conf: 97.95 % | CosSim: 100.00% | FP32: 652  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_89.bin
+Timer FP32: elapsed=660.388977ms
+14 2 0 1 -7 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+13 0 33 40 3 
+-5 -27 -12 31 -19 
+-3 0 -2 -4 2 
+-12 -12 -12 17 24 
+11 26 28 -2 -20 
+-0 0 1 -0 -0 
+4 0 18 0 19 
+-40 -2 37 16 48 
+-1 1 -0 0 0 
+-11 10 11 5 20 
+-1 -6 -28 -24 12 
+-2 2 -0 -1 -0 
+2 8 2 2 2 
+-6 -1 3 -14 -42 
+-1 -1 -1 -1 1 
+1 0 1 0 1 
+12 -3 6 -13 21 
+24 13 9 11 -1 
+0 3 0 1 2 
+0 0 0 0 0 
+21 3 3 21 3 
+33 -71 -45 36 22 
+1 1 -5 -2 -2 
+Timer INT8: elapsed=143.513000ms
+  [OK] Sample 89  | True: tru | Pred: tru | Conf: 91.74 % | CosSim: 100.00% | FP32: 660  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_90.bin
+Timer FP32: elapsed=654.648987ms
+-5 -6 -5 -14 -8 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+1 -1 11 -1 0 
+-5 -27 -12 31 -19 
+0 0 -0 -0 -2 
+12 -12 0 -2 -12 
+11 26 28 -2 -20 
+0 1 -0 0 -1 
+7 9 0 18 0 
+-40 -2 37 16 48 
+-0 0 0 -1 1 
+5 -10 -7 -13 -13 
+-1 -6 -28 -24 12 
+-1 7 -3 -3 1 
+2 84 2 2 2 
+-6 -1 3 -14 -42 
+1 -0 -1 1 -1 
+2 0 0 1 0 
+46 -13 -13 23 -13 
+24 13 9 11 -1 
+-8 7 4 8 -1 
+0 0 1 3 0 
+3 3 45 99 3 
+33 -71 -45 36 22 
+-4 -1 -4 -2 -3 
+Timer INT8: elapsed=145.095993ms
+  [OK] Sample 90  | True: tru | Pred: tru | Conf: 99.98 % | CosSim: 100.00% | FP32: 655  ms | INT8: 145  ms
+Opened binary file data/test_inputs/test_91.bin
+Timer FP32: elapsed=658.257996ms
+-9 0 11 12 9 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+8 -1 31 1 -1 
+-5 -27 -12 31 -19 
+-1 -2 -1 -1 -0 
+-9 -12 -12 -12 9 
+11 26 28 -2 -20 
+-1 -0 -0 -1 0 
+0 0 0 0 27 
+-40 -2 37 16 48 
+1 0 -1 -1 -0 
+32 -13 -12 -13 -13 
+-1 -6 -28 -24 12 
+-2 2 -1 -2 -0 
+2 10 2 2 2 
+-6 -1 3 -14 -42 
+0 1 -1 -0 -0 
+1 1 0 1 0 
+15 5 -13 12 -13 
+24 13 9 11 -1 
+-4 7 -2 -6 1 
+0 0 0 0 0 
+3 8 3 3 3 
+33 -71 -45 36 22 
+1 -1 -1 -2 -2 
+Timer INT8: elapsed=145.710999ms
+  [OK] Sample 91  | True: vio | Pred: vio | Conf: 99.33 % | CosSim: 100.00% | FP32: 658  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_92.bin
+Timer FP32: elapsed=659.302979ms
+3 13 13 15 13 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+16 -1 26 -1 8 
+-5 -27 -12 31 -19 
+-0 1 0 -0 -1 
+4 2 11 5 -12 
+11 26 28 -2 -20 
+0 0 0 1 -1 
+11 0 0 31 0 
+-40 -2 37 16 48 
+-1 0 1 -1 2 
+-13 -7 7 -6 8 
+-1 -6 -28 -24 12 
+-1 2 -1 -0 2 
+2 2 2 2 35 
+-6 -1 3 -14 -42 
+-0 -1 0 1 1 
+1 0 1 2 2 
+6 -13 14 28 35 
+24 13 9 11 -1 
+-6 9 -0 0 2 
+0 1 0 0 0 
+3 24 3 8 3 
+33 -71 -45 36 22 
+0 -0 -1 -2 -5 
+Timer INT8: elapsed=144.218002ms
+  [OK] Sample 92  | True: vio | Pred: vio | Conf: 98.10 % | CosSim: 100.00% | FP32: 659  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_93.bin
+Timer FP32: elapsed=698.383972ms
+6 7 7 8 7 
+-78 12 -67 -63 -12 
+0 0 0 0 0 
+30 -1 28 19 31 
+-5 -27 -12 31 -19 
+-3 0 -2 -2 2 
+4 -5 -12 0 29 
+11 26 28 -2 -20 
+-0 -1 2 0 1 
+3 0 38 10 40 
+-40 -2 37 16 48 
+0 1 -0 -1 0 
+-3 11 -13 -7 -1 
+-1 -6 -28 -24 12 
+-1 1 -0 -1 1 
+2 2 2 2 2 
+-6 -1 3 -14 -42 
+-2 -1 -1 -1 -0 
+0 0 1 0 0 
+-10 -13 13 -4 -13 
+24 13 9 11 -1 
+-2 5 1 -1 1 
+0 0 0 0 0 
+3 3 10 3 3 
+33 -71 -45 36 22 
+1 -1 -2 -1 2 
+Timer INT8: elapsed=153.688004ms
+  [OK] Sample 93  | True: vio | Pred: vio | Conf: 40.35 % | CosSim: 99.98 % | FP32: 698  ms | INT8: 154  ms
+Opened binary file data/test_inputs/test_94.bin
+Timer FP32: elapsed=661.664978ms
+-14 -6 -10 -19 -7 
+-78 12 -67 -63 -12 
+0 0 0 0 0 
+18 -1 28 15 80 
+-5 -27 -12 31 -19 
+-2 -1 -2 -1 1 
+-12 -12 -12 -8 20 
+11 26 28 -2 -20 
+1 0 2 0 -1 
+40 3 38 9 0 
+-40 -2 37 16 48 
+-1 -0 1 -1 1 
+-13 -12 14 17 -13 
+-1 -6 -28 -24 12 
+-2 3 -1 0 -0 
+2 13 2 16 2 
+-6 -1 3 -14 -42 
+-0 -0 -0 -2 1 
+0 0 1 0 2 
+-8 -13 18 -13 42 
+24 13 9 11 -1 
+-8 9 -1 1 2 
+0 1 0 0 0 
+3 32 3 16 3 
+33 -71 -45 36 22 
+1 -1 -1 -1 -3 
+Timer INT8: elapsed=157.141998ms
+  [OK] Sample 94  | True: vio | Pred: vio | Conf: 94.03 % | CosSim: 100.00% | FP32: 662  ms | INT8: 157  ms
+Opened binary file data/test_inputs/test_95.bin
+Timer FP32: elapsed=661.440002ms
+9 6 2 -2 -1 
+-78 12 -67 -63 -12 
+0 0 -0 0 0 
+-1 3 -1 -1 82 
+-5 -27 -12 31 -19 
+-1 -3 -4 -0 1 
+-9 6 -12 0 15 
+11 26 28 -2 -20 
+2 0 2 0 -0 
+64 0 43 19 15 
+-40 -2 37 16 48 
+-1 0 1 -0 1 
+-13 -13 11 7 -8 
+-1 -6 -28 -24 12 
+-2 3 -2 0 1 
+2 18 2 13 4 
+-6 -1 3 -14 -42 
+-0 -1 -0 -1 0 
+0 0 0 0 0 
+-7 -13 -13 -13 -5 
+24 13 9 11 -1 
+-4 2 4 -2 -2 
+0 0 1 0 0 
+3 3 47 3 3 
+33 -71 -45 36 22 
+4 -3 -0 -4 -5 
+Timer INT8: elapsed=159.315994ms
+  [OK] Sample 95  | True: vio | Pred: vio | Conf: 84.01 % | CosSim: 99.99 % | FP32: 661  ms | INT8: 159  ms
+Opened binary file data/test_inputs/test_96.bin
+Timer FP32: elapsed=655.229980ms
+-6 3 7 6 2 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+21 -1 50 35 3 
+-5 -27 -12 31 -19 
+-2 -0 -1 -2 -0 
+-12 -12 -2 -12 -9 
+11 26 28 -2 -20 
+0 0 -0 -0 -1 
+8 7 0 0 0 
+-40 -2 37 16 48 
+-0 -0 0 -1 0 
+-2 -13 2 -13 -13 
+-1 -6 -28 -24 12 
+-2 2 -1 -2 -2 
+2 2 2 2 2 
+-6 -1 3 -14 -42 
+-0 1 -1 -0 -1 
+0 1 0 0 0 
+-5 14 -13 -13 -13 
+24 13 9 11 -1 
+-9 10 3 0 5 
+0 1 1 0 0 
+3 36 29 9 10 
+33 -71 -45 36 22 
+3 0 -2 -4 2 
+Timer INT8: elapsed=151.283997ms
+  [OK] Sample 96  | True: vio | Pred: vio | Conf: 88.41 % | CosSim: 100.00% | FP32: 655  ms | INT8: 151  ms
+Opened binary file data/test_inputs/test_97.bin
+Timer FP32: elapsed=762.989990ms
+29 41 47 46 41 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+65 4 36 -1 -1 
+-5 -27 -12 31 -19 
+-1 1 -1 -1 -0 
+-4 -3 -12 -12 1 
+11 26 28 -2 -20 
+-1 -1 1 -1 0 
+0 0 13 0 34 
+-40 -2 37 16 48 
+1 1 -2 -0 1 
+7 1 14 -1 -11 
+-1 -6 -28 -24 12 
+-1 1 -1 -1 0 
+2 2 2 2 2 
+-6 -1 3 -14 -42 
+-2 -1 -1 -1 0 
+0 0 0 0 1 
+-13 -13 -12 -13 17 
+24 13 9 11 -1 
+-4 4 4 -2 3 
+0 0 1 0 0 
+3 3 41 3 3 
+33 -71 -45 36 22 
+-1 -3 -3 -2 1 
+Timer INT8: elapsed=146.190002ms
+  [OK] Sample 97  | True: vio | Pred: vio | Conf: 85.28 % | CosSim: 100.00% | FP32: 763  ms | INT8: 146  ms
+Opened binary file data/test_inputs/test_98.bin
+Timer FP32: elapsed=662.380005ms
+15 12 4 4 5 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+53 36 14 13 -1 
+-5 -27 -12 31 -19 
+-2 -1 -1 0 -1 
+-12 -12 -9 13 -10 
+11 26 28 -2 -20 
+-1 0 0 1 0 
+0 0 0 29 21 
+-40 -2 37 16 48 
+-0 1 -0 -1 0 
+11 -2 -8 -13 -13 
+-1 -6 -28 -24 12 
+-1 1 -1 -2 -1 
+2 2 2 2 2 
+-6 -1 3 -14 -42 
+-1 1 -0 -1 -0 
+0 1 0 0 0 
+-13 5 -13 -13 -2 
+24 13 9 11 -1 
+-5 3 4 -5 3 
+0 0 1 0 0 
+3 3 52 3 3 
+33 -71 -45 36 22 
+2 -3 -3 -3 -3 
+Timer INT8: elapsed=150.837997ms
+  [OK] Sample 98  | True: vio | Pred: vio | Conf: 49.47 % | CosSim: 99.68 % | FP32: 662  ms | INT8: 151  ms
+Opened binary file data/test_inputs/test_99.bin
+Timer FP32: elapsed=653.997009ms
+2 -5 -17 -14 -20 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+39 11 54 73 -1 
+-5 -27 -12 31 -19 
+-4 0 -2 -4 1 
+-12 -11 -12 43 12 
+11 26 28 -2 -20 
+-0 1 2 -0 -1 
+0 9 33 0 0 
+-40 -2 37 16 48 
+0 1 1 -2 1 
+6 2 48 -13 -10 
+-1 -6 -28 -24 12 
+0 2 -0 -1 -1 
+13 2 2 2 2 
+-6 -1 3 -14 -42 
+-1 0 -0 -0 -0 
+1 1 0 0 0 
+10 3 -13 -13 -9 
+24 13 9 11 -1 
+-2 8 -2 1 2 
+0 0 0 0 0 
+3 16 3 20 3 
+33 -71 -45 36 22 
+-2 -3 -4 1 2 
+Timer INT8: elapsed=144.035004ms
+  [OK] Sample 99  | True: vio | Pred: vio | Conf: 67.97 % | CosSim: 99.98 % | FP32: 654  ms | INT8: 144  ms
+Opened binary file data/test_inputs/test_100.bin
+Timer FP32: elapsed=660.943970ms
+-2 9 13 6 -1 
+-78 12 -67 -63 -12 
+0 0 0 0 -0 
+60 -1 46 12 -1 
+-5 -27 -12 31 -19 
+-3 4 -1 -3 1 
+7 37 -8 -12 6 
+11 26 28 -2 -20 
+-1 -1 2 -0 0 
+0 0 23 0 23 
+-40 -2 37 16 48 
+1 1 -1 -1 1 
+8 18 -13 -12 -3 
+-1 -6 -28 -24 12 
+-2 2 1 1 1 
+2 4 14 40 9 
+-6 -1 3 -14 -42 
+-2 -2 -0 -1 -2 
+0 0 0 0 0 
+-13 -13 -12 -13 -13 
+24 13 9 11 -1 
+-0 15 -1 -1 3 
+0 3 0 0 0 
+13 100 3 3 3 
+33 -71 -45 36 22 
+-2 -1 -3 -0 0 
+Timer INT8: elapsed=145.947998ms
+  [OK] Sample 100 | True: vio | Pred: vio | Conf: 97.25 % | CosSim: 100.00% | FP32: 661  ms | INT8: 146  ms
+
+======================================================================
+BATCH TEST SUMMARY
+======================================================================
+
+ACCURACY METRICS:
+  Total samples: 100 / 100
+
+FP32 ACCURACY:
+  Top-1 Accuracy: 99 / 100 (99.00%)
+  Top-5 Accuracy: 99 / 100 (99.00%)
+
+INT8 ACCURACY:
+  Top-1 Accuracy: 99 / 100 (99.00%)
+  Top-5 Accuracy: 99 / 100 (99.00%)
+
+QUANTIZATION ACCURACY LOSS:
+  Top-1 Loss: 0.00%
+  Top-5 Loss: 0.00%
+
+FP32 RUNTIME STATISTICS:
+  Mean:   664.20 ms
+  Std:    22.96 ms
+  Min:    651.44 ms
+  Max:    832.03 ms
+
+INT8 RUNTIME STATISTICS:
+  Mean:   148.21 ms
+  Std:    4.37 ms
+  Min:    143.14 ms
+  Max:    165.38 ms
+
+SPEEDUP (FP32 → INT8):
+  Average Speedup: 4.48x
+  Performance Gain: 348.14%
+
+QUANTIZATION QUALITY (Cosine Similarity):
+  Mean:   99.9891%
+  Std:    0.0405%
+  Min:    99.6759%
+  Max:    100.0000%
+
+PER-CLASS ACCURACY:
+Class | Name             | Correct | Total | Accuracy
+------|------------------|---------|-------|----------
+0     | Cello            |      10 |    10 |  100.00%
+    1 | Clarinet         |      10 |    10 |  100.00%
+    2 | Flute            |       9 |    10 |   90.00%
+    3 | Acoustic Guitar  |      10 |    10 |  100.00%
+    4 | Electric Guitar  |      10 |    10 |  100.00%
+    5 | Organ            |      10 |    10 |  100.00%
+    6 | Piano            |      10 |    10 |  100.00%
+    7 | Saxophone        |      10 |    10 |  100.00%
+    8 | Trumpet          |      10 |    10 |  100.00%
+    9 | Violin           |      10 |    10 |  100.00%
+
+======================================================================
+
+
+----- ML::runTests() COMPLETE -----
