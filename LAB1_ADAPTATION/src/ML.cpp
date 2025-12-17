@@ -3,6 +3,9 @@
 #include <vector>
 #include <algorithm>
 #include <iomanip>
+#include <fstream>
+#include <cmath>
+#include <numeric>
 
 #include "Config.h"
 #include "Model.h"
@@ -21,6 +24,37 @@
 #endif
 
 namespace ML {
+
+// Batch test metadata structure
+struct BatchTestSample {
+    int sample_id;
+    int validation_index;
+    std::string file_path;
+    std::string filename;
+    int true_label;
+    std::string true_class;
+    std::string binary_file;
+};
+
+// Batch test results structure
+struct BatchTestResults {
+    int total_samples = 0;
+
+    // Separate accuracy tracking for FP32 and INT8
+    int correct_top1_fp32 = 0;
+    int correct_top1_int8 = 0;
+    int correct_top5_fp32 = 0;
+    int correct_top5_int8 = 0;
+
+    std::vector<double> fp32_times;
+    std::vector<double> int8_times;
+
+    std::vector<int> true_labels;
+    std::vector<int> predicted_labels_fp32;
+    std::vector<int> predicted_labels_int8;
+
+    std::vector<double> cosine_similarities;
+};
 
 // Build AudioCNN_IRMAS model for musical instrument classification
 Model buildAudioCNN_IRMAS(const Path modelPath) {
@@ -388,6 +422,153 @@ void runInferenceTest(const Model& model, const LayerData& inputData) {
     }
 }
 
+void runQuantizedInferenceTestWithLayerTiming(const Model& model, const LayerData& inputData) {
+    logInfo("========================================");
+    logInfo("  INT8 QUANTIZED INFERENCE TEST (WITH LAYER TIMING)");
+    logInfo("========================================");
+
+    const char* layerNames[] = {
+        "conv1_1", "bn1_1", "conv1_2", "bn1_2", "pool1",
+        "conv2_1", "bn2_1", "conv2_2", "bn2_2", "pool2",
+        "conv3_1", "bn3_1", "conv3_2", "bn3_2", "pool3",
+        "flatten", "fc1", "bn_fc1", "fc2", "softmax"
+    };
+
+    // First run NAIVE for baseline
+    logInfo("\n--- Step 1: Running FP32 NAIVE baseline ---");
+    Timer naiveTimer("FP32 NAIVE Inference");
+    naiveTimer.start();
+    const LayerData& naiveOutput = model.inference(inputData, Layer::InfType::NAIVE);
+    naiveTimer.stop();
+
+    // Copy NAIVE output for comparison
+    LayerData naiveOutputCopy(naiveOutput);
+
+    // Print NAIVE top prediction
+    const char* instrumentNames[] = {
+        "Cello", "Clarinet", "Flute", "Acoustic Guitar", "Electric Guitar",
+        "Organ", "Piano", "Saxophone", "Trumpet", "Violin"
+    };
+
+    size_t naiveTopClass = 0;
+    fp32 naiveTopProb = naiveOutput.get<fp32>(0);
+    for (size_t i = 1; i < 10; i++) {
+        if (naiveOutput.get<fp32>(i) > naiveTopProb) {
+            naiveTopProb = naiveOutput.get<fp32>(i);
+            naiveTopClass = i;
+        }
+    }
+    std::cout << "FP32 NAIVE Top prediction: " << instrumentNames[naiveTopClass]
+              << " (" << (naiveTopProb * 100.0f) << "%)" << std::endl;
+
+    // Now run QUANTIZED with layer-wise timing
+    logInfo("\n--- Step 2: Running INT8 QUANTIZED inference with layer timing ---");
+    
+    std::vector<double> layerTimes;
+    layerTimes.resize(model.getNumLayers(), 0.0);
+    
+    // First layer
+    Timer layerTimer("Layer 0");
+    layerTimer.start();
+    model.inferenceLayer(inputData, 0, Layer::InfType::QUANTIZED);
+    layerTimer.stop();
+    layerTimes[0] = layerTimer.milliseconds;
+    
+    // Subsequent layers
+    for (size_t i = 1; i < model.getNumLayers(); i++) {
+        layerTimer = Timer("Layer " + std::to_string(i));
+        layerTimer.start();
+        model.inferenceLayer(model[i-1].getOutputData(), i, Layer::InfType::QUANTIZED);
+        layerTimer.stop();
+        layerTimes[i] = layerTimer.milliseconds;
+    }
+    
+    const LayerData& quantOutput = model.getOutputLayer().getOutputData();
+
+    // Print QUANTIZED top prediction
+    size_t quantTopClass = 0;
+    fp32 quantTopProb = quantOutput.get<fp32>(0);
+    for (size_t i = 1; i < 10; i++) {
+        if (quantOutput.get<fp32>(i) > quantTopProb) {
+            quantTopProb = quantOutput.get<fp32>(i);
+            quantTopClass = i;
+        }
+    }
+    std::cout << "INT8 QUANTIZED Top prediction: " << instrumentNames[quantTopClass]
+              << " (" << (quantTopProb * 100.0f) << "%)" << std::endl;
+
+    // Compare outputs
+    logInfo("\n--- Step 3: Comparing FP32 vs INT8 results ---");
+
+    // Calculate cosine similarity
+    fp32 cosine_sim = naiveOutputCopy.compare<fp32>(quantOutput);
+    std::cout << "Cosine similarity: " << (cosine_sim * 100.0f) << "%" << std::endl;
+
+    // Calculate max absolute error
+    fp32 max_error = 0.0f;
+    for (size_t i = 0; i < 10; i++) {
+        fp32 error = std::abs(naiveOutputCopy.get<fp32>(i) - quantOutput.get<fp32>(i));
+        max_error = std::max(max_error, error);
+    }
+    std::cout << "Max absolute error: " << max_error << std::endl;
+
+    // Check if top predictions match
+    bool topMatch = (naiveTopClass == quantTopClass);
+    std::cout << "Top prediction match: " << (topMatch ? "YES" : "NO") << std::endl;
+
+    // Calculate total INT8 time
+    double totalQuantTime = 0.0;
+    for (size_t i = 0; i < layerTimes.size(); i++) {
+        totalQuantTime += layerTimes[i];
+    }
+
+    // Performance comparison
+    logInfo("\n--- Step 4: Layer-wise timing breakdown ---");
+    std::cout << "\nINT8 QUANTIZED Layer Timing:" << std::endl;
+    std::cout << "Layer |      Name      |   Time (ms)  | % of Total" << std::endl;
+    std::cout << "------|----------------|--------------|----------" << std::endl;
+    
+    for (size_t i = 0; i < model.getNumLayers(); i++) {
+        double percentage = (layerTimes[i] / totalQuantTime) * 100.0;
+        std::cout << std::setw(5) << i << " | "
+                  << std::setw(14) << std::left << layerNames[i] << " | "
+                  << std::setw(12) << std::fixed << std::setprecision(6) << layerTimes[i] << " | "
+                  << std::setw(8) << std::fixed << std::setprecision(2) << percentage << "%" << std::endl;
+    }
+    
+    std::cout << "------|----------------|--------------|----------" << std::endl;
+    std::cout << "TOTAL |                | "
+              << std::setw(12) << std::fixed << std::setprecision(6) << totalQuantTime << " | "
+              << "100.00%" << std::endl;
+
+    // Performance comparison summary
+    logInfo("\n--- Step 5: Overall performance comparison ---");
+    fp32 speedup = naiveTimer.milliseconds / totalQuantTime;
+    std::cout << "FP32 NAIVE time:     " << naiveTimer.milliseconds << " ms" << std::endl;
+    std::cout << "INT8 QUANTIZED time: " << totalQuantTime << " ms" << std::endl;
+    std::cout << "Speedup:             " << speedup << "x" << std::endl;
+
+    if (speedup > 1.0f) {
+        std::cout << "INT8 is FASTER by " << ((speedup - 1.0f) * 100.0f) << "%" << std::endl;
+    } else {
+        std::cout << "INT8 is SLOWER by " << ((1.0f - speedup) * 100.0f) << "%" << std::endl;
+    }
+
+    // Print detailed probability comparison
+    std::cout << "\nDetailed probability comparison:" << std::endl;
+    std::cout << "Class | FP32        | INT8        | Diff" << std::endl;
+    std::cout << "------|-------------|-------------|-------------" << std::endl;
+    for (size_t i = 0; i < 10; i++) {
+        fp32 naiveProb = naiveOutputCopy.get<fp32>(i) * 100.0f;
+        fp32 quantProb = quantOutput.get<fp32>(i) * 100.0f;
+        fp32 diff = naiveProb - quantProb;
+        std::cout << std::setw(5) << i << " | "
+                  << std::setw(10) << std::fixed << std::setprecision(4) << naiveProb << "% | "
+                  << std::setw(10) << std::fixed << std::setprecision(4) << quantProb << "% | "
+                  << std::setw(10) << std::fixed << std::setprecision(4) << diff << "%" << std::endl;
+    }
+}
+
 void runQuantizedInferenceTest(const Model& model, const LayerData& inputData) {
     logInfo("========================================");
     logInfo("  INT8 QUANTIZED INFERENCE TEST");
@@ -590,12 +771,294 @@ void runLayerByLayerDiagnostic(const Model& model, const LayerData& inputData) {
 
 void runAllLayerTests(const Model& model, const Path& basePath, const LayerData& inputData) {
     logInfo("--- Running All Layer Tests ---");
-    
+
     // Test all layers (0-12 for AudioCNN_IRMAS)
     size_t numLayers = model.getNumLayers();
     for (std::size_t layerNum = 0; layerNum < numLayers; ++layerNum) {
         runLayerTest(layerNum, model, basePath, inputData);
     }
+}
+
+void runBatchInferenceTest(const Model& model, const Path& dataPath, int numSamples = 10) {
+    logInfo("========================================");
+    logInfo("  BATCH INFERENCE TEST");
+    logInfo("========================================");
+
+    const char* instrumentNames[] = {
+        "Cello", "Clarinet", "Flute", "Acoustic Guitar", "Electric Guitar",
+        "Organ", "Piano", "Saxophone", "Trumpet", "Violin"
+    };
+
+    const char* instrumentCodes[] = {
+        "cel", "cla", "flu", "gac", "gel", "org", "pia", "sax", "tru", "vio"
+    };
+
+    // Load metadata from JSON file (simplified - manual parsing for now)
+    // In production, we'd use a JSON parser library
+    std::cout << "\nLoading batch test metadata...\n" << std::endl;
+
+    BatchTestResults results;
+    results.total_samples = numSamples;
+
+    // Process each test sample
+    for (int i = 0; i < numSamples; i++) {
+        std::stringstream filename;
+        filename << "test_input_" << std::setfill('0') << std::setw(3) << i << ".bin";
+
+        Path inputPath = dataPath / filename.str().c_str();
+
+        // Check if file exists
+        std::ifstream testFile(inputPath, std::ios::binary);
+        if (!testFile.is_open()) {
+            std::cout << "   Sample " << i << ": File not found - " << filename.str() << std::endl;
+            continue;
+        }
+        testFile.close();
+
+        // Load test input
+        LayerData testInput({sizeof(fp32), {128, 128, 1}, inputPath});
+        try {
+            testInput.loadData();
+        } catch (const std::exception& e) {
+            std::cout << "   Sample " << i << ": Failed to load - " << e.what() << std::endl;
+            continue;
+        }
+
+        // Determine true label from filename pattern (1 sample per class, sequential)
+        int true_label = i;  // One sample per class: 0->cel, 1->cla, ..., 9->vio
+        if (true_label >= 10) true_label = 9;  // Clamp to valid range
+
+        results.true_labels.push_back(true_label);
+
+        // Run FP32 NAIVE inference
+        Timer fp32Timer("FP32");
+        fp32Timer.start();
+        const LayerData& fp32Output = model.inference(testInput, Layer::InfType::NAIVE);
+        fp32Timer.stop();
+        results.fp32_times.push_back(fp32Timer.milliseconds);
+
+        // Get FP32 top prediction
+        int fp32TopClass = 0;
+        fp32 fp32TopProb = fp32Output.get<fp32>(0);
+        for (int c = 1; c < 10; c++) {
+            if (fp32Output.get<fp32>(c) > fp32TopProb) {
+                fp32TopProb = fp32Output.get<fp32>(c);
+                fp32TopClass = c;
+            }
+        }
+        results.predicted_labels_fp32.push_back(fp32TopClass);
+
+        // Track FP32 top-1 accuracy
+        if (fp32TopClass == true_label) {
+            results.correct_top1_fp32++;
+        }
+
+        // Track FP32 top-5 accuracy
+        std::vector<std::pair<fp32, int>> fp32_predictions;
+        for (int c = 0; c < 10; c++) {
+            fp32_predictions.push_back({fp32Output.get<fp32>(c), c});
+        }
+        std::sort(fp32_predictions.begin(), fp32_predictions.end(), std::greater<std::pair<fp32, int>>());
+        for (int k = 0; k < 5; k++) {
+            if (fp32_predictions[k].second == true_label) {
+                results.correct_top5_fp32++;
+                break;
+            }
+        }
+
+        // Copy FP32 output for comparison
+        LayerData fp32OutputCopy(fp32Output);
+
+        // Run INT8 QUANTIZED inference
+        Timer int8Timer("INT8");
+        int8Timer.start();
+        const LayerData& int8Output = model.inference(testInput, Layer::InfType::QUANTIZED);
+        int8Timer.stop();
+        results.int8_times.push_back(int8Timer.milliseconds);
+
+        // Get INT8 top prediction
+        int int8TopClass = 0;
+        fp32 int8TopProb = int8Output.get<fp32>(0);
+        for (int c = 1; c < 10; c++) {
+            if (int8Output.get<fp32>(c) > int8TopProb) {
+                int8TopProb = int8Output.get<fp32>(c);
+                int8TopClass = c;
+            }
+        }
+        results.predicted_labels_int8.push_back(int8TopClass);
+
+        // Calculate cosine similarity
+        fp32 cosine_sim = fp32OutputCopy.compare<fp32>(int8Output);
+        results.cosine_similarities.push_back(cosine_sim);
+
+        // Update INT8 accuracy counters
+        if (int8TopClass == true_label) {
+            results.correct_top1_int8++;
+        }
+
+        // Check INT8 top-5 accuracy
+        std::vector<std::pair<fp32, int>> predictions;
+        for (int c = 0; c < 10; c++) {
+            predictions.push_back({int8Output.get<fp32>(c), c});
+        }
+        std::sort(predictions.begin(), predictions.end(), std::greater<std::pair<fp32, int>>());
+
+        bool in_top5 = false;
+        for (int k = 0; k < 5; k++) {
+            if (predictions[k].second == true_label) {
+                in_top5 = true;
+                results.correct_top5_int8++;
+                break;
+            }
+        }
+
+        // Print sample result
+        const char* correctMark = (int8TopClass == true_label) ? "[OK]" : "[XX]";
+        std::cout << "  " << correctMark << " Sample " << std::setw(3) << i
+                  << " | True: " << std::setw(3) << instrumentCodes[true_label]
+                  << " | Pred: " << std::setw(3) << instrumentCodes[int8TopClass]
+                  << " | Conf: " << std::fixed << std::setprecision(2) << std::setw(6) << (int8TopProb * 100.0f) << "%"
+                  << " | CosSim: " << std::setw(6) << (cosine_sim * 100.0f) << "%"
+                  << " | FP32: " << std::setw(5) << std::fixed << std::setprecision(0) << fp32Timer.milliseconds << "ms"
+                  << " | INT8: " << std::setw(5) << int8Timer.milliseconds << "ms" << std::endl;
+    }
+
+    // Calculate statistics
+    std::cout << "\n" << std::string(70, '=') << std::endl;
+    std::cout << "BATCH TEST SUMMARY" << std::endl;
+    std::cout << std::string(70, '=') << std::endl;
+
+    // Accuracy metrics
+    int valid_samples = results.true_labels.size();
+
+    // FP32 Accuracy
+    double fp32_top1_accuracy = (valid_samples > 0) ? (100.0 * results.correct_top1_fp32 / valid_samples) : 0.0;
+    double fp32_top5_accuracy = (valid_samples > 0) ? (100.0 * results.correct_top5_fp32 / valid_samples) : 0.0;
+
+    // INT8 Accuracy
+    double int8_top1_accuracy = (valid_samples > 0) ? (100.0 * results.correct_top1_int8 / valid_samples) : 0.0;
+    double int8_top5_accuracy = (valid_samples > 0) ? (100.0 * results.correct_top5_int8 / valid_samples) : 0.0;
+
+    std::cout << "\nACCURACY METRICS:" << std::endl;
+    std::cout << "  Total samples: " << valid_samples << " / " << numSamples << std::endl;
+
+    std::cout << "\nFP32 ACCURACY:" << std::endl;
+    std::cout << "  Top-1 Accuracy: " << results.correct_top1_fp32 << " / " << valid_samples
+              << " (" << std::fixed << std::setprecision(2) << fp32_top1_accuracy << "%)" << std::endl;
+    std::cout << "  Top-5 Accuracy: " << results.correct_top5_fp32 << " / " << valid_samples
+              << " (" << std::fixed << std::setprecision(2) << fp32_top5_accuracy << "%)" << std::endl;
+
+    std::cout << "\nINT8 ACCURACY:" << std::endl;
+    std::cout << "  Top-1 Accuracy: " << results.correct_top1_int8 << " / " << valid_samples
+              << " (" << std::fixed << std::setprecision(2) << int8_top1_accuracy << "%)" << std::endl;
+    std::cout << "  Top-5 Accuracy: " << results.correct_top5_int8 << " / " << valid_samples
+              << " (" << std::fixed << std::setprecision(2) << int8_top5_accuracy << "%)" << std::endl;
+
+    std::cout << "\nQUANTIZATION ACCURACY LOSS:" << std::endl;
+    std::cout << "  Top-1 Loss: " << std::fixed << std::setprecision(2)
+              << (fp32_top1_accuracy - int8_top1_accuracy) << "%" << std::endl;
+    std::cout << "  Top-5 Loss: " << std::fixed << std::setprecision(2)
+              << (fp32_top5_accuracy - int8_top5_accuracy) << "%" << std::endl;
+
+    // Timing statistics - FP32
+    if (!results.fp32_times.empty()) {
+        double fp32_mean = std::accumulate(results.fp32_times.begin(), results.fp32_times.end(), 0.0) / results.fp32_times.size();
+        double fp32_min = *std::min_element(results.fp32_times.begin(), results.fp32_times.end());
+        double fp32_max = *std::max_element(results.fp32_times.begin(), results.fp32_times.end());
+
+        double fp32_variance = 0.0;
+        for (double t : results.fp32_times) {
+            fp32_variance += (t - fp32_mean) * (t - fp32_mean);
+        }
+        fp32_variance /= results.fp32_times.size();
+        double fp32_std = std::sqrt(fp32_variance);
+
+        std::cout << "\nFP32 RUNTIME STATISTICS:" << std::endl;
+        std::cout << "  Mean:   " << std::fixed << std::setprecision(2) << fp32_mean << " ms" << std::endl;
+        std::cout << "  Std:    " << fp32_std << " ms" << std::endl;
+        std::cout << "  Min:    " << fp32_min << " ms" << std::endl;
+        std::cout << "  Max:    " << fp32_max << " ms" << std::endl;
+    }
+
+    // Timing statistics - INT8
+    if (!results.int8_times.empty()) {
+        double int8_mean = std::accumulate(results.int8_times.begin(), results.int8_times.end(), 0.0) / results.int8_times.size();
+        double int8_min = *std::min_element(results.int8_times.begin(), results.int8_times.end());
+        double int8_max = *std::max_element(results.int8_times.begin(), results.int8_times.end());
+
+        double int8_variance = 0.0;
+        for (double t : results.int8_times) {
+            int8_variance += (t - int8_mean) * (t - int8_mean);
+        }
+        int8_variance /= results.int8_times.size();
+        double int8_std = std::sqrt(int8_variance);
+
+        std::cout << "\nINT8 RUNTIME STATISTICS:" << std::endl;
+        std::cout << "  Mean:   " << std::fixed << std::setprecision(2) << int8_mean << " ms" << std::endl;
+        std::cout << "  Std:    " << int8_std << " ms" << std::endl;
+        std::cout << "  Min:    " << int8_min << " ms" << std::endl;
+        std::cout << "  Max:    " << int8_max << " ms" << std::endl;
+
+        // Speedup
+        if (!results.fp32_times.empty()) {
+            double fp32_mean = std::accumulate(results.fp32_times.begin(), results.fp32_times.end(), 0.0) / results.fp32_times.size();
+            double speedup = fp32_mean / int8_mean;
+            std::cout << "\nSPEEDUP (FP32 → INT8):" << std::endl;
+            std::cout << "  Average Speedup: " << std::fixed << std::setprecision(2) << speedup << "x" << std::endl;
+            std::cout << "  Performance Gain: " << std::fixed << std::setprecision(2) << ((speedup - 1.0) * 100.0) << "%" << std::endl;
+        }
+    }
+
+    // Cosine similarity statistics
+    if (!results.cosine_similarities.empty()) {
+        double cos_mean = std::accumulate(results.cosine_similarities.begin(), results.cosine_similarities.end(), 0.0) / results.cosine_similarities.size();
+        double cos_min = *std::min_element(results.cosine_similarities.begin(), results.cosine_similarities.end());
+        double cos_max = *std::max_element(results.cosine_similarities.begin(), results.cosine_similarities.end());
+
+        double cos_variance = 0.0;
+        for (double s : results.cosine_similarities) {
+            cos_variance += (s - cos_mean) * (s - cos_mean);
+        }
+        cos_variance /= results.cosine_similarities.size();
+        double cos_std = std::sqrt(cos_variance);
+
+        std::cout << "\nQUANTIZATION QUALITY (Cosine Similarity):" << std::endl;
+        std::cout << "  Mean:   " << std::fixed << std::setprecision(4) << (cos_mean * 100.0) << "%" << std::endl;
+        std::cout << "  Std:    " << std::fixed << std::setprecision(4) << (cos_std * 100.0) << "%" << std::endl;
+        std::cout << "  Min:    " << std::fixed << std::setprecision(4) << (cos_min * 100.0) << "%" << std::endl;
+        std::cout << "  Max:    " << std::fixed << std::setprecision(4) << (cos_max * 100.0) << "%" << std::endl;
+    }
+
+    // Confusion matrix (simplified - just show per-class accuracy)
+    std::cout << "\nPER-CLASS ACCURACY:" << std::endl;
+    std::cout << "Class | Name             | Correct | Total | Accuracy" << std::endl;
+    std::cout << "------|------------------|---------|-------|----------" << std::endl;
+
+    int class_counts[10] = {0};
+    int class_correct[10] = {0};
+
+    for (size_t i = 0; i < results.true_labels.size(); i++) {
+        int true_label = results.true_labels[i];
+        int pred_label = results.predicted_labels_int8[i];
+
+        class_counts[true_label]++;
+        if (true_label == pred_label) {
+            class_correct[true_label]++;
+        }
+    }
+
+    for (int c = 0; c < 10; c++) {
+        if (class_counts[c] > 0) {
+            double class_acc = (100.0 * class_correct[c]) / class_counts[c];
+            std::cout << std::setw(5) << c << " | "
+                      << std::setw(16) << std::left << instrumentNames[c] << std::right << " | "
+                      << std::setw(7) << class_correct[c] << " | "
+                      << std::setw(5) << class_counts[c] << " | "
+                      << std::setw(7) << std::fixed << std::setprecision(2) << class_acc << "%" << std::endl;
+        }
+    }
+
+    std::cout << "\n" << std::string(70, '=') << std::endl;
 }
 
 void runTests() {
@@ -625,12 +1088,16 @@ void runTests() {
     // Run full inference test
     //runInferenceTest(model, melSpec);
 
-      // Run quantized inference test with layer-by-layer diagnostic
+    // Run quantized inference test with layer-by-layer diagnostic
     std::cout << "\n\n";
     runLayerByLayerDiagnostic(model, melSpec);
-    
+
     std::cout << "\n\n";
-    runQuantizedInferenceTest(model, melSpec);
+    runQuantizedInferenceTestWithLayerTiming(model, melSpec);
+
+    // Run batch inference test on multiple validation samples
+    std::cout << "\n\n";
+    runBatchInferenceTest(model, basePath, 10);
 
     // Clean up
     model.freeLayers();
