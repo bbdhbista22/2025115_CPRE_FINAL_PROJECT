@@ -1,0 +1,704 @@
+======================================================================
+TEST INPUT MANIFEST - 100 TESTS
+======================================================================
+
+Test ID: test_01
+  Instrument: cel
+  Source File: 012__[cel][nod][cla]0043__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\012__[cel][nod][cla]0043__2.wav
+  Binary Output: test_inputs\test_01.bin
+----------------------------------------------------------------------
+
+Test ID: test_02
+  Instrument: cel
+  Source File: [cel][pop_roc]0064__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\[cel][pop_roc]0064__1.wav
+  Binary Output: test_inputs\test_02.bin
+----------------------------------------------------------------------
+
+Test ID: test_03
+  Instrument: cel
+  Source File: 125__[cel][nod][cla]0046__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\125__[cel][nod][cla]0046__3.wav
+  Binary Output: test_inputs\test_03.bin
+----------------------------------------------------------------------
+
+Test ID: test_04
+  Instrument: cel
+  Source File: [cel][cla]0124__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\[cel][cla]0124__2.wav
+  Binary Output: test_inputs\test_04.bin
+----------------------------------------------------------------------
+
+Test ID: test_05
+  Instrument: cel
+  Source File: 038__[cel][nod][cla]0039__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\038__[cel][nod][cla]0039__2.wav
+  Binary Output: test_inputs\test_05.bin
+----------------------------------------------------------------------
+
+Test ID: test_06
+  Instrument: cel
+  Source File: 115__[cel][nod][cla]0055__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\115__[cel][nod][cla]0055__1.wav
+  Binary Output: test_inputs\test_06.bin
+----------------------------------------------------------------------
+
+Test ID: test_07
+  Instrument: cel
+  Source File: [cel][cla]0002__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\[cel][cla]0002__1.wav
+  Binary Output: test_inputs\test_07.bin
+----------------------------------------------------------------------
+
+Test ID: test_08
+  Instrument: cel
+  Source File: 027__[cel][nod][cla]0027__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\027__[cel][nod][cla]0027__1.wav
+  Binary Output: test_inputs\test_08.bin
+----------------------------------------------------------------------
+
+Test ID: test_09
+  Instrument: cel
+  Source File: [cel][pop_roc]0102__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\[cel][pop_roc]0102__2.wav
+  Binary Output: test_inputs\test_09.bin
+----------------------------------------------------------------------
+
+Test ID: test_10
+  Instrument: cel
+  Source File: [cel][cla]0069__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cel\[cel][cla]0069__2.wav
+  Binary Output: test_inputs\test_10.bin
+----------------------------------------------------------------------
+
+Test ID: test_11
+  Instrument: cla
+  Source File: [cla][cla]0316__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\[cla][cla]0316__3.wav
+  Binary Output: test_inputs\test_11.bin
+----------------------------------------------------------------------
+
+Test ID: test_12
+  Instrument: cla
+  Source File: [cla][pop_roc]0296__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\[cla][pop_roc]0296__2.wav
+  Binary Output: test_inputs\test_12.bin
+----------------------------------------------------------------------
+
+Test ID: test_13
+  Instrument: cla
+  Source File: 012__[cla][nod][cla]0244__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\012__[cla][nod][cla]0244__1.wav
+  Binary Output: test_inputs\test_13.bin
+----------------------------------------------------------------------
+
+Test ID: test_14
+  Instrument: cla
+  Source File: [cla][jaz_blu]0286__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\[cla][jaz_blu]0286__3.wav
+  Binary Output: test_inputs\test_14.bin
+----------------------------------------------------------------------
+
+Test ID: test_15
+  Instrument: cla
+  Source File: [cla][cla]0268__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\[cla][cla]0268__3.wav
+  Binary Output: test_inputs\test_15.bin
+----------------------------------------------------------------------
+
+Test ID: test_16
+  Instrument: cla
+  Source File: [cla][jaz_blu]0282__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\[cla][jaz_blu]0282__2.wav
+  Binary Output: test_inputs\test_16.bin
+----------------------------------------------------------------------
+
+Test ID: test_17
+  Instrument: cla
+  Source File: [cla][jaz_blu]0275__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\[cla][jaz_blu]0275__2.wav
+  Binary Output: test_inputs\test_17.bin
+----------------------------------------------------------------------
+
+Test ID: test_18
+  Instrument: cla
+  Source File: [cla][pop_roc]0307__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\[cla][pop_roc]0307__1.wav
+  Binary Output: test_inputs\test_18.bin
+----------------------------------------------------------------------
+
+Test ID: test_19
+  Instrument: cla
+  Source File: 180__[cla][nod][cla]0227__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\180__[cla][nod][cla]0227__1.wav
+  Binary Output: test_inputs\test_19.bin
+----------------------------------------------------------------------
+
+Test ID: test_20
+  Instrument: cla
+  Source File: [cla][jaz_blu]0167__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\cla\[cla][jaz_blu]0167__1.wav
+  Binary Output: test_inputs\test_20.bin
+----------------------------------------------------------------------
+
+Test ID: test_21
+  Instrument: flu
+  Source File: [flu][pop_roc]0388__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\[flu][pop_roc]0388__1.wav
+  Binary Output: test_inputs\test_21.bin
+----------------------------------------------------------------------
+
+Test ID: test_22
+  Instrument: flu
+  Source File: [flu][cla]0349__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\[flu][cla]0349__3.wav
+  Binary Output: test_inputs\test_22.bin
+----------------------------------------------------------------------
+
+Test ID: test_23
+  Instrument: flu
+  Source File: 051__[flu][nod][cou_fol]0413__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\051__[flu][nod][cou_fol]0413__1.wav
+  Binary Output: test_inputs\test_23.bin
+----------------------------------------------------------------------
+
+Test ID: test_24
+  Instrument: flu
+  Source File: [flu][pop_roc]0489__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\[flu][pop_roc]0489__1.wav
+  Binary Output: test_inputs\test_24.bin
+----------------------------------------------------------------------
+
+Test ID: test_25
+  Instrument: flu
+  Source File: [flu][jaz_blu]0494__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\[flu][jaz_blu]0494__2.wav
+  Binary Output: test_inputs\test_25.bin
+----------------------------------------------------------------------
+
+Test ID: test_26
+  Instrument: flu
+  Source File: [flu][pop_roc]0360__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\[flu][pop_roc]0360__2.wav
+  Binary Output: test_inputs\test_26.bin
+----------------------------------------------------------------------
+
+Test ID: test_27
+  Instrument: flu
+  Source File: [flu][jaz_blu]0456__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\[flu][jaz_blu]0456__2.wav
+  Binary Output: test_inputs\test_27.bin
+----------------------------------------------------------------------
+
+Test ID: test_28
+  Instrument: flu
+  Source File: [flu][jaz_blu]0512__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\[flu][jaz_blu]0512__2.wav
+  Binary Output: test_inputs\test_28.bin
+----------------------------------------------------------------------
+
+Test ID: test_29
+  Instrument: flu
+  Source File: 044__[flu][dru][cou_fol]0408__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\044__[flu][dru][cou_fol]0408__3.wav
+  Binary Output: test_inputs\test_29.bin
+----------------------------------------------------------------------
+
+Test ID: test_30
+  Instrument: flu
+  Source File: [flu][pop_roc]0356__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\flu\[flu][pop_roc]0356__3.wav
+  Binary Output: test_inputs\test_30.bin
+----------------------------------------------------------------------
+
+Test ID: test_31
+  Instrument: gac
+  Source File: [gac][cla]0600__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][cla]0600__1.wav
+  Binary Output: test_inputs\test_31.bin
+----------------------------------------------------------------------
+
+Test ID: test_32
+  Instrument: gac
+  Source File: [gac][cla]0518__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][cla]0518__1.wav
+  Binary Output: test_inputs\test_32.bin
+----------------------------------------------------------------------
+
+Test ID: test_33
+  Instrument: gac
+  Source File: [gac][pop_roc]0545__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][pop_roc]0545__3.wav
+  Binary Output: test_inputs\test_33.bin
+----------------------------------------------------------------------
+
+Test ID: test_34
+  Instrument: gac
+  Source File: [gac][cla]0610__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][cla]0610__2.wav
+  Binary Output: test_inputs\test_34.bin
+----------------------------------------------------------------------
+
+Test ID: test_35
+  Instrument: gac
+  Source File: [gac][pop_roc]0571__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][pop_roc]0571__1.wav
+  Binary Output: test_inputs\test_35.bin
+----------------------------------------------------------------------
+
+Test ID: test_36
+  Instrument: gac
+  Source File: [gac][cla]0609__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][cla]0609__2.wav
+  Binary Output: test_inputs\test_36.bin
+----------------------------------------------------------------------
+
+Test ID: test_37
+  Instrument: gac
+  Source File: [gac][cla]0530__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][cla]0530__1.wav
+  Binary Output: test_inputs\test_37.bin
+----------------------------------------------------------------------
+
+Test ID: test_38
+  Instrument: gac
+  Source File: [gac][cla]0591__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][cla]0591__3.wav
+  Binary Output: test_inputs\test_38.bin
+----------------------------------------------------------------------
+
+Test ID: test_39
+  Instrument: gac
+  Source File: [gac][jaz_blu]0531__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][jaz_blu]0531__3.wav
+  Binary Output: test_inputs\test_39.bin
+----------------------------------------------------------------------
+
+Test ID: test_40
+  Instrument: gac
+  Source File: [gac][cla]0658__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gac\[gac][cla]0658__1.wav
+  Binary Output: test_inputs\test_40.bin
+----------------------------------------------------------------------
+
+Test ID: test_41
+  Instrument: gel
+  Source File: [gel][pop_roc]0909__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\[gel][pop_roc]0909__1.wav
+  Binary Output: test_inputs\test_41.bin
+----------------------------------------------------------------------
+
+Test ID: test_42
+  Instrument: gel
+  Source File: 057__[gel][dru][jaz_blu]0788__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\057__[gel][dru][jaz_blu]0788__3.wav
+  Binary Output: test_inputs\test_42.bin
+----------------------------------------------------------------------
+
+Test ID: test_43
+  Instrument: gel
+  Source File: [gel][pop_roc]0898__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\[gel][pop_roc]0898__3.wav
+  Binary Output: test_inputs\test_43.bin
+----------------------------------------------------------------------
+
+Test ID: test_44
+  Instrument: gel
+  Source File: [gel][pop_roc]0906__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\[gel][pop_roc]0906__3.wav
+  Binary Output: test_inputs\test_44.bin
+----------------------------------------------------------------------
+
+Test ID: test_45
+  Instrument: gel
+  Source File: 223__[gel][dru][pop_roc]0858__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\223__[gel][dru][pop_roc]0858__2.wav
+  Binary Output: test_inputs\test_45.bin
+----------------------------------------------------------------------
+
+Test ID: test_46
+  Instrument: gel
+  Source File: 208__[gel][dru][pop_roc]0981__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\208__[gel][dru][pop_roc]0981__2.wav
+  Binary Output: test_inputs\test_46.bin
+----------------------------------------------------------------------
+
+Test ID: test_47
+  Instrument: gel
+  Source File: 080__[gel][dru][jaz_blu]0809__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\080__[gel][dru][jaz_blu]0809__2.wav
+  Binary Output: test_inputs\test_47.bin
+----------------------------------------------------------------------
+
+Test ID: test_48
+  Instrument: gel
+  Source File: [gel][pop_roc]0888__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\[gel][pop_roc]0888__3.wav
+  Binary Output: test_inputs\test_48.bin
+----------------------------------------------------------------------
+
+Test ID: test_49
+  Instrument: gel
+  Source File: 094__[gel][dru][pop_roc]0844__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\094__[gel][dru][pop_roc]0844__3.wav
+  Binary Output: test_inputs\test_49.bin
+----------------------------------------------------------------------
+
+Test ID: test_50
+  Instrument: gel
+  Source File: [gel][pop_roc]0912__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\gel\[gel][pop_roc]0912__3.wav
+  Binary Output: test_inputs\test_50.bin
+----------------------------------------------------------------------
+
+Test ID: test_51
+  Instrument: org
+  Source File: [org][pop_roc]1105__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][pop_roc]1105__2.wav
+  Binary Output: test_inputs\test_51.bin
+----------------------------------------------------------------------
+
+Test ID: test_52
+  Instrument: org
+  Source File: [org][jaz_blu]1086__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][jaz_blu]1086__2.wav
+  Binary Output: test_inputs\test_52.bin
+----------------------------------------------------------------------
+
+Test ID: test_53
+  Instrument: org
+  Source File: [org][jaz_blu]1161__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][jaz_blu]1161__3.wav
+  Binary Output: test_inputs\test_53.bin
+----------------------------------------------------------------------
+
+Test ID: test_54
+  Instrument: org
+  Source File: [org][pop_roc]1219__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][pop_roc]1219__2.wav
+  Binary Output: test_inputs\test_54.bin
+----------------------------------------------------------------------
+
+Test ID: test_55
+  Instrument: org
+  Source File: [org][pop_roc]1151__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][pop_roc]1151__1.wav
+  Binary Output: test_inputs\test_55.bin
+----------------------------------------------------------------------
+
+Test ID: test_56
+  Instrument: org
+  Source File: [org][pop_roc]1147__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][pop_roc]1147__2.wav
+  Binary Output: test_inputs\test_56.bin
+----------------------------------------------------------------------
+
+Test ID: test_57
+  Instrument: org
+  Source File: [org][jaz_blu]1072__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][jaz_blu]1072__1.wav
+  Binary Output: test_inputs\test_57.bin
+----------------------------------------------------------------------
+
+Test ID: test_58
+  Instrument: org
+  Source File: [org][jaz_blu]1042__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][jaz_blu]1042__2.wav
+  Binary Output: test_inputs\test_58.bin
+----------------------------------------------------------------------
+
+Test ID: test_59
+  Instrument: org
+  Source File: [org][pop_roc]1228__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][pop_roc]1228__1.wav
+  Binary Output: test_inputs\test_59.bin
+----------------------------------------------------------------------
+
+Test ID: test_60
+  Instrument: org
+  Source File: [org][jaz_blu]1195__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\org\[org][jaz_blu]1195__1.wav
+  Binary Output: test_inputs\test_60.bin
+----------------------------------------------------------------------
+
+Test ID: test_61
+  Instrument: pia
+  Source File: [pia][pop_roc]1349__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\[pia][pop_roc]1349__3.wav
+  Binary Output: test_inputs\test_61.bin
+----------------------------------------------------------------------
+
+Test ID: test_62
+  Instrument: pia
+  Source File: 231__[pia][nod][cla]1408__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\231__[pia][nod][cla]1408__3.wav
+  Binary Output: test_inputs\test_62.bin
+----------------------------------------------------------------------
+
+Test ID: test_63
+  Instrument: pia
+  Source File: [pia][jaz_blu]1478__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\[pia][jaz_blu]1478__3.wav
+  Binary Output: test_inputs\test_63.bin
+----------------------------------------------------------------------
+
+Test ID: test_64
+  Instrument: pia
+  Source File: [pia][jaz_blu]1527__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\[pia][jaz_blu]1527__3.wav
+  Binary Output: test_inputs\test_64.bin
+----------------------------------------------------------------------
+
+Test ID: test_65
+  Instrument: pia
+  Source File: [pia][pop_roc]1311__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\[pia][pop_roc]1311__1.wav
+  Binary Output: test_inputs\test_65.bin
+----------------------------------------------------------------------
+
+Test ID: test_66
+  Instrument: pia
+  Source File: [pia][cla]1323__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\[pia][cla]1323__1.wav
+  Binary Output: test_inputs\test_66.bin
+----------------------------------------------------------------------
+
+Test ID: test_67
+  Instrument: pia
+  Source File: [pia][cla]1497__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\[pia][cla]1497__2.wav
+  Binary Output: test_inputs\test_67.bin
+----------------------------------------------------------------------
+
+Test ID: test_68
+  Instrument: pia
+  Source File: 220__[pia][nod][cla]1416__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\220__[pia][nod][cla]1416__3.wav
+  Binary Output: test_inputs\test_68.bin
+----------------------------------------------------------------------
+
+Test ID: test_69
+  Instrument: pia
+  Source File: [pia][pop_roc]1537__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\[pia][pop_roc]1537__1.wav
+  Binary Output: test_inputs\test_69.bin
+----------------------------------------------------------------------
+
+Test ID: test_70
+  Instrument: pia
+  Source File: 152__[pia][dru][pop_roc]1440__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\pia\152__[pia][dru][pop_roc]1440__3.wav
+  Binary Output: test_inputs\test_70.bin
+----------------------------------------------------------------------
+
+Test ID: test_71
+  Instrument: sax
+  Source File: [sax][pop_roc]1589__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\[sax][pop_roc]1589__3.wav
+  Binary Output: test_inputs\test_71.bin
+----------------------------------------------------------------------
+
+Test ID: test_72
+  Instrument: sax
+  Source File: [sax][jaz_blu]1565__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\[sax][jaz_blu]1565__1.wav
+  Binary Output: test_inputs\test_72.bin
+----------------------------------------------------------------------
+
+Test ID: test_73
+  Instrument: sax
+  Source File: [sax][jaz_blu]1784__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\[sax][jaz_blu]1784__1.wav
+  Binary Output: test_inputs\test_73.bin
+----------------------------------------------------------------------
+
+Test ID: test_74
+  Instrument: sax
+  Source File: 053__[sax][nod][jaz_blu]1716__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\053__[sax][nod][jaz_blu]1716__2.wav
+  Binary Output: test_inputs\test_74.bin
+----------------------------------------------------------------------
+
+Test ID: test_75
+  Instrument: sax
+  Source File: [sax][cla]1574__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\[sax][cla]1574__3.wav
+  Binary Output: test_inputs\test_75.bin
+----------------------------------------------------------------------
+
+Test ID: test_76
+  Instrument: sax
+  Source File: [sax][pop_roc]1603__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\[sax][pop_roc]1603__2.wav
+  Binary Output: test_inputs\test_76.bin
+----------------------------------------------------------------------
+
+Test ID: test_77
+  Instrument: sax
+  Source File: 064__[sax][nod][cla]1688__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\064__[sax][nod][cla]1688__3.wav
+  Binary Output: test_inputs\test_77.bin
+----------------------------------------------------------------------
+
+Test ID: test_78
+  Instrument: sax
+  Source File: [sax][cla]1644__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\[sax][cla]1644__1.wav
+  Binary Output: test_inputs\test_78.bin
+----------------------------------------------------------------------
+
+Test ID: test_79
+  Instrument: sax
+  Source File: [sax][pop_roc]1652__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\[sax][pop_roc]1652__3.wav
+  Binary Output: test_inputs\test_79.bin
+----------------------------------------------------------------------
+
+Test ID: test_80
+  Instrument: sax
+  Source File: 049__[sax][dru][jaz_blu]1717__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\sax\049__[sax][dru][jaz_blu]1717__3.wav
+  Binary Output: test_inputs\test_80.bin
+----------------------------------------------------------------------
+
+Test ID: test_81
+  Instrument: tru
+  Source File: [tru][jaz_blu]2032__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][jaz_blu]2032__2.wav
+  Binary Output: test_inputs\test_81.bin
+----------------------------------------------------------------------
+
+Test ID: test_82
+  Instrument: tru
+  Source File: [tru][jaz_blu]1971__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][jaz_blu]1971__1.wav
+  Binary Output: test_inputs\test_82.bin
+----------------------------------------------------------------------
+
+Test ID: test_83
+  Instrument: tru
+  Source File: [tru][pop_roc]2042__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][pop_roc]2042__3.wav
+  Binary Output: test_inputs\test_83.bin
+----------------------------------------------------------------------
+
+Test ID: test_84
+  Instrument: tru
+  Source File: [tru][jaz_blu]1956__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][jaz_blu]1956__2.wav
+  Binary Output: test_inputs\test_84.bin
+----------------------------------------------------------------------
+
+Test ID: test_85
+  Instrument: tru
+  Source File: [tru][jaz_blu]2000__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][jaz_blu]2000__2.wav
+  Binary Output: test_inputs\test_85.bin
+----------------------------------------------------------------------
+
+Test ID: test_86
+  Instrument: tru
+  Source File: [tru][cla]2005__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][cla]2005__2.wav
+  Binary Output: test_inputs\test_86.bin
+----------------------------------------------------------------------
+
+Test ID: test_87
+  Instrument: tru
+  Source File: [tru][cla]1913__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][cla]1913__2.wav
+  Binary Output: test_inputs\test_87.bin
+----------------------------------------------------------------------
+
+Test ID: test_88
+  Instrument: tru
+  Source File: [tru][jaz_blu]2019__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][jaz_blu]2019__1.wav
+  Binary Output: test_inputs\test_88.bin
+----------------------------------------------------------------------
+
+Test ID: test_89
+  Instrument: tru
+  Source File: [tru][pop_roc]2049__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][pop_roc]2049__3.wav
+  Binary Output: test_inputs\test_89.bin
+----------------------------------------------------------------------
+
+Test ID: test_90
+  Instrument: tru
+  Source File: [tru][cla]1977__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\tru\[tru][cla]1977__2.wav
+  Binary Output: test_inputs\test_90.bin
+----------------------------------------------------------------------
+
+Test ID: test_91
+  Instrument: vio
+  Source File: 115__[vio][nod][cla]2150__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\115__[vio][nod][cla]2150__3.wav
+  Binary Output: test_inputs\test_91.bin
+----------------------------------------------------------------------
+
+Test ID: test_92
+  Instrument: vio
+  Source File: 044__[vio][nod][cla]2186__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\044__[vio][nod][cla]2186__1.wav
+  Binary Output: test_inputs\test_92.bin
+----------------------------------------------------------------------
+
+Test ID: test_93
+  Instrument: vio
+  Source File: [vio][pop_roc]2123__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\[vio][pop_roc]2123__1.wav
+  Binary Output: test_inputs\test_93.bin
+----------------------------------------------------------------------
+
+Test ID: test_94
+  Instrument: vio
+  Source File: 009__[vio][nod][cla]2178__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\009__[vio][nod][cla]2178__2.wav
+  Binary Output: test_inputs\test_94.bin
+----------------------------------------------------------------------
+
+Test ID: test_95
+  Instrument: vio
+  Source File: [vio][cla]2264__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\[vio][cla]2264__1.wav
+  Binary Output: test_inputs\test_95.bin
+----------------------------------------------------------------------
+
+Test ID: test_96
+  Instrument: vio
+  Source File: 013__[vio][nod][cla]2162__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\013__[vio][nod][cla]2162__3.wav
+  Binary Output: test_inputs\test_96.bin
+----------------------------------------------------------------------
+
+Test ID: test_97
+  Instrument: vio
+  Source File: 083__[vio][dru][pop_roc]2200__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\083__[vio][dru][pop_roc]2200__1.wav
+  Binary Output: test_inputs\test_97.bin
+----------------------------------------------------------------------
+
+Test ID: test_98
+  Instrument: vio
+  Source File: [vio][jaz_blu]2084__3.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\[vio][jaz_blu]2084__3.wav
+  Binary Output: test_inputs\test_98.bin
+----------------------------------------------------------------------
+
+Test ID: test_99
+  Instrument: vio
+  Source File: [vio][pop_roc]2129__2.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\[vio][pop_roc]2129__2.wav
+  Binary Output: test_inputs\test_99.bin
+----------------------------------------------------------------------
+
+Test ID: test_100
+  Instrument: vio
+  Source File: [vio][jaz_blu]2104__1.wav
+  Full Path: U:\cpre_587\2025115_CPRE_FINAL_PROJECT\LAB1_ADAPTATION\irmas_dataset\IRMAS-TrainingData\vio\[vio][jaz_blu]2104__1.wav
+  Binary Output: test_inputs\test_100.bin
+----------------------------------------------------------------------
+
