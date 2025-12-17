@@ -1,0 +1,16 @@
+﻿test_id,instrument (groundTruth),bin_file
+test_01,cel,test_inputs\test_01.bin
+test_02,cla,test_inputs\test_02.bin
+test_03,flu,test_inputs\test_03.bin
+test_04,gac,test_inputs\test_04.bin
+test_05,gel,test_inputs\test_05.bin
+test_06,org,test_inputs\test_06.bin
+test_07,pia,test_inputs\test_07.bin
+test_08,sax,test_inputs\test_08.bin
+test_09,tru,test_inputs\test_09.bin
+test_10,vio,test_inputs\test_10.bin
+test_11,cel,test_inputs\test_11.bin
+test_12,cel,test_inputs\test_12.bin
+test_13,cel,test_inputs\test_13.bin
+test_14,cel,test_inputs\test_14.bin
+test_15,cel,test_inputs\test_15.bin

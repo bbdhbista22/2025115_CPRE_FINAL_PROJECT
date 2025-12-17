@@ -6,6 +6,8 @@
 #include <fstream>
 #include <cmath>
 #include <numeric>
+#include <map>
+#include <string>
 
 #include "Config.h"
 #include "Model.h"
@@ -793,24 +795,66 @@ void runBatchInferenceTest(const Model& model, const Path& dataPath, int numSamp
         "cel", "cla", "flu", "gac", "gel", "org", "pia", "sax", "tru", "vio"
     };
 
-    // Load metadata from JSON file (simplified - manual parsing for now)
-    // In production, we'd use a JSON parser library
-    std::cout << "\nLoading batch test metadata...\n" << std::endl;
+    // Helper function to convert instrument code to label index
+    auto instrumentToLabel = [&](const std::string& inst) -> int {
+        for (int i = 0; i < 10; i++) {
+            if (inst == instrumentCodes[i]) return i;
+        }
+        return -1;
+    };
+
+    // Load ground truth labels from CSV
+    Path csvPath = dataPath / "test_inputs" / "test_inputs_GroundTruth.csv";
+    std::ifstream csvFile(csvPath);
+    std::map<std::string, int> groundTruthMap;  // filename -> label
+
+    if (csvFile.is_open()) {
+        std::string line;
+        std::getline(csvFile, line);  // Skip header
+
+        while (std::getline(csvFile, line)) {
+            if (line.empty()) continue;
+
+            // Parse CSV: test_id,instrument,bin_file
+            std::stringstream ss(line);
+            std::string testId, instrument, binFile;
+
+            std::getline(ss, testId, ',');
+            std::getline(ss, instrument, ',');
+            std::getline(ss, binFile, ',');
+
+            // Extract filename from path (test_inputs\test_01.bin -> test_01.bin)
+            size_t lastSlash = binFile.find_last_of("\\/");
+            std::string filename = (lastSlash != std::string::npos) ? binFile.substr(lastSlash + 1) : binFile;
+
+            // Convert instrument code to label
+            int label = instrumentToLabel(instrument);
+            if (label >= 0) {
+                groundTruthMap[filename] = label;
+            }
+        }
+        csvFile.close();
+        std::cout << "Loaded ground truth for " << groundTruthMap.size() << " samples from CSV\n" << std::endl;
+    } else {
+        std::cout << "WARNING: Could not open ground truth CSV at " << csvPath << std::endl;
+        std::cout << "Falling back to sequential label assignment\n" << std::endl;
+    }
 
     BatchTestResults results;
     results.total_samples = numSamples;
 
     // Process each test sample
-    for (int i = 0; i < numSamples; i++) {
+    for (int i = 1; i <= numSamples; i++) {  // test_01.bin starts at 1, not 0
         std::stringstream filename;
-        filename << "test_input_" << std::setfill('0') << std::setw(3) << i << ".bin";
+        filename << "test_" << std::setfill('0') << std::setw(2) << i << ".bin";
+        std::string filenameStr = filename.str();
 
-        Path inputPath = dataPath / filename.str().c_str();
+        Path inputPath = dataPath / "test_inputs" / filenameStr.c_str();
 
         // Check if file exists
         std::ifstream testFile(inputPath, std::ios::binary);
         if (!testFile.is_open()) {
-            std::cout << "   Sample " << i << ": File not found - " << filename.str() << std::endl;
+            std::cout << "   Sample " << i << ": File not found - " << filenameStr << std::endl;
             continue;
         }
         testFile.close();
@@ -824,9 +868,16 @@ void runBatchInferenceTest(const Model& model, const Path& dataPath, int numSamp
             continue;
         }
 
-        // Determine true label from filename pattern (1 sample per class, sequential)
-        int true_label = i;  // One sample per class: 0->cel, 1->cla, ..., 9->vio
-        if (true_label >= 10) true_label = 9;  // Clamp to valid range
+        // Get true label from CSV ground truth
+        int true_label = -1;
+        if (groundTruthMap.find(filenameStr) != groundTruthMap.end()) {
+            true_label = groundTruthMap[filenameStr];
+        } else {
+            // Fallback: assume sequential (test_01 -> cel=0, test_02 -> cla=1, etc.)
+            true_label = (i - 1) % 10;
+            std::cout << "   WARNING: No ground truth found for " << filenameStr
+                      << ", using fallback label " << true_label << std::endl;
+        }
 
         results.true_labels.push_back(true_label);
 
